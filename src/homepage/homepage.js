@@ -3,19 +3,15 @@ import React, { Component } from 'react';
 class Homepage extends Component {
     constructor(props) {
         super(props);
-
-        this.state = {
-            Era: props.era,
-            Player: props.player
-        };
     }
 
-    render(){
-        return(
-            <div>Test</div>
-        )
-    };
-    
+    render() {
+        return (
+            this.props.era.mines.map(mine => {
+                mine.materials.map(mat => {
+                    <label>{mat[0]}: {}</label>
+                })
+            })
+        );
+    }
 }
-
-export default Homepage;
