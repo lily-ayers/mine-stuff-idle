@@ -1,4 +1,4 @@
-var Eras = [
+var WorldState = [
     {
         name: "Modern Era",
         // An Era's Color Pallet consists of an array, with Primary at index 0, secondary at index 1, tertiary (like borders) at index 2, and text at index 3
@@ -10,7 +10,7 @@ var Eras = [
                 // refresh rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
                 refreshRate: 0,
                 // Materials are stored in an array of arrays, each interior array has the 
-                // Material name at index 0, starting amount at index 1, current amount at index 2, difficulty at index 3
+                // Material name at index 0, starting amount at index 1, current amount at index 2, difficulty at index 3, held amount at index 4
                 materials: [
                     ["Floatstone", "20", "20", "1"],
                     ["Lightweight Glue", "5", "5", "2"]
@@ -217,3 +217,5 @@ var Eras = [
         ]
     }
 ]
+
+export default WorldState;
