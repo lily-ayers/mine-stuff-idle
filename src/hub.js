@@ -1,4 +1,5 @@
 import React from 'react';
+import { Homepage } from './homepage/homepage'
 
 class Hub extends React.Component {
     constructor(props) {
@@ -20,10 +21,10 @@ class Hub extends React.Component {
     render() {
         return (
             <div className="index">
-                {Selected === "Home" && <}
+                {this.state.Selected === "Home" && <Homepage worldState={this.props.worldState}/>}
             </div>
         );
     }
 }
 
-export default Homepage;
+export default Hub;

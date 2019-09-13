@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { tsPropertySignature } from '@babel/types';
+import Navbar from './Navbar'
+import Hub from './hub'
 
-class App extends React.Component {
+class App extends Component {
   constructor(props) {
 
     super(props)
@@ -21,8 +23,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="main">
-        <Navbar player={props.player} changeEra={this.changeEra}/>
-        <Hub player={props.player}/>
+        <Navbar worldState={this.props.worldState} changeEra={this.changeEra}/>
+        <Hub worldState={this.props.worldState[this.state.selectedEra]}/>
       </div>
     );
   }
