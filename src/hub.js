@@ -6,10 +6,10 @@ class Hub extends React.Component {
         super(props);
 
         this.state = {
-            Era: props.era,
-            Player: props.player,
             Selected: "Home"
         };
+
+        this.selectPage = this.selectPage.bind(this);
     }
 
     selectPage = (pageName) => {
@@ -20,8 +20,13 @@ class Hub extends React.Component {
 
     render() {
         return (
-            <div className="index">
-                {this.state.Selected === "Home" && <Homepage worldState={this.props.worldState}/>}
+            <div className="Index">
+                {this.state.Selected === "Home" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Mine" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Dungeon" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Store" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Employ" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Propaganda" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
             </div>
         );
     }
