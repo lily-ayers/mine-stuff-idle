@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { tsPropertySignature } from '@babel/types';
 
-class App extends React.Component {
+//Components
+import Navbar from './Navbar';
+import Homepage from './homepage/homepage';
+
+class App extends Component {
   constructor(props) {
 
     super(props)
@@ -21,8 +25,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="main">
-        <Navbar player={props.player} changeEra={this.changeEra}/>
-        <Hub player={props.player}/>
+        <Navbar player={this.props.player} changeEra={this.changeEra}/>
+        {/* <Hub player={props.player}/> */}
       </div>
     );
   }

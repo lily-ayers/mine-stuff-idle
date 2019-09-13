@@ -7,6 +7,7 @@ const Navbar = (props) => {
             <div className="dropdown">
                 <div className="listItem">
                     <p className="header-small">Mine Name</p>
+                    <button>Mine!</button>
                 </div>
             </div>
         </div>

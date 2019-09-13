@@ -7,11 +7,11 @@ class Homepage extends Component {
 
     render() {
         return (
-            this.props.era.mines.map(mine => {
-                mine.materials.map(mat => {
-                    <label>{mat[0]}: {}</label>
-                })
-            })
+            // this.props.era.mines.map(mine => {
+            //     mine.materials.map(mat => {
+                    {/* <label>{mat[0]}: {}</label> */}
+            //     })
+            // })
         );
     }
 }
