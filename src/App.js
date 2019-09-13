@@ -3,15 +3,31 @@ import logo from './logo.svg';
 import './App.css';
 import { tsPropertySignature } from '@babel/types';
 
-function App() {
-  return (
-    <div className="navbar">
-      <Navbar player={props.player}/>
-    </div>
-    <div className="main">
-      <Homepage player={props.player}/>
-    </div>
-  );
+class App extends React.Component {
+  constructor(props) {
+
+    super(props)
+    this.state = {
+      selectedEra: 0
+    }
+
+    this.changeEra = this.changeEra.bind(this);
+  }
+
+  changeEra = (era) => {
+    this.setState({
+      selectedEra: era
+    })
+  }
+
+  render() {
+    return (
+      <div className="main">
+        <Navbar player={props.player} changeEra={this.changeEra}/>
+        <Hub player={props.player}/>
+      </div>
+    );
+  }
 }
 
 export default App;
