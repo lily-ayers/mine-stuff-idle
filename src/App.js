@@ -1,15 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 import { tsPropertySignature } from '@babel/types';
 
-function App() {
+//Components
+import Navbar from './Navbar';
+import Homepage from './homepage/homepage';
+
+function App(props) {
   return (
-    <div className="navbar">
-      <Navbar player={props.player}/>
-    </div>
     <div className="main">
-      <Homepage player={props.player}/>
+      <Navbar player={props.player}/>
+      <Homepage/>
     </div>
   );
 }

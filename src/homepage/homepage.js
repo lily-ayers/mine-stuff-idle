@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class Homepage extends React.Component {
+class Homepage extends Component {
     constructor(props) {
         super(props);
 
@@ -9,6 +9,13 @@ class Homepage extends React.Component {
             Player: props.player
         };
     }
+
+    render(){
+        return(
+            <div>Test</div>
+        )
+    };
+    
 }
 
 export default Homepage;
