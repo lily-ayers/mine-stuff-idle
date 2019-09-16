@@ -19,7 +19,8 @@ export class Homepage extends Component {
                     
                     <div className="statList">
                         {this.props.worldState.mines.map(
-                            mine => 
+                            (mine, index) => 
+                            (this.props.worldState.triggerMines[index] && 
                             <div className="mineItem" key={mine.name + "Title"} >
                                 <p className="title-small">{mine.name}</p>
                                     <div className="materials" key={mine.name}>
@@ -30,6 +31,7 @@ export class Homepage extends Component {
                                         )}
                                     </div>
                                 </div>
+                            )
                         )}
                     </div>
                 </div>
