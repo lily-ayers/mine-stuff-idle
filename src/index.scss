@@ -39,7 +39,23 @@ body{
   border: 3px outset gray;
   float: left;
   background-color: slateblue;
-  height: 22vw;
+  height: 20vw;
+  width: 30vw;
+  margin: 1vw;
+  overflow-y: scroll;
+
+  .mineItem{
+    margin: 1vw;
+    padding: 3px;
+    margin-left: .1vw;
+  }
+}
+
+.infobox-large{
+  border: 3px outset gray;
+  float: left;
+  background-color: slateblue;
+  height: 30vw;
   width: 30vw;
   margin: 1vw;
   overflow-y: scroll;
@@ -127,8 +143,6 @@ body{
   right: 1.5vw;;
   margin: 5px;
   border: $test;
-
-  
 
   .plate{
     height: 33%;
