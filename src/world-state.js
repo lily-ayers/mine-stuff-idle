@@ -17,6 +17,10 @@ var WorldState = [
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
         equippableItems: [],
         equippedItems: [],
+        // consumables format: ["name", "amount held", "affect", "affectAmount"]
+        consumables: [],
+        // otherMaterials format: ["name", "amount held"]
+        otherMaterials: [],
         // format: ["name", {stats}, "assignedJob", "assignedLocation"]
         workers: [],
         mines: [

@@ -7,7 +7,8 @@ export class Dungeoning extends Component {
         this.state = {
             selectedDungeon: null,
             dungeoning: false,
-            currentEnemy: null
+            currentEnemy: null,
+            defending: false
         }
         this.switchPages = this.switchPages.bind(this);
     }
@@ -36,12 +37,36 @@ export class Dungeoning extends Component {
     }
 
     battle = (action) => {
+        this.state.defending = false;
         if (action === "attack") {
-
+            let damage;
+            for (let equip of this.props.worldState.equippedInventory) {
+                damage += equip.damage;
+            }
+            this.state.currentEnemy[3] -= (
+                damage / this.state.currentEnemy[4]
+            );
         } else if (action === "defend") {
-
+            this.state.defending = true;
         } else if (action === "run") {
-            
+            this.state.currentEnemy = null;
+            this.toggleDungeoning();
+        }
+        if (this.state.currentEnemy[2] <= 0) {
+            this.getDrops();
+            this.state.currentEnemy = null;
+            this.toggleDungeoning();
+        }
+    }
+
+    getDrops = () => {
+        let item = Items.find(data => data.name = this.state.currentEnemy[5])
+        if (item.type === "Equippable") {
+            this.props.worldState.equippableItems.push(item)
+        } else if (item.type === "Consumable") {
+            this.props.worldState.consumables.push(item)
+        } else {
+            this.props.worldState.otherMaterials.push(item)
         }
     }
 

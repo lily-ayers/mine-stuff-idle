@@ -16,7 +16,6 @@ export class Homepage extends Component {
         return (
             <div className="homepageMaster">
                 <div className="statusBox">
-                    
                     <div className="statList">
                         {this.props.worldState.mines.map(
                             (mine, index) => 
