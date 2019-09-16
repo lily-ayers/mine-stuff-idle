@@ -1,4 +1,20 @@
 /*Global Styles*/
+$test: 1px solid black;
+
+button{
+  border: 2px outset gray;
+  background-color: lightgray;
+  border-radius: 3px;
+
+  &:hover{
+    background-image: linear-gradient(to bottom right, lightgray 55%, black);
+    border: 2px inset gray;
+  }
+}
+
+body{
+  background-color: darken(gainsboro, 10%);
+}
 
   /*Classes*/
 .navbar{
@@ -12,7 +28,107 @@
   left: 7px;
 }
 
-/*------- Dropdown -------*/
+.title-small{
+  font-size: 1.7vw;
+  text-align: center;
+  border: 3px outset gray;
+  width: fit-content;
+  padding: 4px;
+  position: relative;
+  background-color: lightgray;
+  
+}
+
+.statusBox{
+  border: 1px solid blue;
+  margin: 5px;
+  width: 70vw; 
+  height: 37vw;
+  position: absolute;
+  left: .2vw;
+  display: inline-block;
+  overflow-y: scroll;
+
+  .title-small{
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .mineItem{
+    border: 1px solid black;
+    margin: 3px;
+    margin-bottom: 4px;
+    background-color: darken(slateblue, 10%);
+    background-image: linear-gradient(to bottom, darken(slateblue, 10%) 40%, blue);
+  }
+  
+  .materials{
+    border: $test;
+    margin: 3px;
+    font-size: 110%;
+    text-align: center;
+    background-color: lightgray;
+    background-image: linear-gradient(to bottom right, lightgray , slategray);
+  }
+}
+
+.navigation{
+  width: 25vw;
+  height: 25vw;
+  position: absolute;
+  right: 1.5vw;;
+  margin: 5px;
+
+  .plate{
+    height: 33%;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    
+    p{
+      width: fit-content;
+      font-size: 1.4vw;
+      margin: 0px;
+      padding: 3px;
+      position: relative;
+      margin: 5px;
+      margin-left: auto;
+      margin-right: auto;
+      color: rgba(0,0,0,.9);
+    }
+
+    button{
+      width: auto;
+      height: 2.5vw;
+      padding: 4px;
+      position: relative;
+      left: 30%;
+    }
+  }
+  .mineing{
+    background-image: url("./resources/mineBackground.png");
+    background-repeat: none;
+    background-size: 11%;
+  }
+
+  .dungeoning{
+    background-image: url(./resources/combatBackground.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position-y: 50%;
+  }
+
+  .stroreing{
+    background-image: url(./resources/storeBackground.png);
+    background-size: 20%;
+    color: black;
+  }
+}
+
+    /*------- Dropdown -------*/
 .dropdown{
   border: 1px solid blue;
   width: 6vw;
@@ -31,6 +147,7 @@
   width:30vw;
   height: 35vw;
   top: 5vw;
+  z-index: 1;
 
   .listItem{
     display: inline-block;
@@ -69,7 +186,7 @@
   background-color: slategray;
   border: 4px outset gray;
   border-radius: 3px;
-  background-image: linear-gradient(to bottom, slategray 50%, darkblue);
+  background-image: linear-gradient(to bottom, slategray 30%, darkblue);
 }
 
 /*End of Default*/
