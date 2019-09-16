@@ -22,14 +22,14 @@ export class Mining extends Component {
 
     render() {
         return (
-            <div className="MiningMaster">
-                <div className="Navigation">
-                    <div className="ReturnPlate">
+            <div className="miningMaster">
+                <div className="navigation">
+                    <div className="returnPlate">
                         <button onClick={() => this.switchPages("Home")}>Back</button>
                     </div>
                 </div>
-                <div className="MineSelect">
-                    <table className="Mines">
+                <div className="mineSelect">
+                    <table className="mines">
                         <tbody>
                         {this.props.worldState.mines.map((mine, index) => 
                             <tr key={mine.name}>
@@ -43,14 +43,14 @@ export class Mining extends Component {
                     </table>
                 </div>
                 {this.selected !== null && 
-                    <div className="MaterialList">
-                        <table className="MaterialsInMine">
+                    <div className="materialList">
+                        <table className="materialsInMine">
                             <tbody>
                                 {this.state.selectedMine !== null ? this.props.worldState.mines[this.state.selectedMine].materials.map(mat => (
                                     <tr key={mat[0]+"Row"}>
                                         <td key={mat[0]+"Cell"}>{mat[0]}: {mat[4]}</td>
                                     </tr>
-                                )) : <tr key="NullRow"><td key="NullCell">Select a Mine!</td></tr>}
+                                )) : <tr className="nullRow"><td className="nullCell">Select a Mine!</td></tr>}
                             </tbody>
                         </table>
                     </div>
