@@ -1,13 +1,89 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/*Global Styles*/
+
+  /*Classes*/
+.navbar{
+  border: 1px solid black;
+  height: 5vw;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+.icon{
+  height: 5vw;
+  position: relative;
+  left: 7px;
+}
+
+/*------- Dropdown -------*/
+.dropdown{
+  border: 1px solid blue;
+  width: 6vw;
+  height: 5vw;
+  position: relative;
+  float: right;
+  background-color: white;
+
+}
+
+.dropdown-open{
+  border: 1px solid blue;
+  position: relative;
+  float: right;
+  background-color: white;
+  width:30vw;
+  height: 35vw;
+  top: 5vw;
+
+  .listItem{
+    display: inline-block;
+  }
+.icon{
+  display: none;
+}
+}
+
+.dropdown-btn{
+  height: 4vw;
+  width: 4vw;
+}
+
+.listItem{
+  border: 1px solid black;
+  display: none;
+  width: 29vw;
+  margin: 3px;
+  margin-left: 2px;
+  height: 4vw;
+  background-color: lightgrey;
+}
+
+  /*Dropdown animation*/
+  
+
+/*------- End of dropdown -------*/
+
+/*Default Styling*/
+.default{
+  background-color: slategray;
+}
+
+.default-nav{
+  background-color: slategray;
+  border: 4px outset gray;
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom, slategray 50%, darkblue);
+}
+
+/*End of Default*/
+
+/*positioning*/
+
+.right{
+  position: relative;
+  float: right;
+}
+
+.right-center{
+  top: 10%;
+  position: relative;
+  float: right;
+  right: 1vw;
 }
