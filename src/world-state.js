@@ -4,6 +4,8 @@ var WorldState = [
         // An Era's Color Pallet consists of an array, with Primary at index 0, secondary at index 1, tertiary (like borders) at index 2, and text at index 3
         colorPallet: ["slategrey", "darkblue", "yellow", "red"],
         ascensionMultiplier: 0,
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
+        stats: [10, 10, 1, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // modern: tutorial1, tutorial2, Boat, Rapture, Spaceship, Flint
@@ -96,7 +98,7 @@ var WorldState = [
                 // Enemies are stored in an array of arrays, each interior array has the 
                 // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5
                 enemies: [
-                    ["Dinosaur Mascot Costume", "5", "5", "1", "1", "Useless Pickaxe"]
+                    ["Dinosaur Mascot Costume", "5", "5", "2", "1", "Useless Pickaxe"]
                 ]
             },
             {
@@ -106,7 +108,7 @@ var WorldState = [
                 respawnRate: 1,
                 // Enemies are stored in an array of arrays, each interior array has the 
                 enemies: [
-                    ["Pepsi Can", "8", "8", "1", "1", "Cotton"]
+                    ["Pepsi Can", "8", "8", "4", "1", "Cotton"]
                 ]
             },
             {

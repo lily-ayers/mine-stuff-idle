@@ -52,9 +52,9 @@ import React, { Component } from 'react';
                                 <div className="materials">
                                     {this.props.worldState.equippableItems.map(
                                         (type, typeIndex) =>
-                                        type.map(
-                                            (equip, index) =>
-                                            <button key={equip.name} onClick={() => this.equipItem(index, typeIndex)}>Equip {equip.name}</button>
+                                            type.map(
+                                                (equip, index) =>
+                                                <button key={equip.name} onClick={() => this.equipItem(index, typeIndex)}>Equip {equip.name}</button>
                                         )
                                     )}
                                 </div>

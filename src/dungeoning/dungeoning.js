@@ -51,6 +51,7 @@ export class Dungeoning extends Component {
         } else if (action === "defend") {
             state.defending = true;
         }
+        this.setState(state);
         if (action === "run") {
             state.currentEnemy = null;
             this.toggleDungeoning();
@@ -58,9 +59,22 @@ export class Dungeoning extends Component {
             this.getDrops();
             state.currentEnemy = null;
             this.toggleDungeoning();
+        } else {
+            this.enemyTurn();
+        }
+        if (this.props.worldState.stats[1] <= 0) {
+            this.props.worldState.dungeons[0].name = "YOU FUCKIN DIED YA LOSER";
+            this.props.worldState.stats[1] = this.props.worldState.stats[2];
         }
         this.setState(state);
         this.forceUpdate();
+    }
+
+    enemyTurn = () => {
+        let enemy = this.state.currentEnemy;
+        console.log("Enemy attacking!");
+        this.props.worldState.stats[1] -= (enemy[3] - this.props.worldState.stats[4]);
+        
     }
 
     getDrops = () => {
