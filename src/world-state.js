@@ -88,9 +88,9 @@ var WorldState = [
                 // respawn rate math: enemy health / respawnRate = seconds to respawn, 0 means no respawn
                 respawnRate: 0,
                 // Enemies are stored in an array of arrays, each interior array has the 
-                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
+                // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5
                 enemies: [
-                    ["Dinosaur Mascot Costume", "5", "1", "1", "PickAxe"]
+                    ["Dinosaur Mascot Costume", "5", "5", "1", "1", "Useless Pickaxe"]
                 ]
             },
             {
@@ -99,9 +99,8 @@ var WorldState = [
                 // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
                 respawnRate: 1,
                 // Enemies are stored in an array of arrays, each interior array has the 
-                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
                 enemies: [
-                    ["Pepsi Can", "8", "1", "1", "Cotton"]
+                    ["Pepsi Can", "8", "8", "1", "1", "Cotton"]
                 ]
             },
             {
@@ -109,12 +108,10 @@ var WorldState = [
                 discoveryMessage: "This place (that is clearly not India) has a lush forest. You're sure there are treasures and loot to be had galore in there...",
                 // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
                 respawnRate: 2,
-                // Enemies are stored in an array of arrays, each interior array has the 
-                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
                 enemies: [
-                    ["Angsty Lemur", "10", "5", "3", "Berries"],
-                    ["Tall Goat", "14", "5", "8", "Half-Chewed Grass"],
-                    ["Bear", "20", "8", "10", "Bear Claws"]
+                    ["Angsty Lemur", "10", "10", "5", "3", "Berries"],
+                    ["Tall Goat", "14", "14", "5", "8", "Half-Chewed Grass"],
+                    ["Bear", "20", "20", "8", "10", "Bear Claws"]
                 ]
             },
             {
@@ -122,13 +119,11 @@ var WorldState = [
                 discoveryMessage: "The natives seem to like beating the crap out of eachother in a stone ampitheatre. Might as well give it a shot!",
                 // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
                 respawnRate: 5,
-                // Enemies are stored in an array of arrays, each interior array has the 
-                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
                 enemies: [
-                    ["Mike (the owner's son)", "15", "3", "20", "Overpriced Armor"],
-                    ["Kevin (he lifts weights)", "23", "12", "14", "One Dumbell"],
-                    ["Literally Just A Horse", "30", "17", "20", "Horseshoe"],
-                    ["El Guapo", "40", "23", "23", "A Sweater"]
+                    ["Mike (the owner's son)", "15", "15", "3", "20", "Overpriced Armor"],
+                    ["Kevin (he lifts weights)", "23", "23", "12", "14", "One Dumbell"],
+                    ["Literally Just A Horse", "30", "30", "17", "20", "Horseshoe"],
+                    ["El Guapo", "40", "40", "23", "23", "A Sweater"]
                 ]
             }
         ]
