@@ -8,6 +8,8 @@ var WorldState = [
         triggerTimeMachine: false,
         // modern: tutorial1, tutorial2, Boat, Rapture, Spaceship, Flint
         triggerMines: [true, false, false, false, false, false],
+        // modern: tutorial1, tutorial2, forest, colloseum
+        triggerDungeons: [true, false, false, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -22,6 +24,7 @@ var WorldState = [
                 name: "Isla Nubar Quarry",
                 discoveryMessage: "You come across a mine on the island. More of a quarry, really. Yeah, let's go with Quarry.",
                 // refresh rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                //refreshrate of zero means no refresh
                 refreshRate: 0,
                 // Materials are stored in an array of arrays, each interior array has the 
                 // Material name at index 0, starting amount at index 1, current amount at index 2, difficulty at index 3, held amount at index 4
@@ -74,6 +77,57 @@ var WorldState = [
                     ["Palladium", "300", "300", "7"],
                     ["Ruthenium", "90", "90", "8"],
                     ["Osmium", "75", "75", "9"]
+                ]
+            }
+        ],
+        dungeons: [
+            {
+                name: "Abandoned Theme Park",
+                discoveryMessage: "You come across a weird park on the island. What could be inside?",
+                // respawn rate math: enemy health / respawnRate = seconds to respawn, 0 means no respawn
+                respawnRate: 0,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
+                enemies: [
+                    ["Dinosaur Mascot Costume", "5", "1", "1", "PickAxe"]
+                ]
+            },
+            {
+                name: "John's Basement",
+                discoveryMessage: "John offers you a reward for each can you crush (he just took up recycling).",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 1,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
+                enemies: [
+                    ["Pepsi Can", "8", "1", "1", "Cotton"]
+                ]
+            },
+            {
+                name: "'Not India' Forest",
+                discoveryMessage: "This place (that is clearly not India) has a lush forest. You're sure there are treasures and loot to be had galore in there...",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 2,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
+                enemies: [
+                    ["Angsty Lemur", "10", "5", "3", "Berries"],
+                    ["Tall Goat", "14", "5", "8", "Half-Chewed Grass"],
+                    ["Bear", "20", "8", "10", "Bear Claws"]
+                ]
+            },
+            {
+                name: "'Not India' Colloseum",
+                discoveryMessage: "The natives seem to like beating the crap out of eachother in a stone ampitheatre. Might as well give it a shot!",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 5,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Health at index 1, Damage at index 2, Defense at index 3, Drops at index 4
+                enemies: [
+                    ["Mike (the owner's son)", "15", "3", "20", "Overpriced Armor"],
+                    ["Kevin (he lifts weights)", "23", "12", "14", "One Dumbell"],
+                    ["Literally Just A Horse", "30", "17", "20", "Horseshoe"],
+                    ["El Guapo", "40", "23", "23", "A Sweater"]
                 ]
             }
         ]

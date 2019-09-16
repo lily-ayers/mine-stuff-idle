@@ -73,7 +73,6 @@ export class Mining extends Component {
                         </tbody>
                     </table>
                 </div>
-                {this.selected !== null && 
                     <div className="materialList">
                         <table className="materialsInMine">
                             <tbody>
@@ -84,9 +83,7 @@ export class Mining extends Component {
                                 )) : <tr className="nullRow"><td className="nullCell">Select a Mine!</td></tr>}
                             </tbody>
                         </table>
-                    </div>
-                }
-                
+                    </div>                
             </div>
         );
     }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Homepage } from './homepage/homepage'
 import { Mining } from './mining/mining'
+import { Dungeoning } from './dungeoning/dungeoning'
 
 class Hub extends React.Component {
     constructor(props) {
@@ -24,7 +25,7 @@ class Hub extends React.Component {
             <div className="Index">
                 {this.state.Selected === "Home" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Mine" && <Mining worldState={this.props.worldState} selectPage={this.selectPage} />}
-                {this.state.Selected === "Dungeon" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Dungeon" && <Dungeoning worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Store" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Employ" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Propaganda" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
