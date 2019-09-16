@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 export class Homepage extends Component {
     constructor(props) {
         super(props);
@@ -13,29 +14,37 @@ export class Homepage extends Component {
 
     render() {
         return (
-            <div className="HomepageMaster">
-                <div className="StatusBox">
-                    <table className="Materials">
-                        <tbody>
-                        {this.props.worldState.mines.map(mine => 
-                            <tr key={mine.name}>
-                                <td key={mine.name + " Title"}>{mine.name}</td>
-                            {mine.materials.map(mat => (
-                                <td key={mat[0]}>{mat[0]}: {mat[4]}</td>
-                            ))}
-                            </tr>
+            <div className="homepageMaster">
+                <div className="statusBox">
+                    
+                    <div className="statList">
+                        {this.props.worldState.mines.map(
+                            mine => 
+                            <div className="mineItem" key={mine.name + "Title"} >
+                                <p className="title-small">{mine.name}</p>
+                                    <div className="materials" key={mine.name}>
+                                        {mine.materials.map(
+                                            mat => (
+                                            <p key={mat[0]}>{mat[0]}: {mat[4]}</p>
+                                            )
+                                        )}
+                                    </div>
+                                </div>
                         )}
-                        </tbody>
-                    </table>
+                    </div>
                 </div>
-                <div className="Navigation">
-                    <div className="MiningPlate">
+                
+                <div className="navigation">
+                    <div className="plate mineing">
+                        <p>Want to Mine?</p>
                         <button onClick={() => this.switchPages("Mine")}>Go to the Mines!</button>
                     </div>
-                    <div className="DungeoningPlate">
+                    <div className="plate dungeoning">
+                        <p>Want to Kill?</p>
                         <button onClick={() => this.switchPages("Dungeon")}>Go to the Dungeons!</button>
                     </div>
-                    <div className="StoreingPlate">
+                    <div className="plate stroreing">
+                        <p>Want to sell?</p>
                         <button onClick={() => this.switchPages("Store")}>Go to the Stores!</button>
                     </div>
                 </div>
