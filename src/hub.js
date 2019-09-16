@@ -1,5 +1,6 @@
 import React from 'react';
 import { Homepage } from './homepage/homepage'
+import { Mining } from './mining/mining'
 
 class Hub extends React.Component {
     constructor(props) {
@@ -22,7 +23,7 @@ class Hub extends React.Component {
         return (
             <div className="Index">
                 {this.state.Selected === "Home" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
-                {this.state.Selected === "Mine" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Mine" && <Mining worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Dungeon" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Store" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Employ" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}

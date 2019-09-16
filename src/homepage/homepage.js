@@ -4,7 +4,6 @@ export class Homepage extends Component {
     constructor(props) {
         super(props);
         this.switchPages = this.switchPages.bind(this);
-
     }
 
     switchPages = (pageNum) => {
@@ -19,7 +18,7 @@ export class Homepage extends Component {
                         <tbody>
                         {this.props.worldState.mines.map(mine => 
                             <tr key={mine.name}>
-                                <td key={mine.name + " Title"}>{mine.name}</td>
+                                <td key={mine.name + " Materials"}>{mine.name}</td>
                             {mine.materials.map(mat => (
                                 <td key={mat[0]}>{mat[0]}: {mat[4]}</td>
                             ))}
