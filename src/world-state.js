@@ -6,16 +6,8 @@ var WorldState = [
         ascensionMultiplier: 0,
         // Unlocks ascension
         triggerTimeMachine: false,
-        // unlocks John's Mine and Dungeon, bars Isla Nubar
-        triggerTutorialOne: false,
-        // unlocks Not India, bars John's Mine and Dungeon
-        triggerTutorialTwo: false,
-        // unlocks Bottom of the Specific Ocean
-        triggerRapture: false,
-        // unlocks Asteroid Suspenders
-        triggerSpaceship: false,
-        // unlock DARK CAVE NOT IMPLEMENTED
-        triggerFlint: false,
+        // modern: tutorial1, tutorial2, Boat, Rapture, Spaceship, Flint
+        triggerMines: [true, false, false, false, false, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -92,10 +84,8 @@ var WorldState = [
         ascensionMultiplier: 0,
         // Unlocks ascension
         triggerTimeMachine: false,
-        // unlocks Slightly Misbehaved Midwest
-        triggerOregonTrail: false,
-        // unlocks Wild Wild West
-        triggerMountainHiking: false,
+        // industrial: east, Midwest, wild west
+        triggerMines: [true, false, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -150,10 +140,8 @@ var WorldState = [
         ascensionMultiplier: 0,
         // Unlocks ascension
         triggerTimeMachine: false,
-        // unlocks Mount Oogabooga
-        triggerTrustOfTheLocals: false,
-        // unlocks Literally A Volcano
-        triggerFireproofArmor: false,
+        // Prehistoric: tarPits, MountOogabooga, LiterallyAVolcano
+        triggerMines: [true, false, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -208,10 +196,8 @@ var WorldState = [
         ascensionMultiplier: 0,
         // Unlocks ascension
         triggerTimeMachine: false,
-        // unlocks Irrelevant Sun
-        triggerStarbitDrill: false,
-        // unlocks Calvera
-        triggerLightspeedRotator: false,
+        // planetarial: planet, star, neutronStar
+        triggerMines: [true, false, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -266,8 +252,8 @@ var WorldState = [
         ascensionMultiplier: 0,
         // Unlocks ascension
         triggerTimeMachine: false,
-        // unlocks Cyclical Singularity
-        triggerCyclicalPickaxe: false,
+        // absent: singularity, cyclicalSingularity
+        triggerMines: [true, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large

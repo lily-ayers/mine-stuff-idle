@@ -19,7 +19,7 @@ if (localStorage.getItem('MSI-WorldState')) {
             }
         }
     }
-    localStorage.setItem('MSI-WorldState', JSON.stringify(worldState))
+    setInterval(() => {localStorage.setItem('MSI-WorldState', JSON.stringify(worldState))}, 1000);
 }
 
 ReactDOM.render(<App worldState={worldState} />, document.getElementById('root'));
