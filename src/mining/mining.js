@@ -52,7 +52,7 @@ export class Mining extends Component {
 
     render() {
         return (
-            <div className="miningMaster">
+            <div className="master">
                 <div className="navigation">
                     <div className="plate">
                         <button className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
