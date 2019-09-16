@@ -3,6 +3,28 @@ var WorldState = [
         name: "Modern Era",
         // An Era's Color Pallet consists of an array, with Primary at index 0, secondary at index 1, tertiary (like borders) at index 2, and text at index 3
         colorPallet: ["slategrey", "darkblue", "yellow", "red"],
+        ascensionMultiplier: 0,
+        // Unlocks ascension
+        triggerTimeMachine: false,
+        // unlocks John's Mine and Dungeon, bars Isla Nubar
+        triggerTutorialOne: false,
+        // unlocks Not India, bars John's Mine and Dungeon
+        triggerTutorialTwo: false,
+        // unlocks Bottom of the Specific Ocean
+        triggerRapture: false,
+        // unlocks Asteroid Suspenders
+        triggerSpaceship: false,
+        // unlock DARK CAVE NOT IMPLEMENTED
+        triggerFlint: false,
+        warehouses: 0,
+        shopUpgrades: [0, 0, 0, 0, 0, 0],
+        // 1:road, 2:stand, 3:small, 4:liscence, 5:large
+        shopLevel: 1,
+        // equipment format: ["name", {Power, Damage, Defense, Weight}]
+        equippableItems: [],
+        equippedItems: [],
+        // format: ["name", {stats}, "assignedJob", "assignedLocation"]
+        workers: [],
         mines: [
             {
                 name: "Isla Nubar Quarry",
@@ -67,6 +89,22 @@ var WorldState = [
     {
         name: "Industrial Era",
         colorPallet: ["tan", "brown", "black", "yellow"],
+        ascensionMultiplier: 0,
+        // Unlocks ascension
+        triggerTimeMachine: false,
+        // unlocks Slightly Misbehaved Midwest
+        triggerOregonTrail: false,
+        // unlocks Wild Wild West
+        triggerMountainHiking: false,
+        warehouses: 0,
+        shopUpgrades: [0, 0, 0, 0, 0, 0],
+        // 1:road, 2:stand, 3:small, 4:liscence, 5:large
+        shopLevel: 1,
+        // equipment format: ["name", {Power, Damage, Defense, Weight}]
+        equippableItems: [],
+        equippedItems: [],
+        // format: ["name", {stats}, "assignedJob", "assignedLocation"]
+        workers: [],
         mines: [
             {
                 name: "Relatively Tame East Mine",
@@ -109,6 +147,22 @@ var WorldState = [
     {
         name: "Prehistoric Era",
         colorPallet: ["green", "blue", "tan", "orange"],
+        ascensionMultiplier: 0,
+        // Unlocks ascension
+        triggerTimeMachine: false,
+        // unlocks Mount Oogabooga
+        triggerTrustOfTheLocals: false,
+        // unlocks Literally A Volcano
+        triggerFireproofArmor: false,
+        warehouses: 0,
+        shopUpgrades: [0, 0, 0, 0, 0, 0],
+        // 1:road, 2:stand, 3:small, 4:liscence, 5:large
+        shopLevel: 1,
+        // equipment format: ["name", {Power, Damage, Defense, Weight}]
+        equippableItems: [],
+        equippedItems: [],
+        // format: ["name", {stats}, "assignedJob", "assignedLocation"]
+        workers: [],
         mines: [
             {
                 name: "Tar Swamps",
@@ -151,6 +205,22 @@ var WorldState = [
     {
         name: "Planetarial Era",
         colorPallet: ["black", "cadetblue", "pink", "white"],
+        ascensionMultiplier: 0,
+        // Unlocks ascension
+        triggerTimeMachine: false,
+        // unlocks Irrelevant Sun
+        triggerStarbitDrill: false,
+        // unlocks Calvera
+        triggerLightspeedRotator: false,
+        warehouses: 0,
+        shopUpgrades: [0, 0, 0, 0, 0, 0],
+        // 1:road, 2:stand, 3:small, 4:liscence, 5:large
+        shopLevel: 1,
+        // equipment format: ["name", {Power, Damage, Defense, Weight}]
+        equippableItems: [],
+        equippedItems: [],
+        // format: ["name", {stats}, "assignedJob", "assignedLocation"]
+        workers: [],
         mines: [
             {
                 name: "Celestial Body B-99695",
@@ -193,6 +263,18 @@ var WorldState = [
     {
         name: "Absent Era",
         colorPallet: ["white", "white", "black", "black"],
+        ascensionMultiplier: 0,
+        // Unlocks ascension
+        triggerTimeMachine: false,
+        // unlocks Cyclical Singularity
+        triggerCyclicalPickaxe: false,
+        warehouses: 0,
+        shopUpgrades: [0, 0, 0, 0, 0, 0],
+        // 1:road, 2:stand, 3:small, 4:liscence, 5:large
+        shopLevel: 1,
+        // equipment format: ["name", {Power, Damage, Defense, Weight}]
+        equippableItems: [],
+        equippedItems: [],
         mines: [
             {
                 name: "The Singularity",
