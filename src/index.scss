@@ -59,6 +59,21 @@
   
 
 /*------- End of dropdown -------*/
+
+/*Default Styling*/
+.default{
+  background-color: slategray;
+}
+
+.default-nav{
+  background-color: slategray;
+  border: 4px outset gray;
+  border-radius: 3px;
+  background-image: linear-gradient(to bottom, slategray 50%, darkblue);
+}
+
+/*End of Default*/
+
 /*positioning*/
 
 .right{

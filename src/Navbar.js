@@ -14,7 +14,7 @@ handleClick(){
 
 render(){
     return (
-        <div className="navbar">
+        <div className="navbar default-nav">
             <div className="dropdown default" id="dropdown" onClick={() => this.handleClick()}>
                 <img src={Logo} alt="logo" className="icon" />
                 <div className="listItem right default">
