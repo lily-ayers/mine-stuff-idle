@@ -52,37 +52,38 @@ export class Mining extends Component {
 
     render() {
         return (
-            <div className="miningMaster">
+            <div className="master">
                 <div className="navigation">
-                    <div className="returnPlate">
-                        <button onClick={() => this.switchPages("Home")}>Back</button>
+                    <div className="plate">
+                        <button className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
                     </div>
                 </div>
-                <div className="mineSelect">
-                    <table className="mines">
-                        <tbody>
+                <div className="mineSelect infobox">
+                     <div className="mines">
+                        <div>
                         {this.props.worldState.mines.map((mine, index) =>
-                            <tr key={mine.name}>
+                            <div className="mineItem" key={mine.name}>
                                 {this.props.worldState.triggerMines[index] &&
-                                <td key={mine.name+"Cell"}>
+                                <div key={mine.name+"Cell"}>
                                     <button key={mine.name+"Button"} onClick={() => (this.state.selectedMine !== index ?
                                         this.selectMine(index) : this.selectMine(null))}>{mine.name}</button>
-                                </td>}
-                            </tr>
+                                </div>}
+                            </div>
                         )}
-                        </tbody>
-                    </table>
+                        </div>
+                    </div> 
+                    
                 </div>
-                    <div className="materialList">
-                        <table className="materialsInMine">
-                            <tbody>
+                    <div className="materialList infobox-large ">
+                        <div className="materialsInMine">
+                            <div >
                                 {this.state.selectedMine !== null ? this.props.worldState.mines[this.state.selectedMine].materials.map((mat, index) => (
-                                    <tr key={mat[0]+"Row"}>
-                                        <td key={mat[0]+"Cell"}><button disabled={this.state.mining} onClick={() => this.mineMaterial(index)}>{mat[0]}</button> {mat[2]}/{mat[1]} remaining. difficulty: {mat[3]}</td>
-                                    </tr>
-                                )) : <tr className="nullRow"><td className="nullCell">Select a Mine!</td></tr>}
-                            </tbody>
-                        </table>
+                                    <div className=" mineItem" key={mat[0]+"Row"}>
+                                        <p key={mat[0]+"Cell"}><button disabled={this.state.mining} onClick={() => this.mineMaterial(index)}>{mat[0]}</button> {mat[2]}/{mat[1]} remaining. difficulty: {mat[3]}</p>
+                                    </div>
+                                )) : <p className="nullRow">Select a Mine!</p>}
+                            </div>
+                        </div>
                     </div>                
             </div>
         );

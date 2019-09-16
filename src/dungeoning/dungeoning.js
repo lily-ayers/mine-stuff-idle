@@ -72,10 +72,10 @@ export class Dungeoning extends Component {
 
     render() {
         return (
-            <div className="dungeoningMaster">
+            <div className="master">
                 <div className="navigation">
-                    <div className="returnPlate">
-                        <button onClick={() => this.switchPages("Home")}>Back</button>
+                    <div className="plate">
+                        <button className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
                     </div>
                 </div>
                 <div className="dungeonSelect">
