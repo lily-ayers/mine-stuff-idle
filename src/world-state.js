@@ -15,9 +15,11 @@ var WorldState = [
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
         shopLevel: 1,
+        // 0:head, 1:chest, 2:weapon, 3:legs
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
-        equippableItems: [],
-        equippedItems: [],
+        equippableItems: [[], [], [], []],
+        // 0:head, 1:chest, 2:weapon, 3:legs
+        equippedItems: [{name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
         // consumables format: ["name", "amount held", "affect", "affectAmount"]
         consumables: [],
         // otherMaterials format: ["name", "amount held"]

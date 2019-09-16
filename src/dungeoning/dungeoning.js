@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Items } from '../items';
+import Items from '../items';
 
 export class Dungeoning extends Component {
     constructor(props) {
@@ -37,32 +37,51 @@ export class Dungeoning extends Component {
     }
 
     battle = (action) => {
-        this.state.defending = false;
+        let state = this.state
+        state.defending = false;
         if (action === "attack") {
-            let damage;
-            for (let equip of this.props.worldState.equippedInventory) {
-                damage += equip.damage;
+            let damage = 1;
+            for (let equip of this.props.worldState.equippedItems) {
+                if (equip !== null) {
+                    damage += equip.damage;
+                    console.log(damage + " (just added " + equip.name + " for " + equip.damage + " damage)")
+                }
             }
-            this.state.currentEnemy[3] -= (
-                damage / this.state.currentEnemy[4]
-            );
+            state.currentEnemy[2] -= (damage / this.state.currentEnemy[4]);
         } else if (action === "defend") {
-            this.state.defending = true;
-        } else if (action === "run") {
-            this.state.currentEnemy = null;
-            this.toggleDungeoning();
+            state.defending = true;
         }
-        if (this.state.currentEnemy[2] <= 0) {
+        if (action === "run") {
+            state.currentEnemy = null;
+            this.toggleDungeoning();
+        } else if (state.currentEnemy[2] <= 0) {
             this.getDrops();
-            this.state.currentEnemy = null;
+            state.currentEnemy = null;
             this.toggleDungeoning();
         }
+        this.setState(state);
+        this.forceUpdate();
     }
 
     getDrops = () => {
         let item = Items.find(data => data.name = this.state.currentEnemy[5])
         if (item.type === "Equippable") {
-            this.props.worldState.equippableItems.push(item)
+            let slot;
+            switch (item.slot) {
+                case "Head":
+                    slot = 0;
+                    break;
+                case "Chest":
+                    slot = 1
+                    break;
+                case "Weapon":
+                    slot = 2
+                    break;
+                case "Legs":
+                    slot = 3
+                    break;
+            }
+            this.props.worldState.equippableItems[slot].push(item);
         } else if (item.type === "Consumable") {
             this.props.worldState.consumables.push(item)
         } else {

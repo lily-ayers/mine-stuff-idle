@@ -2,9 +2,12 @@ var Items = [
     {
         name: "Useless Pickaxe",
         type: "Equippable",
-        Power: 1,
-        Damage: 1,
-        Defense: 0,
-        Weight: 2
+        slot: "Weapon",
+        power: 1,
+        damage: 1,
+        defense: 0,
+        weight: 2
     }
 ]
+
+export default Items;
