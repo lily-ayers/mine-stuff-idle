@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-export class Homepage extends Component {
+ export class Homepage extends Component {
     constructor(props) {
         super(props);
         this.switchPages = this.switchPages.bind(this);
@@ -54,3 +54,4 @@ export class Homepage extends Component {
         );
     }
 }
+

@@ -3,6 +3,8 @@ $test: 1px solid black;
 
 button{
   border: 2px outset gray;
+  height: 2.5vw;
+  width: auto;
   background-color: lightgray;
   border-radius: 3px;
 
@@ -17,6 +19,51 @@ body{
 }
 
   /*Classes*/
+  
+
+/*Mining page*/
+.miningMaster{
+  .navigation{
+    border: none;
+    height: auto;
+    width: 10vw;
+
+    button{
+      position: relative;
+      left: 30%;
+    }
+  }
+}
+
+.infobox{
+  border: 3px outset gray;
+  float: left;
+  background-color: slateblue;
+  height: 22vw;
+  width: 30vw;
+  margin: 1vw;
+  overflow-y: scroll;
+
+  .mineItem{
+    margin: 1vw;
+    padding: 3px;
+    margin-left: .1vw;
+  }
+}
+
+.nullRow{
+  border: 3px outset gray;
+  font-size: 1.5vw;
+  padding: 2px;
+  background-color: lightgray;
+  width: fit-content;
+  height: 3vw;
+  margin-left: auto;
+  margin-right: auto;
+  
+}
+  
+  /*Homepage*/
 .navbar{
   border: 1px solid black;
   height: 5vw;
@@ -79,6 +126,9 @@ body{
   position: absolute;
   right: 1.5vw;;
   margin: 5px;
+  border: $test;
+
+  
 
   .plate{
     height: 33%;
@@ -87,6 +137,12 @@ body{
     width: 100%;
     margin-left: auto;
     margin-right: auto;
+
+    .escBtn{
+      width: 5vw;
+      height: 3.5vw;
+      font-size: 1.3vw;
+    }
     
     p{
       width: fit-content;
