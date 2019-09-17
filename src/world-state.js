@@ -10,7 +10,7 @@ var WorldState = [
         triggerTimeMachine: false,
         // modern: tutorial1, tutorial2, Boat, Rapture, Spaceship, Flint
         //TODO-Return the variables back to false when done
-        triggerMines: [true, false, false, false, false, false],
+        triggerMines: [true, true, true, true, true, true],
         // modern: tutorial1, tutorial2, forest, colloseum
         triggerDungeons: [true, false, false, false],
         warehouses: 0,

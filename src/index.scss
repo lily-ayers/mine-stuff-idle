@@ -247,6 +247,36 @@ body{
 
 /*------- End of dropdown -------*/
 
+/*Progress Bars*/
+.progress{
+  border: 2px outset lightgray;
+  height: 2vw;
+  width: 20vw;
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 1px;
+
+  p{
+    position: relative;
+    padding: 0;
+    margin: 0;
+    float: left;
+    left: 30%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+}
+
+.bar{
+  height: 2vw;
+  width: 20vw;
+  margin: 0;
+  background-position-y: -10px;
+  background-color: lighten(gray, 10%);
+}
+
 /*Default Styling*/
 .default{
   background-color: slategray;

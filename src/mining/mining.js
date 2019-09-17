@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { promised } from 'q';
+
+import ProgressBar from '../layout/ProgressBar';
 
 export class Mining extends Component {
     constructor(props) {
         super(props);
         this.state = {
             selectedMine: null,
-            mining: false
+            mining: false,
+            progress: [null, null]
         }
         this.switchPages = this.switchPages.bind(this);
     }
@@ -21,34 +25,66 @@ export class Mining extends Component {
         console.log(state);
     }
 
-    toggleMining = () => {
+    toggleMining = (matIndex) => {
         let state = this.state;
+
+        state.progress = [matIndex, 100];
         state.mining = !state.mining;
         this.setState(state);
         console.log(this.state);
     }
 
-    mineMaterial = (matIndex) => {
+    mineMaterial = async (matIndex)  => {
         let mat = this.props.worldState.mines[this.state.selectedMine].materials[matIndex]
         let power = 1
+        
+        
         for (let equip of this.props.worldState.equippedItems)
             power += equip.power;
         if (mat[2] > 0) {
             if (power >= (mat[3])) {
+                this.toggleMining(matIndex);
+
+                //Progressbar calls
+
+                await this.alterProgressBar(matIndex, (2000/(1 + (power - mat[3]))));
+
+                mat[2]--;
+                mat[4]++;
+                this.forceUpdate();
                 this.toggleMining();
-                setTimeout(() => {
-                    mat[2]--;
-                    mat[4]++;
-                    this.forceUpdate();
-                    this.toggleMining();
-                }, (2000 / (1 + (power - mat[3]))));
             } else {
                 console.log('Not enough power!');
             }
         } else {
             console.log('No Ore left!');
         }
+
+        
     }
+
+      alterProgressBar = async (index, time) => {
+        //for altering the different progress bars
+        for(let i = 100; i > 0; i--){
+            await this.delay(time);
+            let state = this.state;
+            state.progress[1] = i;
+            this.setState(state);
+        }
+
+        let state = this.state;
+        state.progress = [null,null];
+        this.setState(state);
+
+        return true;
+    }
+
+     delay = (time) => {
+        let delay = time/100;
+        return new Promise(resolve => setTimeout(resolve,delay ));
+    }
+
+
 
     render() {
         return (
@@ -80,6 +116,9 @@ export class Mining extends Component {
                                 {this.state.selectedMine !== null ? this.props.worldState.mines[this.state.selectedMine].materials.map((mat, index) => (
                                     <div className=" mineItem" key={mat[0]+"Row"}>
                                         <p key={mat[0]+"Cell"}><button disabled={this.state.mining} onClick={() => this.mineMaterial(index)}>{mat[0]}</button> {mat[2]}/{mat[1]} remaining. difficulty: {mat[3]}</p>
+                                        {this.state.progress[0] === index && 
+                                            <ProgressBar percent={this.state.progress[1]}/>    
+                                        }
                                     </div>
                                 )) : <p className="nullRow">Select a Mine!</p>}
                             </div>
