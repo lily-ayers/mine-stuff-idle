@@ -1,6 +1,6 @@
 /*Global Styles*/
 @import url('https://fonts.googleapis.com/css?family=Cute+Font|Inconsolata|Indie+Flower|Shadows+Into+Light|Squada+One&display=swap');
-    /*Absent Font: "font-family: 'Cute Font', cursive;"
+  /*Absent Font: "font-family: 'Cute Font', cursive;"
     Planetarial Font: font-family: 'Squada One', cursive;
     Prehistoric Font: font-family: 'Shadows Into Light', cursive; 
     Industrial Font: font-family: 'Indie Flower', cursive;
@@ -57,6 +57,23 @@ body{
   }
 }
 
+.infobox-small{
+  border: 3px outset gray;
+  float: left;
+  background-color: slateblue;
+  height: 10vw;
+  width: 30vw;
+  text-align: center;
+  margin: 1vw;
+  padding: 3px;
+  label{
+    margin: 4px;
+  }
+  button{
+    margin: 4px;
+  }
+}
+
 .infobox-large{
   border: 3px outset gray;
   float: left;
@@ -98,6 +115,7 @@ body{
 }
 
 .title-small{
+  margin: 2px;
   font-size: 1.7vw;
   text-align: center;
   border: 3px outset gray;
@@ -106,6 +124,13 @@ body{
   position: relative;
   background-color: lightgray;
   
+}
+
+.info-title{
+  font-size: 1.4vw;
+  position: relative;
+  display: inline-block;
+  color: black;
 }
 
 .statusBox{
@@ -298,6 +323,12 @@ body{
 /*End of Default*/
 
 /*positioning*/
+
+.bottom-left{
+  position: absolute;
+  top: 60%;
+  float: left;
+}
 
 .right{
   position: relative;
