@@ -61,12 +61,12 @@ import Items from '../items';
     craftItem = (details) => {
         for (let mat of details.requiredMaterials) {
             let heldMat = this.findMat(mat);
-            if (heldMat < mat.amount) {
+            if (heldMat[4] < mat.amount) {
                 return;
             }
             heldMat -= mat.amount;
         }
-        let item = Items.find(data => data.name = details.name)
+        let item = Items.find(data => data.name === details.name)
         switch (item.type) {
             case "Equippable":
                 let slot;
@@ -194,6 +194,30 @@ import Items from '../items';
                                     {this.props.worldState.equippedItems.map(
                                         (equip, index) =>
                                             <p key={this.state.inventorySlots[index]}>{this.state.inventorySlots[index]}: {equip.name}</p>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        }
+                        {this.props.worldState.consumables.length > 0 &&
+                            <div className="mineItem">
+                                <p className="title-small">Consumables</p>
+                                <div className="materials">
+                                    {this.props.worldState.consumables.map(
+                                        (consume, index) =>
+                                            <p key={consume.name}>{consume.name}: {consume.amountHeld}</p>
+                                        )
+                                    }
+                                </div>
+                            </div>
+                        }
+                        {this.props.worldState.otherMaterials.length > 0 &&
+                            <div className="mineItem">
+                                <p className="title-small">Other Materials</p>
+                                <div className="materials">
+                                    {this.props.worldState.otherMaterials.map(
+                                        (other, index) =>
+                                            <p key={other.name}>{other.name}: {other.amountHeld}</p>
                                         )
                                     }
                                 </div>
