@@ -19,7 +19,8 @@ import React, { Component } from 'react';
             this.props.worldState.equippableItems[typeIndex].push(JSON.parse(JSON.stringify(this.props.worldState.equippedItems[typeIndex])));
         }
         this.props.worldState.equippedItems[typeIndex] = JSON.parse(JSON.stringify(this.props.worldState.equippableItems[typeIndex][index]));
-        this.props.worldState.equippableItems[typeIndex].splice(index);
+        this.props.worldState.equippableItems[typeIndex].splice(index, 1);
+        this.props.worldState.equippableItems[typeIndex] = [...new Set(this.props.worldState.equippableItems[typeIndex])];
         this.forceUpdate();
     }
 
@@ -54,7 +55,7 @@ import React, { Component } from 'react';
                                         (type, typeIndex) =>
                                             type.map(
                                                 (equip, index) =>
-                                                <button key={equip.name} onClick={() => this.equipItem(index, typeIndex)}>Equip {equip.name}</button>
+                                                <button key={index + equip.name} onClick={() => this.equipItem(index, typeIndex)}>Equip {equip.name}</button>
                                         )
                                     )}
                                 </div>
