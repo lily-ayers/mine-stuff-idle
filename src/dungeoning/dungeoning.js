@@ -95,10 +95,33 @@ export class Dungeoning extends Component {
                     slot = 3
                     break;
             }
-            this.props.worldState.equippableItems[slot].push(item);
+            if (this.props.worldState.equippedItems[slot].name !== item.name) {
+                this.props.worldState.equippableItems[slot].push(item);
+                this.props.worldState.equippableItems[slot] = [...new Set(this.props.worldState.equippableItems[slot])];
+            }
         } else if (item.type === "Consumable") {
+            let found = false;
+            for (let consumable of this.props.worldState.consumables) {
+                if (consumable.name === item.name) {
+                    consumable.amountHeld++;
+                    found = true;
+                }
+            }
+            if (!found) {
+                this.props.worldState.consumables.push(item)
+            }
             this.props.worldState.consumables.push(item)
         } else {
+            let found = false;
+            for (let material of this.props.worldState.otherMaterials) {
+                if (material.name === item.name) {
+                    material.amountHeld++;
+                    found = true;
+                }
+            }
+            if (!found) {
+                this.props.worldState.otherMaterials.push(item)
+            }
             this.props.worldState.otherMaterials.push(item)
         }
     }
