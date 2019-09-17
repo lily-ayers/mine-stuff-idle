@@ -7,7 +7,6 @@ import React, { Component } from 'react';
         this.state = {
             canCraft: this.props.craftables.available
         }
-        console.log(JSON.stringify(this.props))
     }
     
 

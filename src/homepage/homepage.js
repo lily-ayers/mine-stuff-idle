@@ -16,8 +16,10 @@ import Items from '../items';
 
     triggerTooltip = (details) => {
         let state = this.state;
-        state.renderTooltip = !state.renderTooltip;
-        if (state.renderTooltip) {
+        if (state.renderTooltip && state.tooltipDetails === details) {
+                state.renderTooltip = !state.renderTooltip;
+        } else {
+            state.renderTooltip = true;
             state.tooltipDetails = details;
         }
         this.setState(state);
@@ -27,8 +29,8 @@ import Items from '../items';
         const craftables = [];
         for (let craft of Crafting) {
             const craftDeepCopy = JSON.parse(JSON.stringify(craft))
-            craftDeepCopy.requiredMaterials.filter(data => data.name === material[0])
-            if (craftDeepCopy.requiredMaterials.length > 0) {
+            let filtered = craftDeepCopy.requiredMaterials.filter(data => data.name === material[0])
+            if (filtered.length > 0) {
                 craftables.push(craft);
             }
         }
