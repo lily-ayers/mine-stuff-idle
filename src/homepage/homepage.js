@@ -1,13 +1,136 @@
 import React, { Component } from 'react';
-
+import { CraftingTooltip } from './crafting-tooltip'
+import Crafting from '../crafting';
+import Items from '../items';
 
  export class Homepage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            inventorySlots: ["Head", "Chest", "Weapon", "Legs"]
+            inventorySlots: ["Head", "Chest", "Weapon", "Legs"],
+            renderTooltip: false,
+            tooltipDetails: null
         }
         this.switchPages = this.switchPages.bind(this);
+    }
+
+    triggerTooltip = (details) => {
+        let state = this.state;
+        state.renderTooltip = true;
+        state.tooltipDetails = details;
+        this.setState(state);
+    }
+
+    getCraftingArray = (material) => {
+        const craftables = [];
+        for (let craft of Crafting) {
+            const craftDeepCopy = JSON.parse(JSON.stringify(craft))
+            craftDeepCopy.requiredMaterials.filter(data => data.name === material[0])
+            if (craftDeepCopy.requiredMaterials.length > 0) {
+                craftables.push(craft);
+            }
+        }
+        return craftables;
+    }
+
+    renderCrafting = (detailsArray) => {
+        const canCraft = [];
+        const names = [];
+        const requiredMaterials = [];
+        for (let details of detailsArray) {
+            names.push(details.name)
+            requiredMaterials.push(details.requiredMaterials)
+            let tempCanCraft = false;
+            for (let mat of details.requiredMaterials) {
+                const heldMat = this.findMat(mat)
+                if (heldMat !== null && heldMat[4] >= mat.amount) {
+                    tempCanCraft = true
+                } else {
+                    tempCanCraft = false;
+                    console.log("cannot craft")
+                    break;
+                }
+            }
+            console.log(tempCanCraft)
+            canCraft.push(tempCanCraft)
+        }
+        const craftables = {results: names, materials: requiredMaterials, available: canCraft};
+        return <CraftingTooltip craftables={craftables} craftItem={(index) => this.craftItem(detailsArray[index])}/> 
+    }
+
+    craftItem = (details) => {
+        for (let mat of details.requiredMaterials) {
+            let heldMat = this.findMat(mat);
+            if (heldMat < mat.amount) {
+                return;
+            }
+            heldMat -= mat.amount;
+        }
+        let item = Items.find(data => data.name = details.name)
+        switch (item.type) {
+            case "Equippable":
+                let slot;
+                switch (item.slot) {
+                    case "Head":
+                        slot = 0;
+                        break;
+                    case "Chest":
+                        slot = 1;
+                        break;
+                    case "Weapon":
+                        slot = 2;
+                        break;
+                    case "Legs":
+                        slot = 3;
+                        break;
+                    }
+                    if (this.props.worldState.equippedItems[slot].name !== item.name) {
+                        this.props.worldState.equippableItems[slot].push(item);
+                        this.props.worldState.equippableItems[slot] = [...new Set(this.props.worldState.equippableItems[slot])];
+                    }
+                break;
+            case "Consumable":
+                let consumableFound = false;
+                for (let consumable of this.props.worldState.consumables) {
+                    if (consumable.name === item.name) {
+                    consumable.amountHeld++;
+                    consumableFound = true;
+                }
+                }
+                if (!consumableFound) {
+                    this.props.worldState.consumables.push(item)
+                }
+                this.props.worldState.consumables.push(item)
+                break;
+            case "Other":
+                let otherFound = false;
+                for (let material of this.props.worldState.otherMaterials) {
+                    if (material.name === item.name) {
+                        material.amountHeld++;
+                        otherFound = true;
+                    }
+                }
+                if (!otherFound) {
+                    this.props.worldState.otherMaterials.push(item)
+                }
+                this.props.worldState.otherMaterials.push(item)
+                break;
+        }
+    }
+
+    findMat = (mat) => {
+        for (let mine of this.props.worldState.mines) {
+            for (let material of mine.materials) {
+                if (mat.name === material[0]) {
+                    return material;
+                }
+            }
+        }
+        for (let material of this.props.worldState.otherMaterials) {
+            if (mat.name === material[0]) {
+                return material;
+            }
+        }
     }
 
     switchPages = (pageNum) => {
@@ -15,7 +138,7 @@ import React, { Component } from 'react';
     }
 
     equipItem = (index, typeIndex) => {
-        if (this.props.worldState.equippedItems[typeIndex] !== null) {
+        if (this.props.worldState.equippedItems[typeIndex].name !== "empty") {
             this.props.worldState.equippableItems[typeIndex].push(JSON.parse(JSON.stringify(this.props.worldState.equippedItems[typeIndex])));
         }
         this.props.worldState.equippedItems[typeIndex] = JSON.parse(JSON.stringify(this.props.worldState.equippableItems[typeIndex][index]));
@@ -37,7 +160,7 @@ import React, { Component } from 'react';
                                     <div className="materials" key={mine.name}>
                                         {mine.materials.map(
                                             mat => (
-                                            <p key={mat[0]}>{mat[0]}: {mat[4]}</p>
+                                            <p onClick={() => this.triggerTooltip(mat)} key={mat[0]}>{mat[0]}: {mat[4]}</p>
                                             )
                                         )}
                                     </div>
@@ -91,6 +214,9 @@ import React, { Component } from 'react';
                     <div className="plate stroreing">
                         <p>Want to sell?</p>
                         <button onClick={() => this.switchPages("Store")}>Go to the Stores!</button>
+                    </div>
+                    <div className="plate crafting">
+                        {this.state.renderTooltip && this.renderCrafting(this.getCraftingArray(this.state.tooltipDetails))}
                     </div>
                 </div>
             </div>

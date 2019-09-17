@@ -38,8 +38,8 @@ var WorldState = [
                 // Materials are stored in an array of arrays, each interior array has the 
                 // Material name at index 0, starting amount at index 1, current amount at index 2, difficulty at index 3, held amount at index 4
                 materials: [
-                    ["Floatstone", "20", "20", "1"],
-                    ["Lightweight Glue", "5", "5", "2"]
+                    ["Floatstone", "20", "20", "1", "0"],
+                    ["Lightweight Glue", "5", "5", "2", "0"]
                 ]
             },
             {
@@ -47,9 +47,9 @@ var WorldState = [
                 discoveryMessage: "John was nice enough to let you use his personal mineshaft until you get back on your feet! There's probably wonderous things inside!",
                 refreshRate: 0,
                 materials: [
-                    ["Planks of Wood", "40", "40", "2"],
-                    ["Actually Iron", "20", "20", "3"],
-                    ["Rope?", "15", "15", "2"]
+                    ["Planks of Wood", "40", "40", "2", "0"],
+                    ["Actually Iron", "20", "20", "3", "0"],
+                    ["Rope?", "15", "15", "2", "0"]
                 ]
             },
             {
@@ -57,11 +57,11 @@ var WorldState = [
                 discoveryMessage: "The locals show you to a dark cave and beckon you inside. It's a new mineshaft!",
                 refreshRate: 5,
                 materials: [
-                    ["Stone", "1000", "1000", "2"],
-                    ["Dirt", "5000", "5000", "1"],
-                    ["Tin", "750", "750", "3"],
-                    ["Iron", "600", "600", "4"],
-                    ["Saltpeter", "200", "200", "2"]
+                    ["Stone", "1000", "1000", "2", "0"],
+                    ["Dirt", "5000", "5000", "1", "0"],
+                    ["Tin", "750", "750", "3", "0"],
+                    ["Iron", "600", "600", "4", "0"],
+                    ["Saltpeter", "200", "200", "2", "0"]
                 ]
             },
             {
@@ -69,11 +69,11 @@ var WorldState = [
                 discoveryMessage: "Andrew Ryan would be proud if you even knew who that was.",
                 refreshRate: 7,
                 materials: [
-                    ["Clay", "1000", "1000", "2"],
-                    ["Diamond", "50", "50", "20"],
-                    ["Quartz", "200", "200", "4"],
-                    ["Copper", "400", "400", "3"],
-                    ["Calcite", "350", "350", "6"]
+                    ["Clay", "1000", "1000", "2", "0"],
+                    ["Diamond", "50", "50", "20", "0"],
+                    ["Quartz", "200", "200", "4", "0"],
+                    ["Copper", "400", "400", "3", "0"],
+                    ["Calcite", "350", "350", "6", "0"]
                 ]
             },
             {
@@ -81,11 +81,11 @@ var WorldState = [
                 discoveryMessage: "These Asteroids do wonders for keeping the universe's pants on!",
                 refreshRate: 10,
                 materials: [
-                    ["Sulfer", "500", "500", "4"],
-                    ["Silicon", "1000", "1000", "3"],
-                    ["Palladium", "300", "300", "7"],
-                    ["Ruthenium", "90", "90", "8"],
-                    ["Osmium", "75", "75", "9"]
+                    ["Sulfer", "500", "500", "4", "0"],
+                    ["Silicon", "1000", "1000", "3", "0"],
+                    ["Palladium", "300", "300", "7", "0"],
+                    ["Ruthenium", "90", "90", "8", "0"],
+                    ["Osmium", "75", "75", "9", "0"]
                 ]
             }
         ],
@@ -159,11 +159,11 @@ var WorldState = [
                 discoveryMessage: "This place really is quite peaceful. You're not sure if that's because everyone left to find decent ore and the mines are nearly useless to commonfolk now.",
                 refreshRate: 15,
                 materials: [
-                    ["Mac N Cheese Crayon", "5000", "5000", "2"],
-                    ["Grey Crayon", "10000", "10000", "2"],
-                    ["Coal", "3000", "3000", "3"],
-                    ["Cement", "3000", "3000", "4"],
-                    ["Uranium", "400", "400", "7"]
+                    ["Mac N Cheese Crayon", "5000", "5000", "2", "0"],
+                    ["Grey Crayon", "10000", "10000", "2", "0"],
+                    ["Coal", "3000", "3000", "3", "0"],
+                    ["Cement", "3000", "3000", "4", "0"],
+                    ["Uranium", "400", "400", "7", "0"]
                 ]
             },
             {
@@ -171,11 +171,11 @@ var WorldState = [
                 discoveryMessage: "Despite their calm demeanor, the people around here can let loose to some extent. You'd put them at about 50% less tamed than the last batch!",
                 refreshRate: 20,
                 materials: [
-                    ["Pyrite", "2500", "2500", "4"],
-                    ["Nickel", "5000", "5000", "4"],
-                    ["Gravel", "10000", "10000", "2"],
-                    ["Zinc", "900", "900", "3"],
-                    ["Bauxite", "750", "750", "5"]
+                    ["Pyrite", "2500", "2500", "4", "0"],
+                    ["Nickel", "5000", "5000", "4", "0"],
+                    ["Gravel", "10000", "10000", "2", "0"],
+                    ["Zinc", "900", "900", "3", "0"],
+                    ["Bauxite", "750", "750", "5", "0"]
                 ]
             },
             {
@@ -183,11 +183,11 @@ var WorldState = [
                 discoveryMessage: "They're out of control here. It's unsafe. Anarchy seems to reign. This may be your last mining expedition.",
                 refreshRate: 25,
                 materials: [
-                    ["GOLD", "250", "250", "5"],
-                    ["Silver", "500", "500", "5"],
-                    ["Molybdenum", "750", "750", "6"],
-                    ["Phosphate", "400", "400", "7"],
-                    ["Feldspar", "150", "150", "6"]
+                    ["GOLD", "250", "250", "5", "0"],
+                    ["Silver", "500", "500", "5", "0"],
+                    ["Molybdenum", "750", "750", "6", "0"],
+                    ["Phosphate", "400", "400", "7", "0"],
+                    ["Feldspar", "150", "150", "6", "0"]
                 ]
             }
         ]
@@ -215,11 +215,11 @@ var WorldState = [
                 discoveryMessage: "You've seen nicer places. You're not sure if you've seen nastier ones.",
                 refreshRate: 30,
                 materials: [
-                    ["Tar, duh", "8000", "8000", "2"],
-                    ["Dino Bone", "300", "300", "4"],
-                    ["Prehistoric Moss", "500", "500", "2"],
-                    ["Lithium", "200", "200", "5"],
-                    ["Crystal Shard", "100", "100", "7"]
+                    ["Tar, duh", "8000", "8000", "2", "0"],
+                    ["Dino Bone", "300", "300", "4", "0"],
+                    ["Prehistoric Moss", "500", "500", "2", "0"],
+                    ["Lithium", "200", "200", "5", "0"],
+                    ["Crystal Shard", "100", "100", "7", "0"]
                 ]
             },
             {
@@ -227,11 +227,11 @@ var WorldState = [
                 discoveryMessage: "You're sure that name means something, but you care less and less what that something is.",
                 refreshRate: 45,
                 materials: [
-                    ["Limestone", "4000", "4000", "3"],
-                    ["Beryllium", "900", "900", "6"],
-                    ["Amber", "1700", "1700", "4"],
-                    ["Flint", "700", "700", "5"],
-                    ["Chalk", "1000", "1000", "2"]
+                    ["Limestone", "4000", "4000", "3", "0"],
+                    ["Beryllium", "900", "900", "6", "0"],
+                    ["Amber", "1700", "1700", "4", "0"],
+                    ["Flint", "700", "700", "5", "0"],
+                    ["Chalk", "1000", "1000", "2", "0"]
                 ]
             },
             {
@@ -239,11 +239,11 @@ var WorldState = [
                 discoveryMessage: "Looking down into the fiery depths of the hollow volcanic mountain, you reconsider your entry point, and dig in from the side.",
                 refreshRate: 50,
                 materials: [
-                    ["Obviously Lava", "3000", "3000", "8"],
-                    ["Obsidian", "800", "800", "9"],
-                    ["Volcanic Rock", "900", "900", "5"],
-                    ["Glass", "500", "500", "6"],
-                    ["Basalt", "1000", "1000", "5"]
+                    ["Obviously Lava", "3000", "3000", "8", "0"],
+                    ["Obsidian", "800", "800", "9", "0"],
+                    ["Volcanic Rock", "900", "900", "5", "0"],
+                    ["Glass", "500", "500", "6", "0"],
+                    ["Basalt", "1000", "1000", "5", "0"]
                 ]
             }
         ]
@@ -271,11 +271,11 @@ var WorldState = [
                 discoveryMessage: "Celestial Body R2D2 was already taken.",
                 refreshRate: 60,
                 materials: [
-                    ["Titanium", "900", "900", "8"],
-                    ["Iridium", "200", "200", "6"],
-                    ["Platinum", "400", "400", "5"],
-                    ["Painite", "150", "150", "7"],
-                    ["Plutonium", "200", "200", "6"]
+                    ["Titanium", "900", "900", "8", "0"],
+                    ["Iridium", "200", "200", "6", "0"],
+                    ["Platinum", "400", "400", "5", "0"],
+                    ["Painite", "150", "150", "7", "0"],
+                    ["Plutonium", "200", "200", "6", "0"]
                 ]
             },
             {
@@ -283,11 +283,11 @@ var WorldState = [
                 discoveryMessage: "This Solar System is abandoned, so the sun is free for you to mine!",
                 refreshRate: 70,
                 materials: [
-                    ["Osmium", "350", "350", "10"],
-                    ["Californium", "400", "400", "8"],
-                    ["Lots of Carbon", "10000", "10000", "6"],
-                    ["Rhodium", "500", "500", "7"],
-                    ["Magnesium", "1200", "1200", "7"]
+                    ["Osmium", "350", "350", "10", "0"],
+                    ["Californium", "400", "400", "8", "0"],
+                    ["Lots of Carbon", "10000", "10000", "6", "0"],
+                    ["Rhodium", "500", "500", "7", "0"],
+                    ["Magnesium", "1200", "1200", "7", "0"]
                 ]
             },
             {
@@ -295,11 +295,11 @@ var WorldState = [
                 discoveryMessage: "A Neutron star. you can't begin to understand the science behind it, but who cares, you're gonna mine that sucker!",
                 refreshRate: 80,
                 materials: [
-                    ["Quantum Stuff", "300", "300", "8"],
-                    ["Neutronic Chunk", "250", "250", "8"],
-                    ["Nuclear Pasta", "70", "70", "10"],
-                    ["Thoughts and Prayers of a Dead Star's Loved Ones", "20", "20", "11"],
-                    ["Bite-Sized Star Core", "1", "1", "15"]
+                    ["Quantum Stuff", "300", "300", "8", "0"],
+                    ["Neutronic Chunk", "250", "250", "8", "0"],
+                    ["Nuclear Pasta", "70", "70", "10", "0"],
+                    ["Thoughts and Prayers of a Dead Star's Loved Ones", "20", "20", "11", "0"],
+                    ["Bite-Sized Star Core", "1", "1", "15", "0"]
                 ]
             }
         ]
@@ -325,11 +325,11 @@ var WorldState = [
                 discoveryMessage: "Here, at the end of time and space, you can find the things that were never meant to be within the reach of man.",
                 refreshRate: 5,
                 materials: [
-                    ["Janet Marble", "1", "1", "25"],
-                    ["Time", "1", "1", "40"],
-                    ["Space", "1", "1", "65"],
-                    ["Questionable Spaghetti", "1", "1", "90"],
-                    ["Radiohead CD", "1", "1", "125"]
+                    ["Janet Marble", "1", "1", "25", "0"],
+                    ["Time", "1", "1", "40", "0"],
+                    ["Space", "1", "1", "65", "0"],
+                    ["Questionable Spaghetti", "1", "1", "90", "0"],
+                    ["Radiohead CD", "1", "1", "125", "0"]
                 ]
             },
             {
@@ -337,7 +337,7 @@ var WorldState = [
                 discoveryMessage: "This one is round, you wonder if it contains anything that might, I dunno, break the laws of physics even more?",
                 refreshRate: 100,
                 materials: [
-                    ["Mobius Strip with Space on One Side and Time on the Same Side", "1", "1", "250"]
+                    ["Mobius Strip with Space on One Side and Time on the Same Side", "1", "1", "250", "0"]
                 ]
             }
         ]
