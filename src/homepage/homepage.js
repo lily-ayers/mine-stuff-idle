@@ -16,8 +16,10 @@ import Items from '../items';
 
     triggerTooltip = (details) => {
         let state = this.state;
-        state.renderTooltip = true;
-        state.tooltipDetails = details;
+        state.renderTooltip = !state.renderTooltip;
+        if (state.renderTooltip) {
+            state.tooltipDetails = details;
+        }
         this.setState(state);
     }
 
@@ -100,7 +102,6 @@ import Items from '../items';
                 if (!consumableFound) {
                     this.props.worldState.consumables.push(item)
                 }
-                this.props.worldState.consumables.push(item)
                 break;
             case "Other":
                 let otherFound = false;
@@ -113,9 +114,9 @@ import Items from '../items';
                 if (!otherFound) {
                     this.props.worldState.otherMaterials.push(item)
                 }
-                this.props.worldState.otherMaterials.push(item)
                 break;
         }
+        this.forceUpdate();
     }
 
     findMat = (mat) => {

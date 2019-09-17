@@ -10,7 +10,8 @@ var Items = [
     },
     {
         name: "Questionable Raft",
-        type: "Other"
+        type: "Other",
+        amountHeld: "0"
     }
 ]
 
