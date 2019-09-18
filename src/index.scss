@@ -1,11 +1,12 @@
 /*Global Styles*/
 @import url('https://fonts.googleapis.com/css?family=Cute+Font|Inconsolata|Indie+Flower|Shadows+Into+Light|Squada+One&display=swap');
-    /*Absent Font: "font-family: 'Cute Font', cursive;"
+  /*Absent Font: "font-family: 'Cute Font', cursive;"
     Planetarial Font: font-family: 'Squada One', cursive;
     Prehistoric Font: font-family: 'Shadows Into Light', cursive; 
     Industrial Font: font-family: 'Indie Flower', cursive;
     Modern Font:font-family: 'Inconsolata', monospace; */
 $test: 1px solid black;
+$modernFont:'Inconsolata', monospace;
 
 button{
   font: unset;
@@ -30,6 +31,7 @@ body{
 
 /*Mining page*/
 .master{
+  font-family: $modernFont;
   .navigation{
     border: none;
     height: auto;
@@ -43,6 +45,7 @@ body{
 }
 
 .infobox{
+  font-family: $modernFont;
   border: 3px outset gray;
   float: left;
   background-color: slateblue;
@@ -58,7 +61,26 @@ body{
   }
 }
 
+.infobox-small{
+  font-family: $modernFont;
+  border: 3px outset gray;
+  float: left;
+  background-color: slateblue;
+  height: 10vw;
+  width: 30vw;
+  text-align: center;
+  margin: 1vw;
+  padding: 3px;
+  label{
+    margin: 4px;
+  }
+  button{
+    margin: 4px;
+  }
+}
+
 .infobox-large{
+  font-family: $modernFont;
   border: 3px outset gray;
   float: left;
   background-color: slateblue;
@@ -75,6 +97,7 @@ body{
 }
 
 .nullRow{
+  font-family: $modernFont;
   border: 3px outset gray;
   font-size: 1.5vw;
   padding: 2px;
@@ -99,6 +122,7 @@ body{
 }
 
 .title-small{
+  margin: 2px;
   font-size: 1.7vw;
   text-align: center;
   border: 3px outset gray;
@@ -107,6 +131,13 @@ body{
   position: relative;
   background-color: lightgray;
   
+}
+
+.info-title{
+  font-size: 1.4vw;
+  position: relative;
+  display: inline-block;
+  color: black;
 }
 
 .statusBox{
@@ -126,6 +157,7 @@ body{
   }
 
   .mineItem{
+    font-family: $modernFont;
     border: 1px solid black;
     margin: 3px;
     margin-bottom: 4px;
@@ -144,6 +176,7 @@ body{
 }
 
 .navigation{
+  font-family: $modernFont;
   width: 25vw;
   height: 40vw;
   position: absolute;
@@ -294,6 +327,7 @@ body{
 }
 
 .listItem{
+  font-family: $modernFont;
   border: 1px solid black;
   display: none;
   width: 29vw;
@@ -353,6 +387,12 @@ body{
 /*End of Default*/
 
 /*positioning*/
+
+.bottom-left{
+  position: absolute;
+  top: 60%;
+  float: left;
+}
 
 .right{
   position: relative;
