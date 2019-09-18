@@ -14,7 +14,10 @@ export class Dungeoning extends Component {
     }
 
     switchPages = (pageNum) => {
-        this.props.selectPage(pageNum)
+        let state = this.state;
+        state.currentEnemy[2] = state.currentEnemy[1];
+        this.setState(state);
+        this.props.selectPage(pageNum);
     }
 
     selectDungeon = (index) => {
@@ -55,6 +58,7 @@ export class Dungeoning extends Component {
         }
         this.setState(state);
         if (action === "run") {
+            state.currentEnemy[2] = state.currentEnemy[1];
             state.currentEnemy = null;
             this.toggleDungeoning();
         } else if (state.currentEnemy[2] <= 0) {
@@ -133,6 +137,7 @@ export class Dungeoning extends Component {
     }
 
     render() {
+
         return (
             <div className="master">
                 <div className="navigation">
@@ -146,7 +151,7 @@ export class Dungeoning extends Component {
                         {this.props.worldState.dungeons.map((dungeon, index) =>
                             <div key={dungeon.name}>
                                 {this.props.worldState.triggerDungeons[index] &&
-                                    <button key={dungeon.name+"Button"} onClick={() => (this.state.selectedDungeon !== index ?
+                                    <button disabled={this.state.dungeoning} key={dungeon.name+"Button"} onClick={() => (this.state.selectedDungeon !== index ?
                                         this.selectDungeon(index) : this.selectDungeon(null))}>{dungeon.name}</button>}
                             </div>
                         )}

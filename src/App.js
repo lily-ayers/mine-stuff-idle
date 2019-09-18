@@ -122,10 +122,6 @@ class App extends Component {
       }
     }
   }
-
-  checkTriggers = (worldState) => {
-
-  }
   
   conductBehavior = (worldState) => {
     this.save(worldState);
@@ -133,7 +129,6 @@ class App extends Component {
         this.superviseWorkers(eraState)
         this.populate(eraState)
     }
-    this.checkTriggers(worldState);
     let state = this.state;
     state.gameClock += 1;
     this.setState(state);

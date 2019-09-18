@@ -93,12 +93,13 @@ import './employering.scss';
                 <div className="smallPlate">
                     <button className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
                 </div>
+                <span className="hireTitle">Hire:</span>
                 <div className="hire">
-                    <button className="refresh" onClick={() => this.refresh()}>Refresh</button>
+                    <button disabled={this.props.worldState.stats[5] <= 10}  className="refresh" onClick={() => this.refresh()}>Refresh (10 {this.props.worldState.currency})</button>
                     {this.state.availableLevels.length > 0 && 
                         <select className="hireLevelSelector">
                             {this.state.availableLevels.map(level => 
-                                <option>Level {level} (Costs {})</option>    
+                                <option>Level {level} (Costs {Math.pow(100, level) + " " + this.props.worldState.currency})</option>    
                             )}
                         </select>
                     }
@@ -107,9 +108,10 @@ import './employering.scss';
                     <p className="stat">Power: {this.state.worker.power}</p>
                     <p className="stat">Damage: {this.state.worker.damage}</p>
                     <p className="stat">Speed: {this.state.worker.speed}</p>
-                    <p className="cost">Cost: {this.state.currentWorkerCost}</p>
+                    <p className="cost">Cost: {this.state.currentWorkerCost + " " + this.props.worldState.currency}</p>
                     <button disabled={this.state.availableLevels.length <= 0} onClick={() => this.hireWorker()}>Hire!</button>
                 </div>
+                <span className="employedListTitle">Employees:</span>
                 <div className="employedList">
                     {this.props.worldState.workers.map((worker, index) =>
                         <div key={index} className="employee">

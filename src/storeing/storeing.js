@@ -169,18 +169,12 @@ import Items from '../items';
                                         {mine.materials.map(
                                             mat =>
                                             <div className="materialPlate">
-                                                {this.props.worldState.workers.length > 0 &&
-                                                    <div className="assignWorker">
-                                                        <label>Assigned Workers:</label>
-                                                        <select onChange={(opt) => this.assignWorker(opt.target.value, mat)}>
-                                                            <option value="">None</option>
-                                                            {this.props.worldState.workers.map(worker =>
-                                                                <option value={worker}>{worker.name}</option>
-                                                            )}
-                                                        </select>
+                                                {mat[4] > 0 &&
+                                                    <div className="sellMaterial">
+                                                        <label>{mat[0]}: {mat[4]}</label>
+                                                        <button>Sell for {mat[5] + " " + this.props.worldState.currency}</button>
                                                     </div>
                                                 }
-                                                <p onClick={() => this.triggerTooltip(mat)} key={mat[0]}>{mat[0]}: {mat[4]}</p>
                                             </div>
                                         )}
                                     </div>
@@ -244,30 +238,6 @@ import Items from '../items';
                             </div>
                         }
                     </div>
-                </div>
-                
-                <div className="navigation">
-                    <div className="plate mineing">
-                        <p>Want to Mine?</p>
-                        <button onClick={() => this.switchPages("Mine")}>Go to the Mines!</button>
-                    </div>
-                    <div className="plate dungeoning">
-                        <p>Want to Kill?</p>
-                        <button onClick={() => this.switchPages("Dungeon")}>Go to the Dungeons!</button>
-                    </div>
-                    <div className="plate stroreing">
-                        <p>Want to Sell?</p>
-                        <button onClick={() => this.switchPages("Store")}>Go to the Stores!</button>
-                    </div>
-                    <div className="plate employering">
-                        <p>Want to Hire?</p>
-                        <button onClick={() => this.switchPages("Employ")}>Go to Craigslist!</button>
-                    </div>
-                    {this.state.renderTooltip && 
-                        <div className="crafting">
-                            {this.renderCrafting(this.getCraftingArray(this.state.tooltipDetails))}
-                        </div>
-                    }
                 </div>
             </div>
         );
