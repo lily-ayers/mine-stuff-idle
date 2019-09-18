@@ -14,6 +14,10 @@ export class Mining extends Component {
         this.switchPages = this.switchPages.bind(this);
     }
 
+    refreshMinerals = () => {
+        
+    }
+
     switchPages = (pageNum) => {
         this.props.selectPage(pageNum)
     }

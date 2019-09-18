@@ -14,7 +14,6 @@ if (localStorage.getItem('MSI-WorldState')) {
     // Initialize New Game WorldState, Add Player's Held Amount of All Materials (0) to Every Materials Array
     worldState = WorldState;
 }
-setInterval(() => {localStorage.setItem('MSI-WorldState', JSON.stringify(worldState))}, 1000);
 
 ReactDOM.render(<App worldState={worldState} />, document.getElementById('root'));
 

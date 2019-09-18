@@ -2,6 +2,7 @@ import React from 'react';
 import { Homepage } from './homepage/homepage'
 import { Mining } from './mining/mining'
 import { Dungeoning } from './dungeoning/dungeoning'
+import { Employering } from './employering/employering'
 
 class Hub extends React.Component {
     constructor(props) {
@@ -22,12 +23,12 @@ class Hub extends React.Component {
 
     render() {
         return (
-            <div className="Index">
+            <div style={this.props.font} className="Index">
                 {this.state.Selected === "Home" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Mine" && <Mining worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Dungeon" && <Dungeoning worldState={this.props.worldState} selectPage={this.selectPage} />}
                 {this.state.Selected === "Store" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
-                {this.state.Selected === "Employ" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
+                {this.state.Selected === "Employ" && <Employering worldState={this.props.worldState} selectPage={this.selectPage} names={this.props.names} />}
                 {this.state.Selected === "Propaganda" && <Homepage worldState={this.props.worldState} selectPage={this.selectPage} />}
             </div>
         );

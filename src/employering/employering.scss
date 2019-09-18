@@ -1,0 +1,97 @@
+
+.employ{
+    font-family: 'Inconsolata', monospace;
+
+    .smallPlate{
+        position: absolute;
+        right: 1.5vw;
+        margin: 5px;
+        padding: 0;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+
+        .escBtn{
+            width: 5vw;
+            height: 3.5vw;
+            font-size: 1.3vw;
+        }
+    }
+
+    label {
+        display: block;
+        margin: 1px;
+        padding: 0px;
+    }
+
+    .cost {
+        font-style: oblique;
+        font-weight: 800;
+        display: block;
+    }
+
+    .hire {
+        border: 2px solid black;
+        width: 20vw;
+        height: 41vh;
+        display: inline-block;
+        vertical-align: middle;
+        text-align: center;
+
+        .refresh{
+            width: 9vw;
+            height: 3.5vw;
+            font-size: 1.3vw;
+        }
+
+        .name {
+            font-weight: 900;
+            display: block;
+        }
+    
+        .stat {
+            display: block;
+        }
+    }
+
+    .employedList {
+        border: 2px solid black;
+        width: 61.77vw;
+        height: 80vh;
+        top: 10vw;
+        right: 0.5vw;
+        display: inline-block;
+        position: absolute;
+        overflow: scroll;
+        overflow-x: hidden;
+
+        select {
+            max-width: 15vw;
+        }
+
+        .name {
+            font-weight: 900;
+            display: block;
+            margin: 1px;
+            padding: 0px;
+        }
+    
+        .stat {
+            display: block;
+            margin: 1px;
+            padding: 0px;
+        }
+    }
+
+    .employee {
+        border: 1px solid whitesmoke;
+        width: 20vw;
+        height: 30vh;
+        display: inline-block;
+        overflow: scroll;
+        overflow-x: hidden;
+        select {
+            max-width: 15vw;
+        }
+    }
+}

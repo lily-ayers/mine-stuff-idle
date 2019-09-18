@@ -2,10 +2,12 @@ var WorldState = [
     {
         name: "Modern Era",
         // An Era's Color Pallet consists of an array, with Primary at index 0, secondary at index 1, tertiary (like borders) at index 2, and text at index 3
+        eraUnlocked: true,
         colorPallet: ["slategrey", "darkblue", "yellow", "red"],
+        currency: "Ruples",
         ascensionMultiplier: 0,
-        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
-        stats: [10, 10, 1, 1, 1, 1, 0],
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Money
+        stats: [10, 10, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // modern: tutorial1, tutorial2, Boat, Rapture, Spaceship, Flint
@@ -34,22 +36,22 @@ var WorldState = [
                 discoveryMessage: "You come across a mine on the island. More of a quarry, really. Yeah, let's go with Quarry.",
                 // refresh rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
                 //refreshrate of zero means no refresh
-                refreshRate: 0,
+                refreshRate: 1,
                 // Materials are stored in an array of arrays, each interior array has the 
-                // Material name at index 0, starting amount at index 1, current amount at index 2, difficulty at index 3, held amount at index 4
+                // Material name at index 0, starting amount at index 1, current amount at index 2, difficulty at index 3, held amount at index 4, sellPrice at index 5
                 materials: [
-                    ["Floatstone", "20", "20", "1", "0"],
-                    ["Lightweight Glue", "5", "5", "2", "0"]
+                    ["Floatstone", "20", "20", "1", "0", "1"],
+                    ["Lightweight Glue", "5", "5", "2", "0", "2"]
                 ]
             },
             {
                 name: "John's Mineshaft",
                 discoveryMessage: "John was nice enough to let you use his personal mineshaft until you get back on your feet! There's probably wonderous things inside!",
-                refreshRate: 0,
+                refreshRate: 2,
                 materials: [
-                    ["Planks of Wood", "40", "40", "2", "0"],
-                    ["Actually Iron", "20", "20", "3", "0"],
-                    ["Rope?", "15", "15", "2", "0"]
+                    ["Planks of Wood", "40", "40", "2", "0", "3"],
+                    ["Actually Iron", "20", "20", "3", "0", "6"],
+                    ["Rope?", "15", "15", "2", "0", "2"]
                 ]
             },
             {
@@ -57,11 +59,11 @@ var WorldState = [
                 discoveryMessage: "The locals show you to a dark cave and beckon you inside. It's a new mineshaft!",
                 refreshRate: 5,
                 materials: [
-                    ["Stone", "1000", "1000", "2", "0"],
-                    ["Dirt", "5000", "5000", "1", "0"],
-                    ["Tin", "750", "750", "3", "0"],
-                    ["Iron", "600", "600", "4", "0"],
-                    ["Saltpeter", "200", "200", "2", "0"]
+                    ["Stone", "1000", "1000", "2", "0", "4"],
+                    ["Dirt", "5000", "5000", "1", "0", "2"],
+                    ["Tin", "750", "750", "3", "0", "4"],
+                    ["Iron", "600", "600", "4", "0", "9"],
+                    ["Saltpeter", "200", "200", "2", "0", "7"]
                 ]
             },
             {
@@ -69,11 +71,11 @@ var WorldState = [
                 discoveryMessage: "Andrew Ryan would be proud if you even knew who that was.",
                 refreshRate: 7,
                 materials: [
-                    ["Clay", "1000", "1000", "2", "0"],
-                    ["Diamond", "50", "50", "20", "0"],
-                    ["Quartz", "200", "200", "4", "0"],
-                    ["Copper", "400", "400", "3", "0"],
-                    ["Calcite", "350", "350", "6", "0"]
+                    ["Clay", "1000", "1000", "2", "0", "3"],
+                    ["Diamond", "50", "50", "20", "0", "75"],
+                    ["Quartz", "200", "200", "4", "0", "30"],
+                    ["Copper", "400", "400", "3", "0", "25"],
+                    ["Calcite", "350", "350", "6", "0", "20"]
                 ]
             },
             {
@@ -81,11 +83,11 @@ var WorldState = [
                 discoveryMessage: "These Asteroids do wonders for keeping the universe's pants on!",
                 refreshRate: 10,
                 materials: [
-                    ["Sulfer", "500", "500", "4", "0"],
-                    ["Silicon", "1000", "1000", "3", "0"],
-                    ["Palladium", "300", "300", "7", "0"],
-                    ["Ruthenium", "90", "90", "8", "0"],
-                    ["Osmium", "75", "75", "9", "0"]
+                    ["Sulfer", "500", "500", "4", "0", "15"],
+                    ["Silicon", "1000", "1000", "3", "0", "20"],
+                    ["Palladium", "300", "300", "7", "0", "40"],
+                    ["Ruthenium", "90", "90", "8", "0", "80"],
+                    ["Osmium", "75", "75", "9", "0", "130"]
                 ]
             }
         ],
@@ -94,52 +96,53 @@ var WorldState = [
                 name: "Abandoned Theme Park",
                 discoveryMessage: "You come across a weird park on the island. What could be inside?",
                 // respawn rate math: enemy health / respawnRate = seconds to respawn, 0 means no respawn
-                respawnRate: 0,
+                respawnRate: 1,
                 // Enemies are stored in an array of arrays, each interior array has the 
-                // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5
+                // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5, Alive(bool) at index 6
                 enemies: [
-                    ["Dinosaur Mascot Costume", "5", "5", "2", "1", "Useless Pickaxe"]
+                    ["Dinosaur Mascot Costume", "5", "5", "2", "1", "Useless Pickaxe", true, "0"]
                 ]
             },
             {
                 name: "John's Basement",
                 discoveryMessage: "John offers you a reward for each can you crush (he just took up recycling).",
-                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
-                respawnRate: 1,
+                respawnRate: 2,
                 // Enemies are stored in an array of arrays, each interior array has the 
                 enemies: [
-                    ["Pepsi Can", "8", "8", "4", "1", "Cotton"]
+                    ["Pepsi Can", "8", "8", "4", "1", "Cotton", true, "0"]
                 ]
             },
             {
                 name: "'Not India' Forest",
                 discoveryMessage: "This place (that is clearly not India) has a lush forest. You're sure there are treasures and loot to be had galore in there...",
-                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
-                respawnRate: 2,
+                respawnRate: 4,
                 enemies: [
-                    ["Angsty Lemur", "10", "10", "5", "3", "Berries"],
-                    ["Tall Goat", "14", "14", "5", "8", "Half-Chewed Grass"],
-                    ["Bear", "20", "20", "8", "10", "Bear Claws"]
+                    ["Angsty Lemur", "10", "10", "5", "3", "Berries", true, "0"],
+                    ["Tall Goat", "14", "14", "5", "8", "Half-Chewed Grass", true, "0"],
+                    ["Bear", "20", "20", "8", "10", "Bear Claws", true, "0"]
                 ]
             },
             {
                 name: "'Not India' Colloseum",
                 discoveryMessage: "The natives seem to like beating the crap out of eachother in a stone ampitheatre. Might as well give it a shot!",
-                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
-                respawnRate: 5,
+                respawnRate: 8,
                 enemies: [
-                    ["Mike (the owner's son)", "15", "15", "3", "20", "Overpriced Armor"],
-                    ["Kevin (he lifts weights)", "23", "23", "12", "14", "One Dumbell"],
-                    ["Literally Just A Horse", "30", "30", "17", "20", "Horseshoe"],
-                    ["El Guapo", "40", "40", "23", "23", "A Sweater"]
+                    ["Mike (the owner's son)", "15", "15", "3", "20", "Overpriced Armor", true, "0"],
+                    ["Kevin (he lifts weights)", "23", "23", "12", "14", "One Dumbell", true, "0"],
+                    ["Literally Just A Horse", "30", "30", "17", "20", "Horseshoe", true, "0"],
+                    ["El Guapo", "40", "40", "23", "23", "A Sweater", true, "0"]
                 ]
             }
         ]
     },
     {
         name: "Industrial Era",
+        eraUnlocked: false,
         colorPallet: ["tan", "brown", "black", "yellow"],
+        currency: "Whiskey",
         ascensionMultiplier: 0,
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
+        stats: [10, 10, 1, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // industrial: east, Midwest, wild west
@@ -149,8 +152,12 @@ var WorldState = [
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
         shopLevel: 1,
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
-        equippableItems: [],
-        equippedItems: [],
+        equippableItems: [[], [], [], []],
+        equippedItems: [{name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
+        // consumables format: ["name", "amount held", "affect", "affectAmount"]
+        consumables: [],
+        // otherMaterials format: ["name", "amount held"]
+        otherMaterials: [],
         // format: ["name", {stats}, "assignedJob", "assignedLocation"]
         workers: [],
         mines: [
@@ -190,14 +197,64 @@ var WorldState = [
                     ["Feldspar", "150", "150", "6", "0"]
                 ]
             }
+        ],
+        dungeons: [
+            {
+                name: "Abandoned Theme Park",
+                discoveryMessage: "You come across a weird park on the island. What could be inside?",
+                // respawn rate math: enemy health / respawnRate = seconds to respawn, 0 means no respawn
+                respawnRate: 1,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5
+                enemies: [
+                    ["Dinosaur Mascot Costume", "5", "5", "2", "1", "Useless Pickaxe"]
+                ]
+            },
+            {
+                name: "John's Basement",
+                discoveryMessage: "John offers you a reward for each can you crush (he just took up recycling).",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 2,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                enemies: [
+                    ["Pepsi Can", "8", "8", "4", "1", "Cotton"]
+                ]
+            },
+            {
+                name: "'Not India' Forest",
+                discoveryMessage: "This place (that is clearly not India) has a lush forest. You're sure there are treasures and loot to be had galore in there...",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 4,
+                enemies: [
+                    ["Angsty Lemur", "10", "10", "5", "3", "Berries"],
+                    ["Tall Goat", "14", "14", "5", "8", "Half-Chewed Grass"],
+                    ["Bear", "20", "20", "8", "10", "Bear Claws"]
+                ]
+            },
+            {
+                name: "'Not India' Colloseum",
+                discoveryMessage: "The natives seem to like beating the crap out of eachother in a stone ampitheatre. Might as well give it a shot!",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 8,
+                enemies: [
+                    ["Mike (the owner's son)", "15", "15", "3", "20", "Overpriced Armor"],
+                    ["Kevin (he lifts weights)", "23", "23", "12", "14", "One Dumbell"],
+                    ["Literally Just A Horse", "30", "30", "17", "20", "Horseshoe"],
+                    ["El Guapo", "40", "40", "23", "23", "A Sweater"]
+                ]
+            }
         ]
     },
     {
         name: "Prehistoric Era",
+        eraUnlocked: false,
         colorPallet: ["green", "blue", "tan", "orange"],
+        currency: "Shiny Rocks",
         ascensionMultiplier: 0,
         // Unlocks ascension
         triggerTimeMachine: false,
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
+        stats: [10, 10, 1, 1, 1, 1, 0],
         // Prehistoric: tarPits, MountOogabooga, LiterallyAVolcano
         triggerMines: [true, false, false],
         warehouses: 0,
@@ -205,8 +262,12 @@ var WorldState = [
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
         shopLevel: 1,
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
-        equippableItems: [],
-        equippedItems: [],
+        equippableItems: [[], [], [], []],
+        equippedItems: [{name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
+        // consumables format: ["name", "amount held", "affect", "affectAmount"]
+        consumables: [],
+        // otherMaterials format: ["name", "amount held"]
+        otherMaterials: [],
         // format: ["name", {stats}, "assignedJob", "assignedLocation"]
         workers: [],
         mines: [
@@ -246,12 +307,62 @@ var WorldState = [
                     ["Basalt", "1000", "1000", "5", "0"]
                 ]
             }
+        ],
+        dungeons: [
+            {
+                name: "Abandoned Theme Park",
+                discoveryMessage: "You come across a weird park on the island. What could be inside?",
+                // respawn rate math: enemy health / respawnRate = seconds to respawn, 0 means no respawn
+                respawnRate: 1,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5
+                enemies: [
+                    ["Dinosaur Mascot Costume", "5", "5", "2", "1", "Useless Pickaxe"]
+                ]
+            },
+            {
+                name: "John's Basement",
+                discoveryMessage: "John offers you a reward for each can you crush (he just took up recycling).",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 2,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                enemies: [
+                    ["Pepsi Can", "8", "8", "4", "1", "Cotton"]
+                ]
+            },
+            {
+                name: "'Not India' Forest",
+                discoveryMessage: "This place (that is clearly not India) has a lush forest. You're sure there are treasures and loot to be had galore in there...",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 4,
+                enemies: [
+                    ["Angsty Lemur", "10", "10", "5", "3", "Berries"],
+                    ["Tall Goat", "14", "14", "5", "8", "Half-Chewed Grass"],
+                    ["Bear", "20", "20", "8", "10", "Bear Claws"]
+                ]
+            },
+            {
+                name: "'Not India' Colloseum",
+                discoveryMessage: "The natives seem to like beating the crap out of eachother in a stone ampitheatre. Might as well give it a shot!",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 8,
+                enemies: [
+                    ["Mike (the owner's son)", "15", "15", "3", "20", "Overpriced Armor"],
+                    ["Kevin (he lifts weights)", "23", "23", "12", "14", "One Dumbell"],
+                    ["Literally Just A Horse", "30", "30", "17", "20", "Horseshoe"],
+                    ["El Guapo", "40", "40", "23", "23", "A Sweater"]
+                ]
+            }
         ]
     },
     {
         name: "Planetarial Era",
+        eraUnlocked: false,
         colorPallet: ["black", "cadetblue", "pink", "white"],
+        currency: "Doge Coins",
         ascensionMultiplier: 0,
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
+        stats: [10, 10, 1, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // planetarial: planet, star, neutronStar
@@ -261,9 +372,13 @@ var WorldState = [
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
         shopLevel: 1,
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
-        equippableItems: [],
-        equippedItems: [],
-        // format: ["name", {stats}, "assignedJob", "assignedLocation"]
+        equippableItems: [[], [], [], []],
+        equippedItems: [{name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
+        // consumables format: ["name", "amount held", "affect", "affectAmount"]
+        consumables: [],
+        // otherMaterials format: ["name", "amount held"]
+        otherMaterials: [],
+        // format: {"name", "power", "damage", "assignedJob"string, "assignedLocation"string, "assignment":indexOfMat/Enemy, "currentProgress":"#", "heldMaterial":mat[], "returning":boolean}
         workers: [],
         mines: [
             {
@@ -302,12 +417,62 @@ var WorldState = [
                     ["Bite-Sized Star Core", "1", "1", "15", "0"]
                 ]
             }
+        ],
+        dungeons: [
+            {
+                name: "Abandoned Theme Park",
+                discoveryMessage: "You come across a weird park on the island. What could be inside?",
+                // respawn rate math: enemy health / respawnRate = seconds to respawn, 0 means no respawn
+                respawnRate: 1,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5
+                enemies: [
+                    ["Dinosaur Mascot Costume", "5", "5", "2", "1", "Useless Pickaxe"]
+                ]
+            },
+            {
+                name: "John's Basement",
+                discoveryMessage: "John offers you a reward for each can you crush (he just took up recycling).",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 2,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                enemies: [
+                    ["Pepsi Can", "8", "8", "4", "1", "Cotton"]
+                ]
+            },
+            {
+                name: "'Not India' Forest",
+                discoveryMessage: "This place (that is clearly not India) has a lush forest. You're sure there are treasures and loot to be had galore in there...",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 4,
+                enemies: [
+                    ["Angsty Lemur", "10", "10", "5", "3", "Berries"],
+                    ["Tall Goat", "14", "14", "5", "8", "Half-Chewed Grass"],
+                    ["Bear", "20", "20", "8", "10", "Bear Claws"]
+                ]
+            },
+            {
+                name: "'Not India' Colloseum",
+                discoveryMessage: "The natives seem to like beating the crap out of eachother in a stone ampitheatre. Might as well give it a shot!",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 8,
+                enemies: [
+                    ["Mike (the owner's son)", "15", "15", "3", "20", "Overpriced Armor"],
+                    ["Kevin (he lifts weights)", "23", "23", "12", "14", "One Dumbell"],
+                    ["Literally Just A Horse", "30", "30", "17", "20", "Horseshoe"],
+                    ["El Guapo", "40", "40", "23", "23", "A Sweater"]
+                ]
+            }
         ]
     },
     {
         name: "Absent Era",
+        eraUnlocked: false,
         colorPallet: ["white", "white", "black", "black"],
+        currency: "",
         ascensionMultiplier: 0,
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
+        stats: [10, 10, 1, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // absent: singularity, cyclicalSingularity
@@ -317,8 +482,13 @@ var WorldState = [
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
         shopLevel: 1,
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
-        equippableItems: [],
-        equippedItems: [],
+        equippableItems: [[], [], [], []],
+        equippedItems: [{name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
+        // consumables format: ["name", "amount held", "affect", "affectAmount"]
+        consumables: [],
+        // otherMaterials format: ["name", "amount held"]
+        otherMaterials: [],
+        workers: [],
         mines: [
             {
                 name: "The Singularity",
@@ -338,6 +508,52 @@ var WorldState = [
                 refreshRate: 100,
                 materials: [
                     ["Mobius Strip with Space on One Side and Time on the Same Side", "1", "1", "250", "0"]
+                ]
+            }
+        ],
+        dungeons: [
+            {
+                name: "Abandoned Theme Park",
+                discoveryMessage: "You come across a weird park on the island. What could be inside?",
+                // respawn rate math: enemy health / respawnRate = seconds to respawn, 0 means no respawn
+                respawnRate: 1,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                // Enemy name at index 0, Max Health at index 1, Current Health at index 2, Damage at index 3, Defense at index 4, Drops at index 5
+                enemies: [
+                    ["Dinosaur Mascot Costume", "5", "5", "2", "1", "Useless Pickaxe"]
+                ]
+            },
+            {
+                name: "John's Basement",
+                discoveryMessage: "John offers you a reward for each can you crush (he just took up recycling).",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 2,
+                // Enemies are stored in an array of arrays, each interior array has the 
+                enemies: [
+                    ["Pepsi Can", "8", "8", "4", "1", "Cotton"]
+                ]
+            },
+            {
+                name: "'Not India' Forest",
+                discoveryMessage: "This place (that is clearly not India) has a lush forest. You're sure there are treasures and loot to be had galore in there...",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 4,
+                enemies: [
+                    ["Angsty Lemur", "10", "10", "5", "3", "Berries"],
+                    ["Tall Goat", "14", "14", "5", "8", "Half-Chewed Grass"],
+                    ["Bear", "20", "20", "8", "10", "Bear Claws"]
+                ]
+            },
+            {
+                name: "'Not India' Colloseum",
+                discoveryMessage: "The natives seem to like beating the crap out of eachother in a stone ampitheatre. Might as well give it a shot!",
+                // respawn rate math: (# of materials missing from the mine / 100) / refreshRate = Amount of each material regenerated every minute
+                respawnRate: 8,
+                enemies: [
+                    ["Mike (the owner's son)", "15", "15", "3", "20", "Overpriced Armor"],
+                    ["Kevin (he lifts weights)", "23", "23", "12", "14", "One Dumbell"],
+                    ["Literally Just A Horse", "30", "30", "17", "20", "Horseshoe"],
+                    ["El Guapo", "40", "40", "23", "23", "A Sweater"]
                 ]
             }
         ]

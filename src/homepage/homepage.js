@@ -239,12 +239,18 @@ import Items from '../items';
                         <button onClick={() => this.switchPages("Dungeon")}>Go to the Dungeons!</button>
                     </div>
                     <div className="plate stroreing">
-                        <p>Want to sell?</p>
+                        <p>Want to Sell?</p>
                         <button onClick={() => this.switchPages("Store")}>Go to the Stores!</button>
                     </div>
-                    <div className="plate crafting">
-                        {this.state.renderTooltip && this.renderCrafting(this.getCraftingArray(this.state.tooltipDetails))}
+                    <div className="plate employering">
+                        <p>Want to Hire?</p>
+                        <button onClick={() => this.switchPages("Employ")}>Go to the Stores!</button>
                     </div>
+                    {this.state.renderTooltip && 
+                        <div className="crafting">
+                            {this.renderCrafting(this.getCraftingArray(this.state.tooltipDetails))}
+                        </div>
+                    }
                 </div>
             </div>
         );

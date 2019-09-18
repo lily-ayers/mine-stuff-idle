@@ -8,6 +8,7 @@
 $test: 1px solid black;
 
 button{
+  font: unset;
   border: 2px outset gray;
   height: 2.5vw;
   width: auto;
@@ -144,14 +145,14 @@ body{
 
 .navigation{
   width: 25vw;
-  height: 25vw;
+  height: 40vw;
   position: absolute;
   right: 1.5vw;;
   margin: 5px;
-  border: $test;
+  border: 1px solid black;
 
   .plate{
-    height: 33%;
+    height: 16%;
     padding: 0;
     margin: 0;
     width: 100%;
@@ -202,6 +203,53 @@ body{
     background-size: 20%;
     color: black;
   }
+
+  .crafting{
+    background-size: 20%;
+    background-image: linear-gradient(to bottom, pink 30%, darkblue);
+    overflow: scroll;
+    overflow-x: hidden;
+
+    .tooltip{
+      display: block;
+      border-bottom: 1px dotted violet;
+
+      .tooltipName{
+        display: block;
+        font-weight: bold;
+        margin: 1vw;
+      }
+
+      .tooltipText{
+        margin: 1vw;
+        display: block;
+      }
+
+      .tooltipReq{
+        display: block;
+        font-style: oblique;
+        margin: 1vw;
+        margin-left: 2vw;
+      }
+      
+      button{
+        width: 5vw;
+        margin-left: 10vw;
+      }
+    }
+  }
+}
+    /*------- Navbar -------*/
+
+
+.playerStatDisplay {
+  vertical-align: middle;
+  display: inline-block;
+
+  .playerStat {
+    margin: 1vw;
+    display: inline-block;
+  }
 }
 
     /*------- Dropdown -------*/
@@ -212,7 +260,6 @@ body{
   position: relative;
   float: right;
   background-color: white;
-
 }
 
 .dropdown-open{
@@ -226,16 +273,24 @@ body{
   z-index: 1;
 
   .listItem{
-    display: inline-block;
+    display: block;
+    height: 7vw;
+    .header-small{
+      display: inline-block;
+      padding: 0;
+    }
+    .dropdown-btn{
+      display: inline-block;
+      position: absolute;
+      top: 1.5vw;
+      right: 0;
+      height: 4vw;
+      width: 10vw;
+    }
   }
-.icon{
-  display: none;
-}
-}
-
-.dropdown-btn{
-  height: 4vw;
-  width: 4vw;
+  .icon{
+    display: none;
+  }
 }
 
 .listItem{
