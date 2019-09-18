@@ -244,7 +244,7 @@ import Items from '../items';
                     </div>
                     <div className="plate employering">
                         <p>Want to Hire?</p>
-                        <button onClick={() => this.switchPages("Employ")}>Go to the Stores!</button>
+                        <button onClick={() => this.switchPages("Employ")}>Go to Craigslist!</button>
                     </div>
                     {this.state.renderTooltip && 
                         <div className="crafting">
