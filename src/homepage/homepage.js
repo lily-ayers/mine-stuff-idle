@@ -41,22 +41,26 @@ import Items from '../items';
         const canCraft = [];
         const names = [];
         const requiredMaterials = [];
+        let detailsIndex = 0;
         for (let details of detailsArray) {
             names.push(details.name)
-            requiredMaterials.push(details.requiredMaterials)
-            let tempCanCraft = false;
+            requiredMaterials.push(JSON.parse(JSON.stringify(details.requiredMaterials)));
+            let tempCanCraft = true;
+            let matIndex = 0;
             for (let mat of details.requiredMaterials) {
-                if (details.eraAvailable == this.props.era) {
+                if (details.eraAvailable === this.props.era) {
                     const heldMat = this.findMat(mat)
-                    if (heldMat !== null && heldMat.amountHeld >= mat.amount) {
-                        tempCanCraft = true
-                    } else {
+                    if (heldMat.name === "?????") {
+                        requiredMaterials[detailsIndex][matIndex].name = heldMat.name;
+                        requiredMaterials[detailsIndex][matIndex].amount = heldMat.amount;
                         tempCanCraft = false;
-                        console.log("cannot craft")
-                        break;
+                    } else if(heldMat.amountHeld < mat.amount) {
+                        tempCanCraft = false;
                     }
                 }
+                matIndex++;
             }
+            detailsIndex++
             canCraft.push(tempCanCraft)
         }
         const craftables = {results: names, materials: requiredMaterials, available: canCraft};
@@ -64,84 +68,128 @@ import Items from '../items';
     }
 
     craftItem = (details) => {
-        for (let mat of details.requiredMaterials) {
-            let heldMat = this.findMat(mat);
-            if (heldMat[4] < mat.amount) {
+        let item = Items.find(data => data.name === details.name)
+        if (item.triggers && (item.triggers[1] || item.triggers[3])) {
+            let lostAccess = [];
+            let gainedAccess = [];
+            for (let triggerIndex of item.triggers[1]) {
+                lostAccess.push(this.props.worldState[this.props.era].mines[triggerIndex].name);
+            }
+            for (let triggerIndex of item.triggers[3]) {
+                lostAccess.push(this.props.worldState[this.props.era].dungeons[triggerIndex].name);
+            }
+            for (let triggerIndex of item.triggers[0]) {
+                gainedAccess.push(this.props.worldState[this.props.era].mines[triggerIndex].name);
+            }
+            for (let triggerIndex of item.triggers[2]) {
+                gainedAccess.push(this.props.worldState[this.props.era].dungeons[triggerIndex].name);
+            }
+            if (window.confirm('Crafting this will block access to ' + lostAccess.join(', ') + " but grant access to " + gainedAccess.join(", "))) {
+                for (let mat of details.requiredMaterials) {
+                    let heldMat = this.findMat(mat);
+                    if (heldMat.amountHeld < mat.amount) {
+                        return;
+                    }
+                    heldMat.amountHeld -= mat.amount;
+                }
+                for (let triggerIndex of item.triggers[0]) {
+                    this.props.worldState[this.props.era].triggerMines[triggerIndex] = true;
+                }
+                for (let triggerIndex of item.triggers[1]) {
+                    this.props.worldState[this.props.era].triggerMines[triggerIndex] = false;
+                }
+                for (let triggerIndex of item.triggers[2]) {
+                    this.props.worldState[this.props.era].triggerDungeons[triggerIndex] = true;
+                }
+                for (let triggerIndex of item.triggers[3]) {
+                    this.props.worldState[this.props.era].triggerDungeons[triggerIndex] = false;
+                }
+            } else {
                 return;
             }
-            heldMat -= mat.amount;
-        }
-        let item = Items.find(data => data.name === details.name)
-        switch (item.type) {
-            case "Equippable":
-                let slot;
-                switch (item.slot) {
-                    case "Head":
-                        slot = 0;
-                        break;
-                    case "Chest":
-                        slot = 1;
-                        break;
-                    case "Weapon":
-                        slot = 2;
-                        break;
-                    case "Legs":
-                        slot = 3;
-                        break;
-                    }
-                    if (this.props.worldState[this.props.era].equippedItems[slot].name !== item.name) {
-                        this.props.worldState[this.props.era].equippableItems[slot].push(item);
-                        this.props.worldState[this.props.era].equippableItems[slot] = [...new Set(this.props.worldState[this.props.era].equippableItems[slot])];
-                    }
-                break;
-            case "Consumable":
-                let consumableFound = false;
-                for (let consumable of this.props.worldState[this.props.era].consumables) {
-                    if (consumable.name === item.name) {
-                    consumable.amountHeld++;
-                    consumableFound = true;
-                }
-                }
-                if (!consumableFound) {
-                    this.props.worldState[this.props.era].consumables.push(item)
-                }
-                break;
-            case "Other":
-                let otherFound = false;
-                for (let material of this.props.worldState[this.props.era].otherMaterials) {
-                    if (material.name === item.name) {
-                        material.amountHeld++;
-                        otherFound = true;
-                    }
-                }
-                if (!otherFound) {
-                    this.props.worldState[this.props.era].otherMaterials.push(item)
-                }
-                break;
-        }
-        if (item.triggers) {
-            for (let triggerIndex of item.triggers) {
-                this.props.worldState[this.props.era].triggerMines[triggerIndex] = !this.props.worldState[this.props.era].triggerMines[triggerIndex];
-                this.props.worldState[this.props.era].triggerDungeons[triggerIndex] = !this.props.worldState[this.props.era].triggerDungeons[triggerIndex];
+        } else {
+            for (let mat of details.requiredMaterials) {
+            let heldMat = this.findMat(mat);
+            if (heldMat.amountHeld < mat.amount) {
+                return;
             }
-        }
+            heldMat.amountHeld -= mat.amount;
+            }
+            switch (item.type) {
+                case "Equippable":
+                    let slot;
+                    switch (item.slot) {
+                        case "Head":
+                            slot = 0;
+                            break;
+                        case "Chest":
+                            slot = 1;
+                            break;
+                        case "Weapon":
+                            slot = 2;
+                            break;
+                        case "Legs":
+                            slot = 3;
+                            break;
+                        }
+                        if (this.props.worldState[this.props.era].equippedItems[slot].name !== item.name) {
+                            this.props.worldState[this.props.era].equippableItems[slot].push(item);
+                            this.props.worldState[this.props.era].equippableItems[slot] = [...new Set(this.props.worldState[this.props.era].equippableItems[slot])];
+                        }
+                    break;
+                case "Consumable":
+                    let consumableFound = false;
+                    for (let consumable of this.props.worldState[this.props.era].consumables) {
+                        if (consumable.name === item.name) {
+                        consumable.amountHeld++;
+                        consumableFound = true;
+                    }
+                    }
+                    if (!consumableFound) {
+                        this.props.worldState[this.props.era].consumables.push(item)
+                    }
+                    break;
+                case "Other":
+                    let otherFound = false;
+                    for (let material of this.props.worldState[this.props.era].otherMaterials) {
+                        if (material.name === item.name) {
+                            material.amountHeld++;
+                            otherFound = true;
+                        }
+                    }
+                    if (!otherFound) {
+                        this.props.worldState[this.props.era].otherMaterials.push(item)
+                    }
+                    break;
+            }
         this.forceUpdate();
+        }
     }
 
     findMat = (mat) => {
         for (let i = 0; i < 5; i++) {
+            let index = 0;
             for (let mine of this.props.worldState[i].mines) {
-                for (let material of mine.materials) {
-                    if (mat.name === material.name) {
-                        return material;
+                if (this.props.worldState[i].triggerMines[index]) {
+                    for (let material of mine.materials) {
+                        if (mat.name === material.name) {
+                            return material;
+                        }
                     }
                 }
+                index++;
             }
             for (let material of this.props.worldState[i].otherMaterials) {
                 if (mat.name === material.name) {
                     return material;
                 }
             }
+            for (let consumable of this.props.worldState[i].consumables) {
+                if (mat.name === consumable.name) {
+                    return consumable;
+                }
+            }
+            return { name: "?????", amount: 99999999 }
         }
     }
 
@@ -229,7 +277,7 @@ import Items from '../items';
                                 <div className="materials">
                                     {this.props.worldState[this.props.era].consumables.map(
                                         (consume, index) =>
-                                            <p key={consume.name}>{consume.name}: {consume.amountHeld}</p>
+                                            <p onClick={() => this.triggerTooltip(consume)} key={consume.name}>{consume.name}: {consume.amountHeld}</p>
                                         )
                                     }
                                 </div>
@@ -241,7 +289,7 @@ import Items from '../items';
                                 <div className="materials">
                                     {this.props.worldState[this.props.era].otherMaterials.map(
                                         (other, index) =>
-                                            <p key={other.name}>{other.name}: {other.amountHeld}</p>
+                                            <p onClick={() => this.triggerTooltip(other)} key={other.name}>{other.name}: {other.amountHeld}</p>
                                         )
                                     }
                                 </div>

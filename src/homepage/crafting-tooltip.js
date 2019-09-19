@@ -4,7 +4,6 @@ import React, { Component } from 'react';
  export class CraftingTooltip extends Component {
     constructor(props) {
         super(props);
-        console.log(props)
     }
     
 

@@ -12,9 +12,9 @@ var WorldState = [
         triggerTimeMachine: false,
         // modern: tutorial1, tutorial2, Boat, Rapture, Spaceship, Flint
         //TODO-Return the variables back to false when done
-        triggerMines: [true, true, true, true, true, true],
+        triggerMines: [false, true, false, false, false, false],
         // modern: tutorial1, tutorial2, forest, colloseum
-        triggerDungeons: [true, false, false, false],
+        triggerDungeons: [false, true, false, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -23,7 +23,7 @@ var WorldState = [
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
         equippableItems: [[], [], [], []],
         // 0:head, 1:chest, 2:weapon, 3:legs
-        equippedItems: [{name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
+        equippedItems: [{name: "empty", power: 50, defense: 50, damage: 50, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
         // consumables format: ["name", "amount held", "affect", "affectAmount"]
         consumables: [],
         // otherMaterials format: ["name", "amount held"]
@@ -109,7 +109,9 @@ var WorldState = [
                 respawnRate: 2,
                 // Enemies are stored in an array of arrays, each interior array has the 
                 enemies: [
-                    ["Pepsi Can", "8", "8", "4", "1", "Cotton", true, "0"]
+                    ["Pepsi Can", "8", "8", "4", "1", "Cotton Soaked in Pepsi", true, "0"],
+                    ["Sprite Can", "12", "12", "2", "4", "Aluminum Shades", true, "0"],
+                    ["Suspicious Can", "15", "15", "5", "2", "Pop Tab Moccasins", true, "0"]
                 ]
             },
             {

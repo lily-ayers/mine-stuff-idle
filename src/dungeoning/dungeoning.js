@@ -124,7 +124,6 @@ export class Dungeoning extends Component {
             if (!found) {
                 this.props.worldState.consumables.push(item)
             }
-            this.props.worldState.consumables.push(item)
         } else {
             let found = false;
             for (let material of this.props.worldState.otherMaterials) {
@@ -136,7 +135,6 @@ export class Dungeoning extends Component {
             if (!found) {
                 this.props.worldState.otherMaterials.push(item)
             }
-            this.props.worldState.otherMaterials.push(item)
         }
     }
 

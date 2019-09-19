@@ -4,11 +4,11 @@ var Crafting = [
         requiredMaterials: [
             {
                 name: "Floatstone",
-                amount: "20"
+                amount: 20
             },
             {
                 name: "Lightweight Glue",
-                amount: "5"
+                amount: 5
             }
         ],
         eraAvailable: 0
@@ -18,15 +18,19 @@ var Crafting = [
         requiredMaterials: [
             {
                 name: "Planks of Wood",
-                amount: "40"
+                amount: 40
             },
             {
                 name: "Actually Iron",
-                amount: "20"
+                amount: 20
             },
             {
                 name: "Rope?",
-                amount: "15"
+                amount: 15
+            },
+            {
+                name: "Cotton Soaked in Pepsi",
+                amount: 20
             }
         ],
         eraAvailable: 0
@@ -36,15 +40,15 @@ var Crafting = [
         requiredMaterials: [
             {
                 name: "Tin",
-                amount: "300"
+                amount: 300
             },
             {
                 name: "Iron",
-                amount: "200"
+                amount: 200
             },
             {
                 name: "Glass",
-                amount: "90"
+                amount: 90
             }
         ],
         eraAvailable: 0
@@ -54,19 +58,19 @@ var Crafting = [
         requiredMaterials: [
             {
                 name: "Clay",
-                amount: "700"
+                amount: 700
             },
             {
                 name: "Diamond",
-                amount: "1"
+                amount: 1
             },
             {
                 name: "Copper",
-                amount: "200"
+                amount: 200
             },
             {
                 name: "Iron",
-                amount: "500"
+                amount: 500
             }
         ],
         eraAvailable: 0
@@ -76,20 +80,20 @@ var Crafting = [
         requiredMaterials: [
             {
                 name: "Flint",
-                amount: "1"
+                amount: 1
             },
             {
                 name: "Dino Bone",
-                amount: "1"
+                amount: 1
             },
             {
                 name: "Coal",
-                amount: "1"
+                amount: 1
             },
             {
                 name: "Saltpeter",
-                amount: "5"
-            },
+                amount: 5
+            }
         ],
         eraAvailable: 0
     }
