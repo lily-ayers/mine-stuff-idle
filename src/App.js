@@ -83,7 +83,7 @@ class App extends Component {
                 if (worker.assignedJob === "Mining") {
                   worker.progress -= (1 + (worker.speed / (worker.heldMaterial.difficulty / 2)));
                 } else if (worker.assignedJob === "Dungeoning") {
-                  worker.progress -= (1 + (worker.speed / (worker.enem[1] * worker.enem[3] / 2)));
+                  worker.progress -= (1 + (worker.speed / (worker.heldMaterial[1] * worker.heldMaterial[3] / 2)));
                 }
                 if (worker.progress <= 0) {
                     worker.progress = 0;
@@ -169,34 +169,32 @@ class App extends Component {
                 slot = 3
                 break;
         }
-        if (this.props.worldState.equippedItems[slot].name !== item.name) {
-            this.props.worldState.equippableItems[slot].push(item);
-            this.props.worldState.equippableItems[slot] = [...new Set(this.props.worldState.equippableItems[slot])];
+        if (this.props.worldState[this.state.selectedEra].equippedItems[slot].name !== item.name) {
+            this.props.worldState[this.state.selectedEra].equippableItems[slot].push(item);
+            this.props.worldState[this.state.selectedEra].equippableItems[slot] = [...new Set(this.props.worldState[this.state.selectedEra].equippableItems[slot])];
         }
     } else if (item.type === "Consumable") {
         let found = false;
-        for (let consumable of this.props.worldState.consumables) {
+        for (let consumable of this.props.worldState[this.state.selectedEra].consumables) {
             if (consumable.name === item.name) {
                 consumable.amountHeld++;
                 found = true;
             }
         }
         if (!found) {
-            this.props.worldState.consumables.push(item)
+            this.props.worldState[this.state.selectedEra].consumables.push(item)
         }
-        this.props.worldState.consumables.push(item)
     } else {
         let found = false;
-        for (let material of this.props.worldState.otherMaterials) {
+        for (let material of this.props.worldState[this.state.selectedEra].otherMaterials) {
             if (material.name === item.name) {
                 material.amountHeld++;
                 found = true;
             }
         }
         if (!found) {
-            this.props.worldState.otherMaterials.push(item)
+            this.props.worldState[this.state.selectedEra].otherMaterials.push(item)
         }
-        this.props.worldState.otherMaterials.push(item)
     }
   }
 

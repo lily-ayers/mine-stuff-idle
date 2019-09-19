@@ -14,6 +14,43 @@ import Items from '../items';
         this.switchPages = this.switchPages.bind(this);
     }
 
+    assignWorker = (workerIndex, target) => {
+        if (workerIndex === "") {
+            for(let mine of this.props.worldState[this.props.era].mines) {
+                if (mine.materials.includes(target)) {
+                    if (this.props.worldState[this.props.era].workers.some(w=> w.assignment === target.name)) {
+                        let oldIndex = this.props.worldState[this.props.era].workers.findIndex(w => w.assignment === target.name)
+                        this.props.worldState[this.props.era].workers[oldIndex].assignment = "";
+                    }
+                }
+            }
+            return;
+        }
+        for(let mine of this.props.worldState[this.props.era].mines) {
+            if (mine.materials.includes(target)) {
+                if (this.props.worldState[this.props.era].workers.some(w=> w.assignment === target.name)) {
+                    let oldIndex = this.props.worldState[this.props.era].workers.findIndex(w => w.assignment === target.name)
+                    this.props.worldState[this.props.era].workers[oldIndex].assignment = "";
+                }
+                this.props.worldState[this.props.era].workers[workerIndex].assignedJob = "Mining";
+                this.props.worldState[this.props.era].workers[workerIndex].assignedLocation = mine.name;
+                this.props.worldState[this.props.era].workers[workerIndex].assignment = target.name;
+            }
+        }
+        for(let dungeon of this.props.worldState[this.props.era].dungeons) {
+            if (dungeon.enemies.includes(target)) {
+                if (this.props.worldState[this.props.era].workers.some(w => w.assignment === target.name)) {
+                    let oldIndex = this.props.worldState[this.props.era].workers.findIndex(w => w.assignment === target.name)
+                    this.props.worldState[this.props.era].workers[oldIndex].assignment = "";
+                }
+                this.props.worldState[this.props.era].workers[workerIndex].assignedJob = "Dungeoning";
+                this.props.worldState[this.props.era].workers[workerIndex].assignedJob = dungeon.name;
+                this.props.worldState[this.props.era].workers[workerIndex].assignedJob = target[0];
+            }
+        }
+        this.forceUpdate();
+    }
+
     triggerTooltip = (details) => {
         let state = this.state;
         if (state.renderTooltip && state.tooltipDetails === details) {
@@ -224,10 +261,10 @@ import Items from '../items';
                                                 {this.props.worldState[this.props.era].workers.length > 0 &&
                                                     <div className="assignWorker">
                                                         <label>Assigned Workers:</label>
-                                                        <select defaultValue={this.props.worldState[this.props.era].workers.includes(data => data.assignment === mat.name) ? this.props.worldState[this.props.era].workers.find(data => data.assignment === mat.name) : ""} onChange={(opt) => this.assignWorker(opt.target.value, mat)}>
+                                                        <select value={(this.props.worldState[this.props.era].workers.some(w => w.assignment === mat.name) ? this.props.worldState[this.props.era].workers.findIndex(w => w.assignment === mat.name) : "")} onChange={(opt) => this.assignWorker(opt.target.value, mat)}>
                                                             <option value="">None</option>
                                                             {this.props.worldState[this.props.era].workers.map((worker, index) =>
-                                                                <option key={worker.name + index} value={worker}>{worker.name}</option>
+                                                                <option key={worker.name + index} value={index}>{worker.name}</option>
                                                             )}
                                                         </select>
                                                     </div>

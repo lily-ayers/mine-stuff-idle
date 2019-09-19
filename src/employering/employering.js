@@ -158,7 +158,7 @@ import './employering.scss';
                                         {worker.assignment !== "" && <option value={worker.assignment}>{worker.assignment}</option>}
                                         {(worker.assignedJob === "Mining" && this.props.worldState.mines.find(data => data.name === worker.assignedLocation).materials.filter(material => !this.props.worldState.workers.some(otherWorker => otherWorker.assignment === material.name)).map(mat => 
                                             <option key={mat.name} value={mat.name}>{mat.name}</option>    
-                                        )) || (worker.assignedJob === "Dungeoning" && this.props.worldState.dungeons.find(data => data.name === worker.assignedLocation).enemies.map(enem => 
+                                        )) || (worker.assignedJob === "Dungeoning" && this.props.worldState.dungeons.find(data => data.name === worker.assignedLocation).enemies.filter(enemy => !this.props.worldState.workers.some(otherWorker => otherWorker.assignment === enemy[0])).map(enem => 
                                             <option key={enem.name} value={enem[0]}>{enem[0]}</option>    
                                         ))}
                                     </select>
