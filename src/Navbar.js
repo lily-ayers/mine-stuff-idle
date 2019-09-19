@@ -15,45 +15,48 @@ class Navbar extends Component {
     }
 
     getEquip = (stat) => {
-        for (let slot = 0; slot < 4; slot++) {
-            // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Money
+        let equipStats = 0;
+        for (let slot = 0; slot < 3; slot++) {
             switch (stat) {
-                case "0":
-                    return this.props.worldState[this.props.era].equippedInventory[slot].power;
+                case 0:
+                    equipStats += this.props.worldState[this.props.era].equippedItems[slot].power;
                     break;
-                case "1":
-                    return this.props.worldState[this.props.era].equippedInventory[slot].damage;
+                case 1:
+                    equipStats += this.props.worldState[this.props.era].equippedItems[slot].damage;
                     break;
-                case "2":
-                    return this.props.worldState[this.props.era].equippedInventory[slot].defense;
-                    break;
-                case "3":
-                    return this.props.worldState[this.props.era].equippedInventory[slot].weight;
+                case 2:
+                    equipStats += this.props.worldState[this.props.era].equippedItems[slot].defense;
                     break;
             }
         }
+        return equipStats;
     }
     
     changeEra = (era) => {
-        this.props.changeEra(era)
+        this.props.changeEra(era);
+        this.forceUpdate();
     }
 
     render(){
         return (
-            <div style={this.props.font} className="navbar default-nav">
-                <div className="playerStatDisplay">
+            <div className="navbar default-nav">
+                <div style={this.props.font[this.props.era]} className="playerStatDisplay">
                     <label className="playerStat">Health: {this.props.worldState[this.props.era].stats[1] + "/" + this.props.worldState[this.props.era].stats[0]}</label>
-                    <label className="playerStat">Power: {this.props.worldState[this.props.era].stats[2]}</label>
-                    <label className="playerStat">Damage: {this.props.worldState[this.props.era].stats[3]}</label>
-                    <label className="playerStat">Defense: {this.props.worldState[this.props.era].stats[4]}</label>
+                    <label className="playerStat">Power: {this.props.worldState[this.props.era].stats[2]}{this.getEquip(0) >= 1 && "(+" + this.getEquip(0) + ")"}</label>
+                    <label className="playerStat">Damage: {this.props.worldState[this.props.era].stats[3]}{this.getEquip(1) >= 1 && "(+" + this.getEquip(1) + ")"}</label>
+                    <label className="playerStat">Defense: {this.props.worldState[this.props.era].stats[4]}{this.getEquip(2) >= 1 && "(+" + this.getEquip(2) + ")"}</label>
                     <label className="playerStat">{this.props.worldState[this.props.era].currency}: {this.props.worldState[this.props.era].stats[5]}</label>
                 </div>
                 <div className="dropdown default" id="dropdown" onClick={() => this.handleClick()}>
                     <img src={Logo} alt="logo" className="icon" />
                     {this.props.worldState.map((era, index) =>
-                        <div key={era.name + "div"} className="listItem right default">
-                            <p key={era.name + "name"} className="header-small default" >{era.name}</p>
-                            <button key={era.name + "button"} className="dropdown-btn" onClick={() => this.changeEra(index)}>Warp!</button>
+                        <div key={index}>
+                            {index !== this.props.era && 
+                                <div key={era.name + "div"} style={this.props.font[index]} className="listItem right default">
+                                    <p key={era.name + "name"} className="header-small default" >{era.name}</p>
+                                    <button key={era.name + "button"} className="dropdown-btn" onClick={() => this.changeEra(index)}>Warp!</button>
+                                </div>
+                            }
                         </div>
                     )}
                 </div>

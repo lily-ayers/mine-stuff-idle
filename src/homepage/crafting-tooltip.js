@@ -4,9 +4,7 @@ import React, { Component } from 'react';
  export class CraftingTooltip extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            canCraft: this.props.craftables.available
-        }
+        console.log(props)
     }
     
 
@@ -20,7 +18,7 @@ import React, { Component } from 'react';
                     {this.props.craftables.materials[index].map(data =>
                         <span key={data.name + index} className="tooltipReq">{data.name}: {data.amount}</span>
                     )}
-                    <button key={"craft" + index} className="tooltipButton" disabled={!this.state.canCraft[index]} onClick={() => this.props.craftItem(index)}>Craft!</button>
+                    <button key={"craft" + index} className="tooltipButton" disabled={!this.props.craftables.available[index]} onClick={() => this.props.craftItem(index)}>Craft!</button>
                 </div>
             )
         );

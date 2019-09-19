@@ -29,7 +29,7 @@ import Items from '../items';
         const craftables = [];
         for (let craft of Crafting) {
             const craftDeepCopy = JSON.parse(JSON.stringify(craft))
-            let filtered = craftDeepCopy.requiredMaterials.filter(data => data.name === material[0])
+            let filtered = craftDeepCopy.requiredMaterials.filter(data => data.name === material.name)
             if (filtered.length > 0) {
                 craftables.push(craft);
             }
@@ -46,16 +46,17 @@ import Items from '../items';
             requiredMaterials.push(details.requiredMaterials)
             let tempCanCraft = false;
             for (let mat of details.requiredMaterials) {
-                const heldMat = this.findMat(mat)
-                if (heldMat !== null && heldMat[4] >= mat.amount) {
-                    tempCanCraft = true
-                } else {
-                    tempCanCraft = false;
-                    console.log("cannot craft")
-                    break;
+                if (details.eraAvailable == this.props.era) {
+                    const heldMat = this.findMat(mat)
+                    if (heldMat !== null && heldMat.amountHeld >= mat.amount) {
+                        tempCanCraft = true
+                    } else {
+                        tempCanCraft = false;
+                        console.log("cannot craft")
+                        break;
+                    }
                 }
             }
-            console.log(tempCanCraft)
             canCraft.push(tempCanCraft)
         }
         const craftables = {results: names, materials: requiredMaterials, available: canCraft};
@@ -88,55 +89,58 @@ import Items from '../items';
                         slot = 3;
                         break;
                     }
-                    if (this.props.worldState.equippedItems[slot].name !== item.name) {
-                        this.props.worldState.equippableItems[slot].push(item);
-                        this.props.worldState.equippableItems[slot] = [...new Set(this.props.worldState.equippableItems[slot])];
+                    if (this.props.worldState[this.props.era].equippedItems[slot].name !== item.name) {
+                        this.props.worldState[this.props.era].equippableItems[slot].push(item);
+                        this.props.worldState[this.props.era].equippableItems[slot] = [...new Set(this.props.worldState[this.props.era].equippableItems[slot])];
                     }
                 break;
             case "Consumable":
                 let consumableFound = false;
-                for (let consumable of this.props.worldState.consumables) {
+                for (let consumable of this.props.worldState[this.props.era].consumables) {
                     if (consumable.name === item.name) {
                     consumable.amountHeld++;
                     consumableFound = true;
                 }
                 }
                 if (!consumableFound) {
-                    this.props.worldState.consumables.push(item)
+                    this.props.worldState[this.props.era].consumables.push(item)
                 }
                 break;
             case "Other":
                 let otherFound = false;
-                for (let material of this.props.worldState.otherMaterials) {
+                for (let material of this.props.worldState[this.props.era].otherMaterials) {
                     if (material.name === item.name) {
                         material.amountHeld++;
                         otherFound = true;
                     }
                 }
                 if (!otherFound) {
-                    this.props.worldState.otherMaterials.push(item)
+                    this.props.worldState[this.props.era].otherMaterials.push(item)
                 }
                 break;
         }
-        if (item.trigger) {
-            for (let triggerIndex of item.trigger) {
-                this.props.worldState.triggerMines[triggerIndex] = this.props.worldState.triggerMines[triggerIndex];
+        if (item.triggers) {
+            for (let triggerIndex of item.triggers) {
+                this.props.worldState[this.props.era].triggerMines[triggerIndex] = !this.props.worldState[this.props.era].triggerMines[triggerIndex];
+                this.props.worldState[this.props.era].triggerDungeons[triggerIndex] = !this.props.worldState[this.props.era].triggerDungeons[triggerIndex];
             }
         }
         this.forceUpdate();
     }
 
     findMat = (mat) => {
-        for (let mine of this.props.worldState.mines) {
-            for (let material of mine.materials) {
-                if (mat.name === material[0]) {
-                    return material;
+        for (let i = 0; i < 5; i++) {
+            for (let mine of this.props.worldState[i].mines) {
+                for (let material of mine.materials) {
+                    if (mat.name === material.name) {
+                        return material;
+                    }
                 }
             }
-        }
-        for (let material of this.props.worldState.otherMaterials) {
-            if (mat.name === material[0]) {
-                return material;
+            for (let material of this.props.worldState[i].otherMaterials) {
+                if (mat.name === material.name) {
+                    return material;
+                }
             }
         }
     }
@@ -146,12 +150,12 @@ import Items from '../items';
     }
 
     equipItem = (index, typeIndex) => {
-        if (this.props.worldState.equippedItems[typeIndex].name !== "empty") {
-            this.props.worldState.equippableItems[typeIndex].push(JSON.parse(JSON.stringify(this.props.worldState.equippedItems[typeIndex])));
+        if (this.props.worldState[this.props.era].equippedItems[typeIndex].name !== "empty") {
+            this.props.worldState[this.props.era].equippableItems[typeIndex].push(JSON.parse(JSON.stringify(this.props.worldState[this.props.era].equippedItems[typeIndex])));
         }
-        this.props.worldState.equippedItems[typeIndex] = JSON.parse(JSON.stringify(this.props.worldState.equippableItems[typeIndex][index]));
-        this.props.worldState.equippableItems[typeIndex].splice(index, 1);
-        this.props.worldState.equippableItems[typeIndex] = [...new Set(this.props.worldState.equippableItems[typeIndex])];
+        this.props.worldState[this.props.era].equippedItems[typeIndex] = JSON.parse(JSON.stringify(this.props.worldState[this.props.era].equippableItems[typeIndex][index]));
+        this.props.worldState[this.props.era].equippableItems[typeIndex].splice(index, 1);
+        this.props.worldState[this.props.era].equippableItems[typeIndex] = [...new Set(this.props.worldState[this.props.era].equippableItems[typeIndex])];
         this.forceUpdate();
     }
 
@@ -160,41 +164,41 @@ import Items from '../items';
             <div className="homepageMaster">
                 <div className="statusBox">
                     <div className="statList">
-                        {this.props.worldState.mines.map(
+                        {this.props.worldState[this.props.era].mines.map(
                             (mine, index) => 
-                            (this.props.worldState.triggerMines[index] && 
+                            (this.props.worldState[this.props.era].triggerMines[index] && 
                             <div className="mineItem" key={mine.name + "Title"} >
                                 <p className="title-small">{mine.name}</p>
                                     <div className="materials" key={mine.name}>
                                         {mine.materials.map(
                                             mat =>
-                                            <div className="materialPlate">
-                                                {this.props.worldState.workers.length > 0 &&
+                                            <div key={mat.name} className="materialPlate">
+                                                {this.props.worldState[this.props.era].workers.length > 0 &&
                                                     <div className="assignWorker">
                                                         <label>Assigned Workers:</label>
-                                                        <select onChange={(opt) => this.assignWorker(opt.target.value, mat)}>
+                                                        <select defaultValue={this.props.worldState[this.props.era].workers.includes(data => data.assignment === mat.name) ? this.props.worldState[this.props.era].workers.find(data => data.assignment === mat.name) : ""} onChange={(opt) => this.assignWorker(opt.target.value, mat)}>
                                                             <option value="">None</option>
-                                                            {this.props.worldState.workers.map(worker =>
-                                                                <option value={worker}>{worker.name}</option>
+                                                            {this.props.worldState[this.props.era].workers.map((worker, index) =>
+                                                                <option key={worker.name + index} value={worker}>{worker.name}</option>
                                                             )}
                                                         </select>
                                                     </div>
                                                 }
-                                                <p onClick={() => this.triggerTooltip(mat)} key={mat[0]}>{mat[0]}: {mat[4]}</p>
+                                                <p onClick={() => this.triggerTooltip(mat)} key={mat.name}>{mat.name}: {mat.amountHeld}</p>
                                             </div>
                                         )}
                                     </div>
                                 </div>
                             )
                         )}
-                        {(this.props.worldState.equippableItems[0].length > 0 ||
-                        this.props.worldState.equippableItems[1].length > 0 ||
-                        this.props.worldState.equippableItems[2].length > 0 ||
-                        this.props.worldState.equippableItems[3].length > 0) &&
+                        {(this.props.worldState[this.props.era].equippableItems[0].length > 0 ||
+                        this.props.worldState[this.props.era].equippableItems[1].length > 0 ||
+                        this.props.worldState[this.props.era].equippableItems[2].length > 0 ||
+                        this.props.worldState[this.props.era].equippableItems[3].length > 0) &&
                             <div className="mineItem">
                                 <p className="title-small">Equippables</p>
                                 <div className="materials">
-                                    {this.props.worldState.equippableItems.map(
+                                    {this.props.worldState[this.props.era].equippableItems.map(
                                         (type, typeIndex) =>
                                             type.map(
                                                 (equip, index) =>
@@ -204,14 +208,14 @@ import Items from '../items';
                                 </div>
                             </div>
                         }
-                        {(this.props.worldState.equippedItems[0].name !== "empty" ||
-                        this.props.worldState.equippedItems[1].name !== "empty" ||
-                        this.props.worldState.equippedItems[2].name !== "empty" ||
-                        this.props.worldState.equippedItems[3].name !== "empty") &&
+                        {(this.props.worldState[this.props.era].equippedItems[0].name !== "empty" ||
+                        this.props.worldState[this.props.era].equippedItems[1].name !== "empty" ||
+                        this.props.worldState[this.props.era].equippedItems[2].name !== "empty" ||
+                        this.props.worldState[this.props.era].equippedItems[3].name !== "empty") &&
                             <div className="mineItem">
                                 <p className="title-small">Equipped</p>
                                 <div className="materials">
-                                    {this.props.worldState.equippedItems.map(
+                                    {this.props.worldState[this.props.era].equippedItems.map(
                                         (equip, index) =>
                                             <p key={this.state.inventorySlots[index]}>{this.state.inventorySlots[index]}: {equip.name}</p>
                                         )
@@ -219,11 +223,11 @@ import Items from '../items';
                                 </div>
                             </div>
                         }
-                        {this.props.worldState.consumables.length > 0 &&
+                        {this.props.worldState[this.props.era].consumables.length > 0 &&
                             <div className="mineItem">
                                 <p className="title-small">Consumables</p>
                                 <div className="materials">
-                                    {this.props.worldState.consumables.map(
+                                    {this.props.worldState[this.props.era].consumables.map(
                                         (consume, index) =>
                                             <p key={consume.name}>{consume.name}: {consume.amountHeld}</p>
                                         )
@@ -231,11 +235,11 @@ import Items from '../items';
                                 </div>
                             </div>
                         }
-                        {this.props.worldState.otherMaterials.length > 0 &&
+                        {this.props.worldState[this.props.era].otherMaterials.length > 0 &&
                             <div className="mineItem">
                                 <p className="title-small">Other Materials</p>
                                 <div className="materials">
-                                    {this.props.worldState.otherMaterials.map(
+                                    {this.props.worldState[this.props.era].otherMaterials.map(
                                         (other, index) =>
                                             <p key={other.name}>{other.name}: {other.amountHeld}</p>
                                         )

@@ -42,19 +42,19 @@ export class Mining extends Component {
         let mat = this.props.worldState.mines[this.state.selectedMine].materials[matIndex]
         let power = 1
         
-        
-        for (let equip of this.props.worldState.equippedItems)
+        for (let equip of this.props.worldState.equippedItems) {
             power += equip.power;
-        if (mat[2] > 0) {
-            if (power >= (mat[3])) {
+        }
+        if (mat.remaining > 0) {
+            if (power >= (mat.difficulty)) {
                 this.toggleMining(matIndex);
 
                 //Progressbar calls
 
-                await this.alterProgressBar(matIndex, (2000/(1 + (power - mat[3]))));
+                await this.alterProgressBar(matIndex, (2000/(1 + (power - mat.difficulty))));
 
-                mat[2]--;
-                mat[4]++;
+                mat.remaining--;
+                mat.amountHeld++;
                 this.forceUpdate();
                 this.toggleMining();
             } else {
@@ -95,7 +95,7 @@ export class Mining extends Component {
             <div className="master">
                 <div className="navigation">
                     <div className="plate">
-                        <button className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
+                        <button disabled={this.state.mining} className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
                     </div>
                 </div>
                 <div className="mineSelect infobox">
@@ -105,7 +105,7 @@ export class Mining extends Component {
                             <div className="mineItem" key={mine.name}>
                                 {this.props.worldState.triggerMines[index] &&
                                 <div key={mine.name+"Cell"}>
-                                    <button key={mine.name+"Button"} onClick={() => (this.state.selectedMine !== index ?
+                                    <button key={mine.name+"Button"} disabled={this.state.mining} onClick={() => (this.state.selectedMine !== index ?
                                         this.selectMine(index) : this.selectMine(null))}>{mine.name}</button>
                                 </div>}
                             </div>
@@ -118,10 +118,10 @@ export class Mining extends Component {
                         <div className="materialsInMine">
                             <div >
                                 {this.state.selectedMine !== null ? this.props.worldState.mines[this.state.selectedMine].materials.map((mat, index) => (
-                                    <div className=" mineItem" key={mat[0]+"Row"}>
-                                        <p key={mat[0]+"Cell"}><button disabled={this.state.mining} onClick={() => this.mineMaterial(index)}>{mat[0]}</button> {mat[2]}/{mat[1]} remaining. difficulty: {mat[3]}</p>
+                                    <div className=" mineItem" key={mat.name+"Div"}>
+                                        <p key={mat.name+"Item"}><button disabled={this.state.mining} onClick={() => this.mineMaterial(index)}>{mat.name}</button> {mat.remaining}/{mat.capacity} remaining. difficulty: {mat.difficulty}</p>
                                         {this.state.progress[0] === index && 
-                                            <ProgressBar percent={this.state.progress[1]}/>    
+                                            <ProgressBar key={mat.name + "Progress Bar"} percent={this.state.progress[1]}/>    
                                         }
                                     </div>
                                 )) : <p className="nullRow">Select a Mine!</p>}

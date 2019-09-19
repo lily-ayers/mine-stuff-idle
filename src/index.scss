@@ -6,7 +6,6 @@
     Industrial Font: font-family: 'Indie Flower', cursive;
     Modern Font:font-family: 'Inconsolata', monospace; */
 $test: 1px solid black;
-$modernFont:'Inconsolata', monospace;
 
 button{
   font: unset;
@@ -31,7 +30,6 @@ body{
 
 /*Mining page*/
 .master{
-  font-family: $modernFont;
   .navigation{
     border: none;
     height: auto;
@@ -45,7 +43,6 @@ body{
 }
 
 .infobox{
-  font-family: $modernFont;
   border: 3px outset gray;
   float: left;
   background-color: slateblue;
@@ -62,7 +59,6 @@ body{
 }
 
 .infobox-small{
-  font-family: $modernFont;
   border: 3px outset gray;
   float: left;
   background-color: slateblue;
@@ -80,7 +76,6 @@ body{
 }
 
 .infobox-large{
-  font-family: $modernFont;
   border: 3px outset gray;
   float: left;
   background-color: slateblue;
@@ -97,7 +92,6 @@ body{
 }
 
 .nullRow{
-  font-family: $modernFont;
   border: 3px outset gray;
   font-size: 1.5vw;
   padding: 2px;
@@ -157,7 +151,6 @@ body{
   }
 
   .mineItem{
-    font-family: $modernFont;
     border: 1px solid black;
     margin: 3px;
     margin-bottom: 4px;
@@ -176,7 +169,6 @@ body{
 }
 
 .navigation{
-  font-family: $modernFont;
   width: 25vw;
   height: 40vw;
   position: absolute;
@@ -327,7 +319,6 @@ body{
 }
 
 .listItem{
-  font-family: $modernFont;
   border: 1px solid black;
   display: none;
   width: 29vw;

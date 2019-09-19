@@ -4,13 +4,13 @@ import './employering.scss';
  export class Employering extends Component {
     constructor(props) {
         super(props);
+        let worker = this.generateWorker(1)
         this.state = {
-            names: this.props.names,
-            worker: null,
-            currentWorkerCost: 100,
-            availableLevels: []
+            worker: worker.worker,
+            currentWorkerCost: worker.currentWorkerCost,
+            availableLevels: this.getAvailableLevels(),
+            selectedLevel: 1
         }
-        this.generateWorker(1);
         this.switchPages = this.switchPages.bind(this);
     }
 
@@ -23,15 +23,16 @@ import './employering.scss';
     }
 
     refresh = () => {
-        this.generateWorker(1);
-        this.forceUpdate();
+        if (this.props.worldState.stats[5] >= 10) {
+            this.generateWorker(this.state.selectedLevel);
+            this.forceUpdate();
+        }
     }
   
-    generateWorker(workerLevel) {
-        let state = this.state;
-        let index = Math.floor(Math.random() * state.names.length)
+    generateWorker = (workerLevel) => {
+        let index = Math.floor(Math.random() * this.props.names.length)
         let newWorker = {
-            name: state.names.splice(index, 1)[0],
+            name: this.props.names.splice(index, 1)[0],
             power: +Math.floor(Math.random() * workerLevel * 2),
             damage: +Math.floor(Math.random() * workerLevel * 2),
             speed: +Math.floor(Math.random() * workerLevel * 2),
@@ -42,31 +43,43 @@ import './employering.scss';
             returning: false,
             heldMaterial: ""
         }
-        state.worker = newWorker;
-        state.currentWorkerCost = Math.pow(100, workerLevel);
-        this.state = state;
-        console.log(newWorker)
+        let state ={
+            worker: newWorker,
+            currentWorkerCost: Math.pow(100, workerLevel)
+        }
+        return state;
+    }
+
+    changeHireLevel = (level) => {
+        if (level !== this.state.selectedLevel) {
+            let state = this.state;
+            state.selectedLevel = level;
+            this.setState(state);
+        }
     }
 
     hireWorker = () => {
-        this.props.worldState.workers.push(this.state.worker)
-        this.generateWorker(1);
-        console.log(this.props.worldState.workers)
-        this.forceUpdate();
+        if (this.props.worldState.stats[5] >= Math.pow(100, this.state.selectedLevel)) {
+            this.props.worldState.stats[5] -= Math.pow(100, this.state.selectedLevel)
+            this.props.worldState.workers.push(this.state.worker)
+            let newWorker = this.generateWorker(this.state.selectedLevel);
+            let state = this.state;
+            state.worker = newWorker.worker;
+            state.currentWorkerCost = newWorker.currentWorkerCost;
+            this.setState(state);
+        }
     }
 
     getAvailableLevels = () => {
-        let available = [];
-        for (let i = 1; i < 100; i++) {
-            if (this.props.worldState.stats[6] >= Math.pow(100, i)) {
+        let available = [1];
+        for (let i = 2; i < 100; i++) {
+            if (this.props.worldState.stats[5] >= Math.pow(100, i)) {
                 available.push(i);
             } else {
                 break;
             }
         }
-        let state = this.state;
-        state.availableLevels = available;
-        this.setState(state);
+        return available;
     }
 
     assign = (worker, selection, tier) => {
@@ -83,6 +96,8 @@ import './employering.scss';
             case "Target":
                 worker.assignment = selection;
                 break;
+            default:
+                break;
         }
         this.forceUpdate();
     }
@@ -96,20 +111,18 @@ import './employering.scss';
                 <span className="hireTitle">Hire:</span>
                 <div className="hire">
                     <button disabled={this.props.worldState.stats[5] <= 10}  className="refresh" onClick={() => this.refresh()}>Refresh (10 {this.props.worldState.currency})</button>
-                    {this.state.availableLevels.length > 0 && 
-                        <select className="hireLevelSelector">
-                            {this.state.availableLevels.map(level => 
-                                <option>Level {level} (Costs {Math.pow(100, level) + " " + this.props.worldState.currency})</option>    
-                            )}
-                        </select>
-                    }
+                    <select onChange={(selection) => this.changeHireLevel(selection.target.value)} defaultValue={1} className="hireLevelSelector">
+                        {this.state.availableLevels.map(level => 
+                            <option value={level}>Level {level} (Costs {Math.pow(100, level) + " " + this.props.worldState.currency})</option>    
+                        )}
+                    </select>
                     <hr/>
                     <p className="name">Name: {this.state.worker.name}</p>
                     <p className="stat">Power: {this.state.worker.power}</p>
                     <p className="stat">Damage: {this.state.worker.damage}</p>
                     <p className="stat">Speed: {this.state.worker.speed}</p>
                     <p className="cost">Cost: {this.state.currentWorkerCost + " " + this.props.worldState.currency}</p>
-                    <button disabled={this.state.availableLevels.length <= 0} onClick={() => this.hireWorker()}>Hire!</button>
+                    <button disabled={this.props.worldState.stats[5] <= Math.pow(100, this.state.selectedLevel)} onClick={() => this.hireWorker()}>Hire!</button>
                 </div>
                 <span className="employedListTitle">Employees:</span>
                 <div className="employedList">

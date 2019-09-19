@@ -40,8 +40,8 @@ var WorldState = [
                 // Materials are stored in an array of arrays, each interior array has the 
                 // Material name at index 0, starting amount at index 1, current amount at index 2, difficulty at index 3, held amount at index 4, sellPrice at index 5
                 materials: [
-                    ["Floatstone", "20", "20", "1", "0", "1"],
-                    ["Lightweight Glue", "5", "5", "2", "0", "2"]
+                    { name:"Floatstone", capacity: 20, remaining: 20, difficulty: 1, amountHeld: 0, price: 1 },
+                    { name:"Lightweight Glue", capacity: 5, remaining: 5, difficulty: 2, amountHeld: 0, price: 2 }
                 ]
             },
             {
@@ -49,9 +49,9 @@ var WorldState = [
                 discoveryMessage: "John was nice enough to let you use his personal mineshaft until you get back on your feet! There's probably wonderous things inside!",
                 refreshRate: 2,
                 materials: [
-                    ["Planks of Wood", "40", "40", "2", "0", "3"],
-                    ["Actually Iron", "20", "20", "3", "0", "6"],
-                    ["Rope?", "15", "15", "2", "0", "2"]
+                    { name:"Planks of Wood", capacity: 40, remaining: 40, difficulty: 2, amountHeld: 0, price: 3 },
+                    { name:"Actually Iron", capacity: 20, remaining: 20, difficulty: 3, amountHeld: 0, price: 6 },
+                    { name:"Rope?", capacity: "15", remaining: 15, difficulty: 2, amountHeld: 0, price: 2 }
                 ]
             },
             {
@@ -59,11 +59,11 @@ var WorldState = [
                 discoveryMessage: "The locals show you to a dark cave and beckon you inside. It's a new mineshaft!",
                 refreshRate: 5,
                 materials: [
-                    ["Stone", "1000", "1000", "2", "0", "4"],
-                    ["Dirt", "5000", "5000", "1", "0", "2"],
-                    ["Tin", "750", "750", "3", "0", "4"],
-                    ["Iron", "600", "600", "4", "0", "9"],
-                    ["Saltpeter", "200", "200", "2", "0", "7"]
+                    { name:"Stone", capacity: "1000", remaining: 1000, difficulty: 2, amountHeld: 0, capacity: 4, price: 20 },
+                    { name:"Dirt", capacity: "5000", remaining: 5000, difficulty: 1, amountHeld: 0, capacity: 2, price: 20 },
+                    { name:"Tin", capacity: "750", remaining: 750, difficulty: 3, amountHeld: 0, capacity: 4, price: 20 },
+                    { name:"Iron", capacity: "600", remaining: 600, difficulty: 4, amountHeld: 0, capacity: 9, price: 20 },
+                    { name:"Saltpeter", capacity: "200", remaining: 200, difficulty: 2, amountHeld: 0, capacity: 7, price: 20 }
                 ]
             },
             {
@@ -71,11 +71,11 @@ var WorldState = [
                 discoveryMessage: "Andrew Ryan would be proud if you even knew who that was.",
                 refreshRate: 7,
                 materials: [
-                    ["Clay", "1000", "1000", "2", "0", "3"],
-                    ["Diamond", "50", "50", "20", "0", "75"],
-                    ["Quartz", "200", "200", "4", "0", "30"],
-                    ["Copper", "400", "400", "3", "0", "25"],
-                    ["Calcite", "350", "350", "6", "0", "20"]
+                    { name:"Clay", capacity: "1000", remaining: 1000, difficulty: 2, amountHeld: 0, capacity: 3, price: 20 },
+                    { name:"Diamond", capacity: "50", remaining: 50, difficulty: 20, amountHeld: 0, capacity: 75, price: 20 },
+                    { name:"Quartz", capacity: "200", remaining: 200, difficulty: 4, amountHeld: 0, capacity: 30, price: 20 },
+                    { name:"Copper", capacity: "400", remaining: 400, difficulty: 3, amountHeld: 0, capacity: 25, price: 20 },
+                    { name:"Calcite", capacity: "350", remaining: 350, difficulty: 6, amountHeld: 0, capacity: 20, price: 20 }
                 ]
             },
             {
@@ -83,11 +83,11 @@ var WorldState = [
                 discoveryMessage: "These Asteroids do wonders for keeping the universe's pants on!",
                 refreshRate: 10,
                 materials: [
-                    ["Sulfer", "500", "500", "4", "0", "15"],
-                    ["Silicon", "1000", "1000", "3", "0", "20"],
-                    ["Palladium", "300", "300", "7", "0", "40"],
-                    ["Ruthenium", "90", "90", "8", "0", "80"],
-                    ["Osmium", "75", "75", "9", "0", "130"]
+                    { name:"Sulfer", capacity: "500", remaining: 500, difficulty: 4, amountHeld: 0, capacity: 15, price: 20 },
+                    { name:"Silicon", capacity: "1000", remaining: 1000, difficulty: 3, amountHeld: 0, capacity: 20, price: 20 },
+                    { name:"Palladium", capacity: "300", remaining: 300, difficulty: 7, amountHeld: 0, capacity: 40, price: 20 },
+                    { name:"Ruthenium", capacity: "90", remaining: 90, difficulty: 8, amountHeld: 0, capacity: 80, price: 20 },
+                    { name:"Osmium", capacity: "75", remaining: 75, difficulty: 9, amountHeld: 0, capacity: 130, price: 20 }
                 ]
             }
         ],
@@ -141,12 +141,14 @@ var WorldState = [
         colorPallet: ["tan", "brown", "black", "yellow"],
         currency: "Whiskey",
         ascensionMultiplier: 0,
-        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
-        stats: [10, 10, 1, 1, 1, 1, 0],
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 6:Money
+        stats: [10, 10, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // industrial: east, Midwest, wild west
         triggerMines: [true, false, false],
+        // industrial: raid town, Frontier
+        triggerDungeons: [true, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -166,11 +168,11 @@ var WorldState = [
                 discoveryMessage: "This place really is quite peaceful. You're not sure if that's because everyone left to find decent ore and the mines are nearly useless to commonfolk now.",
                 refreshRate: 15,
                 materials: [
-                    ["Mac N Cheese Crayon", "5000", "5000", "2", "0"],
-                    ["Grey Crayon", "10000", "10000", "2", "0"],
-                    ["Coal", "3000", "3000", "3", "0"],
-                    ["Cement", "3000", "3000", "4", "0"],
-                    ["Uranium", "400", "400", "7", "0"]
+                    { name:"Mac N Cheese Crayon", capacity: 5000, remaining: 5000, difficulty: 2, amountHeld: 0, price: 20 },
+                    { name:"Grey Crayon", capacity: 10000, remaining: 10000, difficulty: 2, amountHeld: 0, price: 20 },
+                    { name:"Coal", capacity: 3000, remaining: 3000, difficulty: 3, amountHeld: 0, price: 20 },
+                    { name:"Cement", capacity: 3000, remaining: 3000, difficulty: 4, amountHeld: 0, price: 20 },
+                    { name:"Uranium", capacity: 400, remaining: 400, difficulty: 7, amountHeld: 0, price: 20 }
                 ]
             },
             {
@@ -178,11 +180,11 @@ var WorldState = [
                 discoveryMessage: "Despite their calm demeanor, the people around here can let loose to some extent. You'd put them at about 50% less tamed than the last batch!",
                 refreshRate: 20,
                 materials: [
-                    ["Pyrite", "2500", "2500", "4", "0"],
-                    ["Nickel", "5000", "5000", "4", "0"],
-                    ["Gravel", "10000", "10000", "2", "0"],
-                    ["Zinc", "900", "900", "3", "0"],
-                    ["Bauxite", "750", "750", "5", "0"]
+                    { name:"Pyrite", capacity: 2500, remaining: 2500, difficulty: 4, amountHeld: 0, price: 20 },
+                    { name:"Nickel", capacity: 5000, remaining: 5000, difficulty: 4, amountHeld: 0, price: 20 },
+                    { name:"Gravel", capacity: 10000, remaining: 10000, difficulty: 2, amountHeld: 0, price: 20 },
+                    { name:"Zinc", capacity: 900, remaining: 900, difficulty: 3, amountHeld: 0, price: 20 },
+                    { name:"Bauxite", capacity: 750, remaining: 750, difficulty: 5, amountHeld: 0, price: 20 }
                 ]
             },
             {
@@ -190,11 +192,11 @@ var WorldState = [
                 discoveryMessage: "They're out of control here. It's unsafe. Anarchy seems to reign. This may be your last mining expedition.",
                 refreshRate: 25,
                 materials: [
-                    ["GOLD", "250", "250", "5", "0"],
-                    ["Silver", "500", "500", "5", "0"],
-                    ["Molybdenum", "750", "750", "6", "0"],
-                    ["Phosphate", "400", "400", "7", "0"],
-                    ["Feldspar", "150", "150", "6", "0"]
+                    { name:"GOLD", capacity: 250, remaining: 250, difficulty: 5, amountHeld: 0, price: 20 },
+                    { name:"Silver", capacity: 500, remaining: 500, difficulty: 5, amountHeld: 0, price: 20 },
+                    { name:"Molybdenum", capacity: 750, remaining: 750, difficulty: 6, amountHeld: 0, price: 20 },
+                    { name:"Phosphate", capacity: 400, remaining: 400, difficulty: 7, amountHeld: 0, price: 20 },
+                    { name:"Feldspar", capacity: 150, remaining: 150, difficulty: 6, amountHeld: 0, price: 20 }
                 ]
             }
         ],
@@ -253,10 +255,12 @@ var WorldState = [
         ascensionMultiplier: 0,
         // Unlocks ascension
         triggerTimeMachine: false,
-        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
-        stats: [10, 10, 1, 1, 1, 1, 0],
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 6:Money
+        stats: [10, 10, 1, 1, 1, 0],
         // Prehistoric: tarPits, MountOogabooga, LiterallyAVolcano
         triggerMines: [true, false, false],
+        // Prehistoric: stomping grounds, tribal proving grounds
+        triggerDungeons: [true, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -276,11 +280,11 @@ var WorldState = [
                 discoveryMessage: "You've seen nicer places. You're not sure if you've seen nastier ones.",
                 refreshRate: 30,
                 materials: [
-                    ["Tar, duh", "8000", "8000", "2", "0"],
-                    ["Dino Bone", "300", "300", "4", "0"],
-                    ["Prehistoric Moss", "500", "500", "2", "0"],
-                    ["Lithium", "200", "200", "5", "0"],
-                    ["Crystal Shard", "100", "100", "7", "0"]
+                    { name:"Tar, duh", capacity: 8000, remaining: 8000, difficulty: 2, amountHeld: 0, price: 20 },
+                    { name:"Dino Bone", capacity: 300, remaining: 300, difficulty: 4, amountHeld: 0, price: 20 },
+                    { name:"Prehistoric Moss", capacity: 500, remaining: 500, difficulty: 2, amountHeld: 0, price: 20 },
+                    { name:"Lithium", capacity: 200, remaining: 200, difficulty: 5, amountHeld: 0, price: 20 },
+                    { name:"Crystal Shard", capacity: 100, remaining: 100, difficulty: 7, amountHeld: 0, price: 20 }
                 ]
             },
             {
@@ -288,11 +292,11 @@ var WorldState = [
                 discoveryMessage: "You're sure that name means something, but you care less and less what that something is.",
                 refreshRate: 45,
                 materials: [
-                    ["Limestone", "4000", "4000", "3", "0"],
-                    ["Beryllium", "900", "900", "6", "0"],
-                    ["Amber", "1700", "1700", "4", "0"],
-                    ["Flint", "700", "700", "5", "0"],
-                    ["Chalk", "1000", "1000", "2", "0"]
+                    { name:"Limestone", capacity: 4000, remaining: 4000, difficulty: 3, amountHeld: 0, price: 20 },
+                    { name:"Beryllium", capacity: 900, remaining: 900, difficulty: 6, amountHeld: 0, price: 20 },
+                    { name:"Amber", capacity: 1700, remaining: 1700, difficulty: 4, amountHeld: 0, price: 20 },
+                    { name:"Flint", capacity: 700, remaining: 700, difficulty: 5, amountHeld: 0, price: 20 },
+                    { name:"Chalk", capacity: 1000, remaining: 1000, difficulty: 2, amountHeld: 0, price: 20 }
                 ]
             },
             {
@@ -300,11 +304,11 @@ var WorldState = [
                 discoveryMessage: "Looking down into the fiery depths of the hollow volcanic mountain, you reconsider your entry point, and dig in from the side.",
                 refreshRate: 50,
                 materials: [
-                    ["Obviously Lava", "3000", "3000", "8", "0"],
-                    ["Obsidian", "800", "800", "9", "0"],
-                    ["Volcanic Rock", "900", "900", "5", "0"],
-                    ["Glass", "500", "500", "6", "0"],
-                    ["Basalt", "1000", "1000", "5", "0"]
+                    { name:"Obviously Lava", capacity: 3000, remaining: 3000, difficulty: 8, amountHeld: 0, price: 20 },
+                    { name:"Obsidian", capacity: 800, remaining: 800, difficulty: 9, amountHeld: 0, price: 20 },
+                    { name:"Volcanic Rock", capacity: 900, remaining: 900, difficulty: 5, amountHeld: 0, price: 20 },
+                    { name:"Glass", capacity: 500, remaining: 500, difficulty: 6, amountHeld: 0, price: 20 },
+                    { name:"Basalt", capacity: 1000, remaining: 1000, difficulty: 5, amountHeld: 0, price: 20 }
                 ]
             }
         ],
@@ -361,12 +365,14 @@ var WorldState = [
         colorPallet: ["black", "cadetblue", "pink", "white"],
         currency: "Doge Coins",
         ascensionMultiplier: 0,
-        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
-        stats: [10, 10, 1, 1, 1, 1, 0],
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 6:Money
+        stats: [10, 10, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // planetarial: planet, star, neutronStar
         triggerMines: [true, false, false],
+        // planetarial: Battelion, outer ring
+        triggerDungeons: [true, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -386,11 +392,11 @@ var WorldState = [
                 discoveryMessage: "Celestial Body R2D2 was already taken.",
                 refreshRate: 60,
                 materials: [
-                    ["Titanium", "900", "900", "8", "0"],
-                    ["Iridium", "200", "200", "6", "0"],
-                    ["Platinum", "400", "400", "5", "0"],
-                    ["Painite", "150", "150", "7", "0"],
-                    ["Plutonium", "200", "200", "6", "0"]
+                    { name:"Titanium", capacity: 900, remaining: 900, difficulty: 8, amountHeld: 0, price: 20 },
+                    { name:"Iridium", capacity: 200, remaining: 200, difficulty: 6, amountHeld: 0, price: 20 },
+                    { name:"Platinum", capacity: 400, remaining: 400, difficulty: 5, amountHeld: 0, price: 20 },
+                    { name:"Painite", capacity: 150, remaining: 150, difficulty: 7, amountHeld: 0, price: 20 },
+                    { name:"Plutonium", capacity: 200, remaining: 200, difficulty: 6, amountHeld: 0, price: 20 }
                 ]
             },
             {
@@ -398,11 +404,11 @@ var WorldState = [
                 discoveryMessage: "This Solar System is abandoned, so the sun is free for you to mine!",
                 refreshRate: 70,
                 materials: [
-                    ["Osmium", "350", "350", "10", "0"],
-                    ["Californium", "400", "400", "8", "0"],
-                    ["Lots of Carbon", "10000", "10000", "6", "0"],
-                    ["Rhodium", "500", "500", "7", "0"],
-                    ["Magnesium", "1200", "1200", "7", "0"]
+                    { name:"Osmium", capacity: 350, remaining: 350, difficulty: 10, amountHeld: 0, price: 20 },
+                    { name:"Californium", capacity: 400, remaining: 400, difficulty: 8, amountHeld: 0, price: 20 },
+                    { name:"Lots of Carbon", capacity: 10000, remaining: 10000, difficulty: 6, amountHeld: 0, price: 20 },
+                    { name:"Rhodium", capacity: 500, remaining: 500, difficulty: 7, amountHeld: 0, price: 20 },
+                    { name:"Magnesium", capacity: 1200, remaining: 1200, difficulty: 7, amountHeld: 0, price: 20 }
                 ]
             },
             {
@@ -410,11 +416,11 @@ var WorldState = [
                 discoveryMessage: "A Neutron star. you can't begin to understand the science behind it, but who cares, you're gonna mine that sucker!",
                 refreshRate: 80,
                 materials: [
-                    ["Quantum Stuff", "300", "300", "8", "0"],
-                    ["Neutronic Chunk", "250", "250", "8", "0"],
-                    ["Nuclear Pasta", "70", "70", "10", "0"],
-                    ["Thoughts and Prayers of a Dead Star's Loved Ones", "20", "20", "11", "0"],
-                    ["Bite-Sized Star Core", "1", "1", "15", "0"]
+                    { name:"Quantum Stuff", capacity: 300, remaining: 300, difficulty: 8, amountHeld: 0, price: 20 },
+                    { name:"Neutronic Chunk", capacity: 250, remaining: 250, difficulty: 8, amountHeld: 0, price: 20 },
+                    { name:"Nuclear Pasta", capacity: 70, remaining: 70, difficulty: 10, amountHeld: 0, price: 20 },
+                    { name:"Thoughts and Prayers of a Dead Star's Loved Ones", capacity: 20, remaining: 20, difficulty: 11, amountHeld: 0, price: 20 },
+                    { name:"Bite-Sized Star Core", capacity: 1, remaining: 1, difficulty: 15, amountHeld: 0, price: 20 }
                 ]
             }
         ],
@@ -469,14 +475,16 @@ var WorldState = [
         name: "Absent Era",
         eraUnlocked: false,
         colorPallet: ["white", "white", "black", "black"],
-        currency: "",
+        currency: "Condensed Universe",
         ascensionMultiplier: 0,
-        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Weight, 6:Money
-        stats: [10, 10, 1, 1, 1, 1, 0],
+        // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 6:Money
+        stats: [10, 10, 1, 1, 1, 0],
         // Unlocks ascension
         triggerTimeMachine: false,
         // absent: singularity, cyclicalSingularity
         triggerMines: [true, false],
+        // absent: The Plurality
+        triggerDungeons: [true],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -495,11 +503,11 @@ var WorldState = [
                 discoveryMessage: "Here, at the end of time and space, you can find the things that were never meant to be within the reach of man.",
                 refreshRate: 5,
                 materials: [
-                    ["Janet Marble", "1", "1", "25", "0"],
-                    ["Time", "1", "1", "40", "0"],
-                    ["Space", "1", "1", "65", "0"],
-                    ["Questionable Spaghetti", "1", "1", "90", "0"],
-                    ["Radiohead CD", "1", "1", "125", "0"]
+                    { name:"Janet Marble", capacity: 1, remaining: 1, difficulty: 25, amountHeld: 0, price: 20 },
+                    { name:"Time", capacity: 1, remaining: 1, difficulty: 40, amountHeld: 0, price: 20 },
+                    { name:"Space", capacity: 1, remaining: 1, difficulty: 65, amountHeld: 0, price: 20 },
+                    { name:"Questionable Spaghetti", capacity: 1, remaining: 1, difficulty: 90, amountHeld: 0, price: 20 },
+                    { name:"Radiohead CD", capacity: 1, remaining: 1, difficulty: 125, amountHeld: 0, price: 20 }
                 ]
             },
             {
@@ -507,7 +515,7 @@ var WorldState = [
                 discoveryMessage: "This one is round, you wonder if it contains anything that might, I dunno, break the laws of physics even more?",
                 refreshRate: 100,
                 materials: [
-                    ["Mobius Strip with Space on One Side and Time on the Same Side", "1", "1", "250", "0"]
+                    { name:"Mobius Strip with Space on One Side and Time on the Same Side", capacity: 1, remaining: 1, difficulty: 250, amountHeld: 0, price: 20 }
                 ]
             }
         ],

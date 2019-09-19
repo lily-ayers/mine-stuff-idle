@@ -10,7 +10,8 @@ var Crafting = [
                 name: "Lightweight Glue",
                 amount: "5"
             }
-        ]
+        ],
+        eraAvailable: 0
     },
     {
         name: "Semi-Sturdy Boat",
@@ -27,7 +28,8 @@ var Crafting = [
                 name: "Rope?",
                 amount: "15"
             }
-        ]
+        ],
+        eraAvailable: 0
     },
     {
         name: "'The Rapture' Diving Suit",
@@ -44,7 +46,8 @@ var Crafting = [
                 name: "Glass",
                 amount: "90"
             }
-        ]
+        ],
+        eraAvailable: 0
     },
     {
         name: "Starship Kerbal",
@@ -65,7 +68,8 @@ var Crafting = [
                 name: "Iron",
                 amount: "500"
             }
-        ]
+        ],
+        eraAvailable: 0
     },
     {
         name: "Literally Just a Simple Torch",
@@ -86,7 +90,8 @@ var Crafting = [
                 name: "Saltpeter",
                 amount: "5"
             },
-        ]
+        ],
+        eraAvailable: 0
     }
 ]
 

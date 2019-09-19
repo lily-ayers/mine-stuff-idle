@@ -15,7 +15,9 @@ export class Dungeoning extends Component {
 
     switchPages = (pageNum) => {
         let state = this.state;
-        state.currentEnemy[2] = state.currentEnemy[1];
+        if (state.currentEnemy) {
+            state.currentEnemy[2] = state.currentEnemy[1];
+        }
         this.setState(state);
         this.props.selectPage(pageNum);
     }
@@ -49,7 +51,6 @@ export class Dungeoning extends Component {
             for (let equip of this.props.worldState.equippedItems) {
                 if (equip !== null) {
                     damage += equip.damage;
-                    console.log(damage + " (just added " + equip.name + " for " + equip.damage + " damage)")
                 }
             }
             state.currentEnemy[2] -= (damage / this.state.currentEnemy[4]);
@@ -60,13 +61,13 @@ export class Dungeoning extends Component {
         if (action === "run") {
             state.currentEnemy[2] = state.currentEnemy[1];
             state.currentEnemy = null;
-            this.toggleDungeoning();
+            state.dungeoning = false;
         } else if (state.currentEnemy[2] <= 0) {
             this.getDrops();
             state.currentEnemy[6] = false;
             state.currentEnemy[2] = state.currentEnemy[1];
             state.currentEnemy = null;
-            this.toggleDungeoning();
+            state.dungeoning = false;
         } else {
             this.enemyTurn();
         }
@@ -74,6 +75,7 @@ export class Dungeoning extends Component {
             state.currentEnemy[6] = false;
             state.currentEnemy[2] = state.currentEnemy[1];
             state.currentEnemy = null;
+            state.dungeoning = false;
             this.props.worldState.stats[1] = this.props.worldState.stats[2];
         }
         this.setState(state);
@@ -103,6 +105,8 @@ export class Dungeoning extends Component {
                     break;
                 case "Legs":
                     slot = 3
+                    break;
+                default:
                     break;
             }
             if (this.props.worldState.equippedItems[slot].name !== item.name) {
@@ -142,7 +146,7 @@ export class Dungeoning extends Component {
             <div className="master">
                 <div className="navigation">
                     <div className="plate">
-                        <button className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
+                        <button disabled={this.state.dungeoning} className="escBtn" onClick={() => this.switchPages("Home")}>Back</button>
                     </div>
                 </div>
                 <div className="infobox">

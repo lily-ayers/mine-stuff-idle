@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { tsPropertySignature } from '@babel/types';
 import names from './names';
 import Navbar from './Navbar'
 import Hub from './hub'
@@ -16,13 +15,15 @@ class App extends Component {
       selectedEra: 0,
       workerNames: remaining,
       gameClock: 0,
+      currentFont: 0,
       styles: {
         fonts: [
           { fontFamily: "'Inconsolata', monospace" },
           { fontFamily: "'Indie Flower', cursive" },
           { fontFamily: "'Shadows Into Light', cursive" },
           { fontFamily: "'Squada One', cursive" },
-          { fontFamily: "'Cute Font', cursive" }]
+          { fontFamily: "'Cute Font', cursive" }
+        ]
       }
     }
     setInterval(() => this.conductBehavior(this.props.worldState), 1000)
@@ -97,28 +98,36 @@ class App extends Component {
   }
 
   populate = (eraState) => {
+    let index = 0;
     for (let mine of eraState.mines) {
-      let materialAbsence = 0;
-      for (let mat of mine.materials) {
-        if (mat[2] < mat[1]) {
-          materialAbsence += (mat[1] - mat[2]);
-        }
-      }
-      for (let mat of mine.materials) {
-        if(this.state.gameClock % 60 && mat[2] < mat[1]) {
-          mat += ((materialAbsence / 100) / mine.refreshRate);
-        }
-      }
-    }
-    for (let dungeon of eraState.dungeons) {
-      for (let enem of dungeon.enemies) {
-        if (!enem[6]) {
-          if (enem[7] >= (enem[1] / dungeon.respawnRate)) {
-            enem[6] = true;
-          } else {
-            enem[7]++;
+      if (eraState.triggerMines[index]) {
+        let materialAbsence = 0;
+        for (let mat of mine.materials) {
+          if (mat.remaining < mat.capacity) {
+            materialAbsence += (mat.capacity - mat.remaining);
           }
         }
+        for (let mat of mine.materials) {
+          if(this.state.gameClock % 60 === 0 && mat.remaining < mat.capacity) {
+            mat.remaining += Math.floor(((materialAbsence) / mine.refreshRate));
+          }
+        }
+      }
+      index++;
+    }
+    index = 0
+    for (let dungeon of eraState.dungeons) {
+      if (eraState.triggerDungeons[index]) {
+        for (let enem of dungeon.enemies) {
+          if (!enem[6]) {
+            if (enem[7] >= (enem[1] * dungeon.respawnRate)) {
+              enem[6] = true;
+            } else {
+              enem[7]++;
+            }
+          }
+        }
+        index++;
       }
     }
   }
@@ -130,6 +139,7 @@ class App extends Component {
         this.populate(eraState)
     }
     let state = this.state;
+    state.currentFont = this.state.styles.fonts[this.state.selectedEra]
     state.gameClock += 1;
     this.setState(state);
   }
@@ -187,14 +197,13 @@ class App extends Component {
         }
         this.props.worldState.otherMaterials.push(item)
     }
-}
+  }
 
   render() {
-    var font = this.state.styles.fonts[this.state.selectedEra]
     return (
       <div className="main">
-        <Navbar font={font} worldState={this.props.worldState} era={this.state.selectedEra} changeEra={this.changeEra}/>
-        <Hub font={font} worldState={this.props.worldState[this.state.selectedEra]} names={this.state.workerNames}/>
+        <Navbar font={this.state.styles.fonts} worldState={this.props.worldState} era={this.state.selectedEra} changeEra={this.changeEra}/>
+        <Hub font={this.state.styles.fonts[this.state.selectedEra]} worldState={this.props.worldState} era={this.state.selectedEra} names={this.state.workerNames}/>
       </div>
     );
   }
