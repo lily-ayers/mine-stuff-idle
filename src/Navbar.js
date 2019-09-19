@@ -47,11 +47,12 @@ class Navbar extends Component {
                     <label className="playerStat">Defense: {this.props.worldState[this.props.era].stats[4]}{this.getEquip(2) >= 1 && "(+" + this.getEquip(2) + ")"}</label>
                     <label className="playerStat">{this.props.worldState[this.props.era].currency}: {this.props.worldState[this.props.era].stats[5]}</label>
                 </div>
+                {this.props.worldState[1].eraUnlocked && 
                 <div className="dropdown default" id="dropdown" onClick={() => this.handleClick()}>
                     <img src={Logo} alt="logo" className="icon" />
                     {this.props.worldState.map((era, index) =>
                         <div key={index}>
-                            {index !== this.props.era && 
+                            {index !== this.props.era && era.eraUnlocked &&
                                 <div key={era.name + "div"} style={this.props.font[index]} className="listItem right default">
                                     <p key={era.name + "name"} className="header-small default" >{era.name}</p>
                                     <button key={era.name + "button"} className="dropdown-btn" onClick={() => this.changeEra(index)}>Warp!</button>
@@ -59,7 +60,7 @@ class Navbar extends Component {
                             }
                         </div>
                     )}
-                </div>
+                </div>}
             </div>
         )
     }

@@ -86,7 +86,7 @@ import './employering.scss';
         switch (tier) {
             case "Job":
                 worker.assignedJob = selection;
-                worker.assignedLocation = "";
+                worker.assignedLocation = ""
                 worker.assignment = "";
                 break;
             case "Location":
@@ -110,7 +110,7 @@ import './employering.scss';
                 </div>
                 <span className="hireTitle">Hire:</span>
                 <div className="hire">
-                    <button disabled={this.props.worldState.stats[5] <= 10}  className="refresh" onClick={() => this.refresh()}>Refresh (10 {this.props.worldState.currency})</button>
+                    <button disabled={this.props.worldState.stats[5] < 10}  className="refresh" onClick={() => this.refresh()}>Refresh (10 {this.props.worldState.currency})</button>
                     <select onChange={(selection) => this.changeHireLevel(selection.target.value)} defaultValue={1} className="hireLevelSelector">
                         {this.state.availableLevels.map(level => 
                             <option value={level}>Level {level} (Costs {Math.pow(100, level) + " " + this.props.worldState.currency})</option>    
@@ -122,7 +122,7 @@ import './employering.scss';
                     <p className="stat">Damage: {this.state.worker.damage}</p>
                     <p className="stat">Speed: {this.state.worker.speed}</p>
                     <p className="cost">Cost: {this.state.currentWorkerCost + " " + this.props.worldState.currency}</p>
-                    <button disabled={this.props.worldState.stats[5] <= Math.pow(100, this.state.selectedLevel)} onClick={() => this.hireWorker()}>Hire!</button>
+                    <button disabled={this.props.worldState.stats[5] < Math.pow(100, this.state.selectedLevel)} onClick={() => this.hireWorker()}>Hire!</button>
                 </div>
                 <span className="employedListTitle">Employees:</span>
                 <div className="employedList">
@@ -140,13 +140,13 @@ import './employering.scss';
                                     <option value="Dungeoning">Dungeoning</option>
                                 </select>
                             {worker.assignedJob !== "" &&
-                                <label>Location: {worker.assignedLocation}
+                                <label>Location: {worker.assignedLocation.name}
                                     <select defaultValue={worker.assignedLocation} onChange={(val) => this.assign(worker, val.target.value, "Location")}>
-                                        <option value="">None</option>
-                                        {(worker.assignedJob === "Mining" && this.props.worldState.mines.map(mine => 
-                                            <option key={mine.name} value={mine.name}>{mine.name}</option>    
-                                        )) || (worker.assignedJob === "Dungeoning" && this.props.worldState.dungeons.map(dungeon => 
-                                            <option key={dungeon.name} value={dungeon.name}>{dungeon.name}</option>    
+                                        <option value={{ name: "" }}>None</option>
+                                        {(worker.assignedJob === "Mining" && this.props.worldState.mines.map((mine, mineIndex) => 
+                                            (this.props.worldState.triggerMines[mineIndex] && <option key={mine.name} value={mine.name}>{mine.name}</option>)  
+                                        )) || (worker.assignedJob === "Dungeoning" && this.props.worldState.dungeons.map((dungeon, dungeonIndex) => 
+                                            (this.props.worldState.triggerDungeons[dungeonIndex] && <option key={dungeon.name} value={dungeon.name}>{dungeon.name}</option>)
                                         ))}
                                     </select>
                                 </label>
@@ -155,17 +155,17 @@ import './employering.scss';
                                 <label>Target: {worker.assignment}
                                     <select defaultValue={worker.assignment} onChange={(val) => this.assign(worker, val.target.value, "Target")}>
                                         <option value="">None</option>
-                                        {(worker.assignedLocation === "Mining" && this.props.worldState.mines.find(data => data.name === worker.assignedLocation).materials.map(mat => 
-                                            <option key={mat.name} value={mat[0]}>{mat[0]}</option>    
-                                        )) || (worker.assignedLocation === "Dungeoning" && this.props.worldState.dungeons.find(data => data.name === worker.assignedLocation).enemies.map(enem => 
+                                        {worker.assignment !== "" && <option value={worker.assignment}>{worker.assignment}</option>}
+                                        {(worker.assignedJob === "Mining" && this.props.worldState.mines.find(data => data.name === worker.assignedLocation).materials.filter(material => !this.props.worldState.workers.some(otherWorker => otherWorker.assignment === material.name)).map(mat => 
+                                            <option key={mat.name} value={mat.name}>{mat.name}</option>    
+                                        )) || (worker.assignedJob === "Dungeoning" && this.props.worldState.dungeons.find(data => data.name === worker.assignedLocation).enemies.map(enem => 
                                             <option key={enem.name} value={enem[0]}>{enem[0]}</option>    
                                         ))}
                                     </select>
                                 </label>
                             }
-                            {worker.assignment !== "" &&
-                                (worker.returning ? <label>Returning</label> : <label>{worker.assignedJob}</label>)}
-                                <label>Progress: {worker.progress}</label>
+                            {worker.assignment !== "" && (
+                                worker.returning ? <label>Returning with {worker.assignment} (Progress: {worker.progress})</label> : <label>{worker.assignedJob + " " + worker.assignment} (Progress: {worker.progress})</label>)}
                         </div>
                     )}
                 </div>

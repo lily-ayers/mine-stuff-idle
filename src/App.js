@@ -47,11 +47,14 @@ class App extends Component {
                               }
                           }
                           if (assignedMine !== null) {
-                              let mat = assignedMine.materials.find(data => data[0] === worker.assignment);
-                              worker.progress += (1 + (worker.power / (mat[3] / 2)));
-                              console.log(worker.progress)
+                              let mat = assignedMine.materials.find(data => data.name === worker.assignment);
+                              if (mat.remaining <= 0) {
+                                break;
+                              }
+                              worker.progress += (1 + (worker.power / (mat.difficulty / 2)));
                               if (worker.progress >= 100) {
                                   worker.returning = true;
+                                  mat.remaining--;
                                   worker.heldMaterial = mat;
                                   worker.progress = 100;
                               }
@@ -78,14 +81,14 @@ class App extends Component {
                   }
               } else {
                 if (worker.assignedJob === "Mining") {
-                  worker.progress -= (1 + (worker.speed / (worker.mat[3] / 2)));
+                  worker.progress -= (1 + (worker.speed / (worker.heldMaterial.difficulty / 2)));
                 } else if (worker.assignedJob === "Dungeoning") {
                   worker.progress -= (1 + (worker.speed / (worker.enem[1] * worker.enem[3] / 2)));
                 }
                 if (worker.progress <= 0) {
                     worker.progress = 0;
                     if (worker.assignedJob === "Mining") {
-                      worker.heldMaterial[4]++;
+                      worker.heldMaterial.amountHeld++;
                     } else if (worker.assignedJob === "Dungeoning") {
                       this.getWorkerDrops(worker.heldMaterial[5]);
                     }

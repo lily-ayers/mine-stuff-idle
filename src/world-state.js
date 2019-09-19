@@ -7,14 +7,14 @@ var WorldState = [
         currency: "Ruples",
         ascensionMultiplier: 0,
         // 0:MaxHealth, 1:Health. 2:Power, 3:Damage, 4:Defense, 5:Money
-        stats: [10, 10, 1, 1, 1, 1000],
+        stats: [10, 10, 1, 1, 1, 10000],
         // Unlocks ascension
         triggerTimeMachine: false,
         // modern: tutorial1, tutorial2, Boat, Rapture, Spaceship, Flint
         //TODO-Return the variables back to false when done
-        triggerMines: [false, true, false, false, false, false],
+        triggerMines: [true, false, false, false, false, false],
         // modern: tutorial1, tutorial2, forest, colloseum
-        triggerDungeons: [false, true, false, false],
+        triggerDungeons: [true, false, false, false],
         warehouses: 0,
         shopUpgrades: [0, 0, 0, 0, 0, 0],
         // 1:road, 2:stand, 3:small, 4:liscence, 5:large
@@ -23,7 +23,7 @@ var WorldState = [
         // equipment format: ["name", {Power, Damage, Defense, Weight}]
         equippableItems: [[], [], [], []],
         // 0:head, 1:chest, 2:weapon, 3:legs
-        equippedItems: [{name: "empty", power: 50, defense: 50, damage: 50, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
+        equippedItems: [{name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}, {name: "empty", power: 0, defense: 0, damage: 0, weight: 0}],
         // consumables format: ["name", "amount held", "affect", "affectAmount"]
         consumables: [],
         // otherMaterials format: ["name", "amount held"]
