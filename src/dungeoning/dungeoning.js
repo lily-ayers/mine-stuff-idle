@@ -14,12 +14,17 @@ export class Dungeoning extends Component {
     }
 
     switchPages = (pageNum) => {
-        this.props.selectPage(pageNum)
+        let state = this.state;
+        state.currentEnemy[2] = state.currentEnemy[1];
+        this.setState(state);
+        this.props.selectPage(pageNum);
     }
 
     selectDungeon = (index) => {
         let state = this.state;
         state.selectedDungeon = index;
+        state.currentEnemy = null;
+        state.dungeoning = false;
         this.setState(state);
     }
 
@@ -32,7 +37,7 @@ export class Dungeoning extends Component {
     fightEnemy = (enemIndex) => {
         this.toggleDungeoning();
         let state = this.state;
-        state.currentEnemy = JSON.parse(JSON.stringify(this.props.worldState.dungeons[this.state.selectedDungeon].enemies[enemIndex]));
+        state.currentEnemy = this.props.worldState.dungeons[this.state.selectedDungeon].enemies[enemIndex];
         this.setState(state);
     }
 
@@ -53,17 +58,22 @@ export class Dungeoning extends Component {
         }
         this.setState(state);
         if (action === "run") {
+            state.currentEnemy[2] = state.currentEnemy[1];
             state.currentEnemy = null;
             this.toggleDungeoning();
         } else if (state.currentEnemy[2] <= 0) {
             this.getDrops();
+            state.currentEnemy[6] = false;
+            state.currentEnemy[2] = state.currentEnemy[1];
             state.currentEnemy = null;
             this.toggleDungeoning();
         } else {
             this.enemyTurn();
         }
         if (this.props.worldState.stats[1] <= 0) {
-            this.props.worldState.dungeons[0].name = "YOU FUCKIN DIED YA LOSER";
+            state.currentEnemy[6] = false;
+            state.currentEnemy[2] = state.currentEnemy[1];
+            state.currentEnemy = null;
             this.props.worldState.stats[1] = this.props.worldState.stats[2];
         }
         this.setState(state);
@@ -72,13 +82,13 @@ export class Dungeoning extends Component {
 
     enemyTurn = () => {
         let enemy = this.state.currentEnemy;
-        console.log("Enemy attacking!");
         this.props.worldState.stats[1] -= (enemy[3] - this.props.worldState.stats[4]);
+        console.log(this.state.currentEnemy[0] + " attacked for " + (enemy[3] - this.props.worldState.stats[4]) + " damage!");
         
     }
 
     getDrops = () => {
-        let item = Items.find(data => data.name = this.state.currentEnemy[5])
+        let item = Items.find(data => data.name === this.state.currentEnemy[5])
         if (item.type === "Equippable") {
             let slot;
             switch (item.slot) {
@@ -127,6 +137,7 @@ export class Dungeoning extends Component {
     }
 
     render() {
+
         return (
             <div className="master">
                 <div className="navigation">
@@ -140,7 +151,7 @@ export class Dungeoning extends Component {
                         {this.props.worldState.dungeons.map((dungeon, index) =>
                             <div key={dungeon.name}>
                                 {this.props.worldState.triggerDungeons[index] &&
-                                    <button key={dungeon.name+"Button"} onClick={() => (this.state.selectedDungeon !== index ?
+                                    <button disabled={this.state.dungeoning} key={dungeon.name+"Button"} onClick={() => (this.state.selectedDungeon !== index ?
                                         this.selectDungeon(index) : this.selectDungeon(null))}>{dungeon.name}</button>}
                             </div>
                         )}
