@@ -9,7 +9,7 @@ class ProgressBar extends Component{
     render(){
         return(
             <div className="progress">
-                <p>Mining Bitch</p>
+                <p>Mining </p>
                 <Filler percent={this.props.percent}/>
             </div>
         )

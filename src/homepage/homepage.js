@@ -249,26 +249,27 @@ import Items from '../items';
                         }
                     </div>
                 </div>
-                
-                <div className="navigation">
-                    <div className="plate mineing">
-                        <p>Want to Mine?</p>
-                        <button onClick={() => this.switchPages("Mine")}>Go to the Mines!</button>
-                    </div>
-                    <div className="plate dungeoning">
-                        <p>Want to Kill?</p>
-                        <button onClick={() => this.switchPages("Dungeon")}>Go to the Dungeons!</button>
-                    </div>
-                    <div className="plate stroreing">
-                        <p>Want to Sell?</p>
-                        <button onClick={() => this.switchPages("Store")}>Go to the Stores!</button>
-                    </div>
-                    <div className="plate employering">
-                        <p>Want to Hire?</p>
-                        <button onClick={() => this.switchPages("Employ")}>Go to Craigslist!</button>
+                <div className="container-large right">
+                    <div className="navigation">
+                        <div className="plate mineing">
+                            <p className="title-small">Want to Mine?</p>
+                            <button onClick={() => this.switchPages("Mine")}>Go to the Mines!</button>
+                        </div>
+                        <div className="plate dungeoning">
+                            <p className="title-small">Want to Kill?</p>
+                            <button onClick={() => this.switchPages("Dungeon")}>Go to the Dungeons!</button>
+                        </div>
+                        <div className="plate stroreing">
+                            <p className="title-small">Want to Sell?</p>
+                            <button onClick={() => this.switchPages("Store")}>Go to the Stores!</button>
+                        </div>
+                        <div className="plate employering">
+                            <p className="title-small">Want to Hire?</p>
+                            <button onClick={() => this.switchPages("Employ")}>Go to Craigslist!</button>
+                        </div>
                     </div>
                     {this.state.renderTooltip && 
-                        <div className="crafting">
+                        <div className="crafting bottom">
                             {this.renderCrafting(this.getCraftingArray(this.state.tooltipDetails))}
                         </div>
                     }

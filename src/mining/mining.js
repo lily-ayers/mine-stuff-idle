@@ -19,7 +19,7 @@ export class Mining extends Component {
     }
 
     switchPages = (pageNum) => {
-        this.props.selectPage(pageNum)
+        this.props.selectPage(pageNum);
     }
 
     selectMine = (index) => {

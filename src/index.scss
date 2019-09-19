@@ -26,7 +26,11 @@ body{
 }
 
   /*Classes*/
-  
+  .container-large{
+    height: 40vw;
+    width: 30vw;
+    position: absolute;
+  }
 
 /*Mining page*/
 .master{
@@ -80,7 +84,7 @@ body{
   float: left;
   background-color: slateblue;
   height: 30vw;
-  width: 30vw;
+  width: 30.5vw;
   margin: 1vw;
   overflow-y: scroll;
 
@@ -116,7 +120,7 @@ body{
 }
 
 .title-small{
-  margin: 2px;
+  margin: 4px;
   font-size: 1.7vw;
   text-align: center;
   border: 3px outset gray;
@@ -174,7 +178,6 @@ body{
   position: absolute;
   right: 1.5vw;;
   margin: 5px;
-  border: 1px solid black;
 
   .plate{
     height: 16%;
@@ -229,44 +232,50 @@ body{
     color: black;
   }
 
-  .crafting{
-    background-size: 20%;
-    background-image: linear-gradient(to bottom, pink 30%, darkblue);
-    overflow: scroll;
-    overflow-x: hidden;
+  .employering{
+    border: 1px solid blue;
+  }
+/*---------------------------------*/
+  
+}
+.crafting{
+  display: inline-block;
+  position: relative;
+  background-image: linear-gradient(to bottom , pink 40%, darkblue);
+  overflow: scroll;
+  overflow-x: hidden;
 
-    .tooltip{
+  .tooltip{
+    display: block;
+    border-bottom: 1px dotted violet;
+
+    .tooltipName{
       display: block;
-      border-bottom: 1px dotted violet;
+      font-weight: bold;
+      margin: 1vw;
+    }
 
-      .tooltipName{
-        display: block;
-        font-weight: bold;
-        margin: 1vw;
-      }
+    .tooltipText{
+      margin: 1vw;
+      display: block;
+    }
 
-      .tooltipText{
-        margin: 1vw;
-        display: block;
-      }
-
-      .tooltipReq{
-        display: block;
-        font-style: oblique;
-        margin: 1vw;
-        margin-left: 2vw;
-      }
-      
-      button{
-        width: 5vw;
-        margin-left: 10vw;
-      }
+    .tooltipReq{
+      display: block;
+      font-style: oblique;
+      margin: 1vw;
+      margin-left: 2vw;
+    }
+    
+    button{
+      width: 5vw;
+      margin-left: 10vw;
     }
   }
 }
     /*------- Navbar -------*/
 
-
+/*----------------------------*/
 .playerStatDisplay {
   vertical-align: middle;
   display: inline-block;
@@ -298,7 +307,7 @@ body{
   z-index: 1;
 
   .listItem{
-    display: block;
+    display: inline-block;
     height: 7vw;
     .header-small{
       display: inline-block;
@@ -306,7 +315,9 @@ body{
     }
     .dropdown-btn{
       display: inline-block;
-      position: absolute;
+      position: relative;
+      float: right;
+      margin-right: 4px;
       top: 1.5vw;
       right: 0;
       height: 4vw;
@@ -372,12 +383,18 @@ body{
   background-color: slategray;
   border: 4px outset gray;
   border-radius: 3px;
-  background-image: linear-gradient(to bottom, slategray 30%, darkblue);
+  background-image: linear-gradient(to bottom , slategray 30%, darkblue);
 }
 
 /*End of Default*/
 
 /*positioning*/
+
+.bottom{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
 
 .bottom-left{
   position: absolute;
@@ -386,8 +403,7 @@ body{
 }
 
 .right{
-  position: relative;
-  float: right;
+  right: 0;
 }
 
 .right-center{
