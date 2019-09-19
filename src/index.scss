@@ -79,14 +79,13 @@ body{
   }
 }
 
-.infobox-large{
+.infobox-dynamic{
   border: 3px outset gray;
   float: left;
   background-color: slateblue;
-  height: 30vw;
-  width: 30.5vw;
+  height: fit-content;
+  width: fit-content;
   margin: 1vw;
-  overflow-y: scroll;
 
   .mineItem{
     margin: 1vw;
@@ -178,6 +177,7 @@ body{
   position: absolute;
   right: 1.5vw;;
   margin: 5px;
+  text-align: center;
 
   .plate{
     height: 16%;
@@ -210,7 +210,6 @@ body{
       height: 2.5vw;
       padding: 4px;
       position: relative;
-      left: 30%;
     }
   }
   .mineing{

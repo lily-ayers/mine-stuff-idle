@@ -114,7 +114,7 @@ export class Mining extends Component {
                     </div> 
                     
                 </div>
-                    <div className="materialList infobox-large ">
+                    <div className="materialList infobox-dynamic ">
                         <div className="materialsInMine">
                             <div >
                                 {this.state.selectedMine !== null ? this.props.worldState.mines[this.state.selectedMine].materials.map((mat, index) => (

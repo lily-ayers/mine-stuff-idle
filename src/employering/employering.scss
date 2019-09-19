@@ -46,15 +46,29 @@
         display: block;
     }
 
+    select{
+        border: 2px outset lightgrey;  
+
+        option{
+            background-color: lightgrey;
+            font-size: 1vw;
+        }
+    }
+
     .hire {
         border: 2px solid black;
         width: 20vw;
-        height: 41vh;
+        height: fit-content;
         display: inline-block;
         vertical-align: middle;
         text-align: center;
         position: absolute;
         top: 10vw;
+        padding: 4px;
+
+        button{
+            margin: 4px;
+        }
 
         .refresh{
             margin-top: 0.5vw;
@@ -84,6 +98,10 @@
         overflow: scroll;
         overflow-x: hidden;
 
+        .employee{
+            display: inline-block;
+        }
+
         select {
             max-width: 15vw;
         }
@@ -108,9 +126,15 @@
         height: 30vh;
         display: inline-block;
         overflow: scroll;
+        padding: 2px;
         overflow-x: hidden;
         select {
-            max-width: 15vw;
+            max-width: 10vw;
+
+            option{
+                max-width: fit-content;
+            }
         }
     }
 }
+

@@ -162,7 +162,7 @@ export class Dungeoning extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="infobox">
+                <div className="infobox-dynamic">
                     <div className="mineItem">
                         <div>
                             {this.state.selectedDungeon !== null ? this.props.worldState.dungeons[this.state.selectedDungeon].enemies.map((enem, index) => (
