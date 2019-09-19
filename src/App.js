@@ -106,8 +106,6 @@ class App extends Component {
           if (mat.remaining < mat.capacity) {
             materialAbsence += (mat.capacity - mat.remaining);
           }
-        }
-        for (let mat of mine.materials) {
           if(this.state.gameClock % 60 === 0 && mat.remaining < mat.capacity) {
             mat.remaining += Math.floor(((materialAbsence) / mine.refreshRate));
           }
