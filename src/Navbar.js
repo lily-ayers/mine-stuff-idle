@@ -16,7 +16,7 @@ class Navbar extends Component {
 
     getEquip = (stat) => {
         let equipStats = 0;
-        for (let slot = 0; slot < 3; slot++) {
+        for (let slot = 0; slot <= 3; slot++) {
             switch (stat) {
                 case 0:
                     equipStats += this.props.worldState[this.props.era].equippedItems[slot].power;
